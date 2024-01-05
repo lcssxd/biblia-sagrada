@@ -1,0 +1,26 @@
+[
+    {
+        "key": "version",
+        "value": "1"
+    },
+    {
+        "key": "name",
+        "value": "ARA"
+    },
+    {
+        "key": "copyright",
+        "value": "Almeida Revista e Atualizada - 1993"
+    },
+    {
+        "key": "permissions",
+        "value": "SBB"
+    },
+    {
+        "key": "language_id",
+        "value": "89"
+    },
+    {
+        "key": "book_name_language",
+        "value": "pt-BR"
+    }
+]
