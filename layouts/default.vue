@@ -4,8 +4,9 @@
       <Nuxt />
     </div>
   </div-->
-  <div>
-    <Nuxt />
+  <div class="app">
+    <Nuxt class="mb-auto" />
+    <Footer />
   </div>
 </template>
 
@@ -33,6 +34,6 @@ export default {
   }
 
   .app {
-    @apply height-screen w-full min-w-[320px];
+    @apply flex flex-col height-screen w-full justify-between min-w-[320px];
   }
 </style>
