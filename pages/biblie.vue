@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col h-screen justify-between overflow-hidden text-gray-50 bg-gray-800">
+  <div class="flex flex-col h-screen justify-between overflow-hidden">
     <div class="relative flex items-center justify-center font-semibold bg-gray-700 py-4 w-full select-none">
       <button v-if="currentBook && (currentChapter || !currentChapter )" class="absolute left-3 inset-y-0 p-2 cursor-pointer outline-none" @click.prevent="returnMenu">
         <arrowlongleftIcon class="w-5 h-5" />
@@ -40,9 +40,9 @@
         </div>
         <div v-if="currentBook && currentChapter" class="space-y-3">
           <div v-if="currentBook && currentChapter" class="overflow-y-auto">
-            <p v-for="verseItem in filteredChapter" :key="verseItem.id" class="select-all">
+            <button v-for="verseItem in filteredChapter" :key="verseItem.id" class="text-left select-none outline-none" :class="{ 'bg-gray-600' : verseItem?.select }" @click.prevent="verseItem.select = !verseItem.select">
               <span class="superscript">{{ verseItem.verse }}</span> {{ verseItem.text }}
-            </p>
+            </button>
           </div>
         </div>
       </div>
@@ -52,6 +52,7 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 import arrowlongleftIcon from '@/static/heroicons/outline/arrow-long-left.svg?inline';
 import book from '@/assets/ARA/book.json';
 import metadata from '@/assets/ARA/metadata.json';
@@ -70,6 +71,10 @@ export default {
     };
   },
   methods: {
+    ...mapMutations({
+      setCurrentBook: 'setCurrentBook',
+      setCurrentChapter: 'setCurrentChapter',
+    }),
     selectBook(item) {
       if(!this.currentBook) {
         this.currentBook = item
@@ -125,10 +130,13 @@ export default {
       if (!this.verse || !this.currentBook || !this.currentChapter) {
         return [];
       }
-      return this.verse.filter(verseItem => 
+      let verse = []
+
+      verse = this.verse.filter(verseItem => 
         verseItem.book_id === this.currentBook.book_reference_id && 
         verseItem.chapter === this.currentChapter
       );
+      return this.verse = verse.map(o => ({ ...o, select: false }))
     },
     uniqueChapters() {
       const verses = this.filteredVerses;

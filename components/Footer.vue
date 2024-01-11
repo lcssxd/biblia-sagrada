@@ -1,6 +1,6 @@
 <template>
-  <div class="grid grid-cols-3 bg-gray-700 text-white py-1">
-    <NuxtLink v-for="(item, index) in menu" :key="index" :to="item.link" class="flex flex-col items-center justify-center space-y-1">
+  <div class="grid grid-cols-3 bg-gray-700 py-1">
+    <NuxtLink v-for="(item, index) in menu" :key="index" :to="item.link" class="flex flex-col items-center justify-center space-y-1 outline-none text-gray-400 transition" :exact-active-class="`active-link`">
       <component :is="item.icon" class="w-6 h-6"></component>
       <span class="text-xs font-medium">{{ item.name }}</span>
     </NuxtLink>
@@ -42,5 +42,7 @@ export default {
 </script>
 
 <style>
-
+.active-link {
+  @apply text-white
+}
 </style>

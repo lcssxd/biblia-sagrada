@@ -34,6 +34,6 @@ export default {
   }
 
   .app {
-    @apply flex flex-col height-screen w-full justify-between min-w-[320px];
+    @apply flex flex-col height-screen w-full justify-between min-w-[320px] text-gray-50 bg-gray-800;
   }
 </style>
