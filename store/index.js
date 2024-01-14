@@ -1,25 +1,57 @@
 export const state = () => ({
-  currentBook: null,
-  currentChapter: null,
+  version_default: 'ARA',
+  version: 'ARA',
+  text_size_default: '',
+  text_size: '',
+  book: null,
+  chapter: null,
 })
 
+export const getters = {
+  getVersion(state) {
+    return state.version;
+  },
+  getBook(state) {
+    return state.book;
+  },
+  getChapter(state) {
+    return state.chapter;
+  },
+}
+
 export const mutations = {
-  initialize(state) {
-    const currentBook = localStorage.getItem('currentBook');
-    const currentChapter = localStorage.getItem('currentChapter');
+  UPDATE(state) {
+    const book = localStorage.getItem('book');
+    const chapter = localStorage.getItem('chapter');
 
-    state.currentBook = currentBook;
-    state.currentChapter = currentChapter;
+    state.book = book;
+    state.chapter = chapter;
+  },
+  UPDATE_VERSION(state) {
+    const version = localStorage.getItem('version');
+    const validVersions = ['ARA', 'NTLH'];
 
-    localStorage.setItem('currentBook', state.currentBook);
-    localStorage.setItem('currentChapter', state.currentChapter);
+    if (validVersions.includes(version)) {
+      state.version = version;
+    } else {
+      state.version = state.version_default;
+    }
+    localStorage.setItem('version', state.version);
   },
-  setCurrentBook(state, payload) {
-    state.currentBook = payload;
-    localStorage.setItem('currentBook', payload);
+  SET_VERSION(state, payload) {
+    const validVersions = ['ARA', 'NTLH'];
+
+    if (validVersions.includes(payload)) {
+      state.version = payload;
+      localStorage.setItem('version', payload);
+    }
   },
-  setCurrentChapter(state, payload) {
-    state.currentChapter = payload;
-    localStorage.setItem('currentChapter', payload);
-  }
+  SET_BOOK(state, payload) {
+    state.book = payload;
+    localStorage.setItem('book', payload);
+  },
+  SET_CHAPTER(state, payload) {
+    state.chapter = payload;
+    localStorage.setItem('chapter', payload);
+  },
 }
