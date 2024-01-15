@@ -54,7 +54,7 @@
           </button>
         </div>
         <div v-if="getBook && getChapter" class="space-y-3">
-          <div class="overflow-y-auto">
+          <div class="flex flex-col overflow-y-auto">
             <button
               v-for="verseItem in filteredChapter" :key="verseItem.id"
               class="text-left select-none outline-none"
@@ -157,8 +157,8 @@ export default {
       const endVerse = sortedSelectedVerses[sortedSelectedVerses.length - 1].verse;
 
       let verseToCopy = this.selectedVerse.length > 1
-        ? `${versesText} - ${this.currentName}:${startVerse}-${endVerse}`
-        : `${versesText} - ${this.currentName}:${startVerse}`;
+        ? `"${versesText}" (${this.currentName}:${startVerse}-${endVerse})`
+        : `"${versesText}" (${this.currentName}:${startVerse})`;
 
       if (navigator.clipboard) {
         navigator.clipboard.writeText(verseToCopy)
