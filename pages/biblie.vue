@@ -1,6 +1,6 @@
 <template>
-  <div class="flex flex-col h-screen justify-between overflow-hidden">
-    <div class="relative flex items-center justify-center font-semibold bg-gray-700 py-4 w-full select-none">
+  <div class="flex flex-col h-full justify-between overflow-hidden">
+    <Header class="relative flex items-center justify-center">
       <button v-if="getBook && (getChapter || !getChapter )" class="absolute left-3 inset-y-0 p-2 cursor-pointer outline-none" @click.prevent="returnMenu">
         <arrowlongleftIcon class="w-5 h-5" />
       </button>
@@ -19,15 +19,16 @@
           <xMarkIcon class="w-5 h-5" />
         </button>
       </div>
-    </div>
-    <div class="overflow-y-auto h-full">
-      <div v-if="!getBook" class="h-full">
+    </Header>
+    <div class="relative overflow-y-auto h-full">
+      <div v-if="loading" class="h-full bg-gray-700 animate-pulse"></div>
+      <div v-if="!getBook && !loading" class="h-full">
         <div class="flex flex-col h-full">
           <div class="flex flex-col">
             <span class="p-2 text-center font-medium text-base select-none bg-gray-600 border-b border-gray-600">Antigo Testamento</span>
             <button 
               v-for="(item, index) in filteredOldTestament" :key="index"
-              class="p-2 outline-none select-none border-b border-gray-600"
+              class="text-left p-2 outline-none select-none border-b border-gray-600"
               @click.prevent="SET_BOOK(item)"
               >{{ item.name }}
             </button>
@@ -36,7 +37,7 @@
             <span class="p-2 text-center font-medium text-base select-none bg-gray-600 border-b border-gray-600">Novo Testamento</span>
             <button 
               v-for="(item, index) in filteredNewTestament" :key="index"
-              class="p-2 outline-none select-none border-b border-gray-600"
+              class="text-left p-2 outline-none select-none border-b border-gray-600"
               @click.prevent="SET_BOOK(item)"
               >{{ item.name }}
             </button>
@@ -64,6 +65,14 @@
           </div>
         </div>
       </div>
+      <div v-if="getBook && getChapter">
+        <button class="fixed inset-y-0 left-0 my-auto h-64 flex items-center px-3 select-none outline-none transition text-transparent rounded-3xl" :class="{ 'bg-gray-600/10 text-gray-200' : chapter.prev }" @click.prevent="prevChapter()">
+          <chevronDoubleLeftIcon class="w-5 h-5" />
+        </button>
+        <button class="fixed inset-y-0 right-0 my-auto h-64 flex items-center px-3 select-none outline-none transition text-transparent rounded-3xl" :class="{ 'bg-gray-600/10 text-gray-200' : chapter.next }" @click.prevent="nextChapter()">
+          <chevronDoubleRightIcon class="w-5 h-5" />
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -75,17 +84,24 @@ import shareIcon from '@/static/heroicons/outline/share.svg?inline';
 import documentCheckIcon from '@/static/heroicons/outline/document-check.svg?inline';
 import clipboardDocumentIcon from '@/static/heroicons/outline/clipboard-document.svg?inline';
 import xMarkIcon from '@/static/heroicons/outline/x-mark.svg?inline';
+import chevronDoubleLeftIcon from '@/static/heroicons/outline/chevron-double-left.svg?inline';
+import chevronDoubleRightIcon from '@/static/heroicons/outline/chevron-double-right.svg?inline';
 
 export default {
-  components: { arrowlongleftIcon, shareIcon, documentCheckIcon, clipboardDocumentIcon, xMarkIcon },
+  components: { arrowlongleftIcon, shareIcon, documentCheckIcon, clipboardDocumentIcon, xMarkIcon, chevronDoubleLeftIcon, chevronDoubleRightIcon, },
   data() {
     return {
+      loading: true,
       book: null,
       metadata: null,
       testament: null,
       verse: null,
       filteredChapters: [],
-      selectedVerse: []
+      selectedVerse: [],
+      chapter: {
+        next: false,
+        prev: false
+      }
     };
   },
   async mounted() {
@@ -106,6 +122,7 @@ export default {
       this.metadata = metadata.default;
       this.testament = testament.default;
       this.verse = verse.default;
+      this.loading = false;
     },
     async returnMenu() {
       if (this.getBook && !this.getChapter) {
@@ -196,6 +213,26 @@ export default {
     },
     cancelSelected() {
       this.selectedVerse = []
+    },
+    nextChapter() {
+      if(this.chapter.next) return 
+      this.chapter.next = true
+      if(this.getChapter < this.uniqueChapters.length) {
+        this.SET_CHAPTER(this.getChapter + 1)
+      } else {
+        this.SET_CHAPTER(null)
+      }
+      setTimeout(() => {
+        this.chapter.next = false
+      }, 500)
+    },
+    prevChapter() {
+      if(this.chapter.prev) return 
+      this.chapter.prev = true
+      this.SET_CHAPTER(this.getChapter - 1)
+      setTimeout(() => {
+        this.chapter.prev = false
+      }, 500)
     }
   },
   computed: {
