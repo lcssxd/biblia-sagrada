@@ -34,12 +34,12 @@ export default {
 </script>
 
 <style>
-  .height-screen {
+  .h-full-screen {
     height: 100vh;
     height: calc(var(--vh, 1vh) * 100);
   }
 
   .app {
-    @apply flex flex-col height-screen w-full justify-between min-w-[320px] bg-gray-50 text-gray-800 dark:text-gray-50 dark:bg-gray-800;
+    @apply flex flex-col h-full-screen w-full justify-between min-w-[320px] bg-gray-50 text-gray-800 dark:text-gray-50 dark:bg-gray-800;
   }
 </style>

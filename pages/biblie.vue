@@ -25,7 +25,7 @@
       <div v-if="!getBook && !loading" class="h-full">
         <div class="flex flex-col h-full">
           <div class="flex flex-col divide-y divide-gray-200 dark:divide-gray-600">
-            <span class="p-2 text-center font-medium text-base select-none bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-100">Antigo Testamento</span>
+            <span class="sticky top-0 p-2 text-center font-medium text-base select-none bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-100">Antigo Testamento</span>
             <button 
               v-for="(item, index) in filteredOldTestament" :key="index"
               class="text-left p-2 outline-none select-none"
@@ -34,7 +34,7 @@
             </button>
           </div>
           <div class="flex flex-col divide-y divide-gray-200 dark:divide-gray-600">
-            <span class="p-2 text-center font-medium text-base select-none bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-100">Novo Testamento</span>
+            <span class="sticky top-0 p-2 text-center font-medium text-base select-none bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-100">Novo Testamento</span>
             <button 
               v-for="(item, index) in filteredNewTestament" :key="index"
               class="text-left p-2 outline-none select-none"
@@ -44,34 +44,40 @@
           </div>
         </div>
       </div>
-      <div v-else>
+      <div v-else class="h-full relative">
         <div v-if="getBook && !getChapter" class="grid grid-cols-5 gap-1">
           <button
             v-for="chapter in uniqueChapters" :key="chapter.id"
-            class="p-2 bg-gray-200 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 outline-none"
+            class="p-2 bg-gray-200 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 outline-none select-none"
             @click.prevent="SET_CHAPTER(chapter)"
             >{{ chapter }}
           </button>
         </div>
-        <div v-if="getBook && getChapter" class="space-y-3">
-          <div class="flex flex-col overflow-y-auto">
-            <button
-              v-for="verseItem in filteredChapter" :key="verseItem.id"
-              class="text-left select-none outline-none"
-              :class="{ 'bg-gray-300 dark:bg-gray-600' : selectedVerse.some(verse => verse.id === verseItem.id) }"
-              @click.prevent="selectVerse(verseItem)"
-            ><span class="superscript">{{ verseItem.verse }}</span> {{ verseItem.text }}
-            </button>
+        <div v-if="getBook && getChapter" class="h-full">
+          <div class="flex flex-col space-y-2 overflow-y-auto h-full relative">
+            <div class="flex flex-col mb-auto">
+              <button
+                v-for="verseItem in filteredChapter"
+                :key="verseItem.id"
+                class="text-left select-none outline-none mb-auto"
+                :class="{ 'bg-gray-300 dark:bg-gray-600' : selectedVerse.some(verse => verse.id === verseItem.id) }"
+                @click.prevent="selectVerse(verseItem)"
+              ><span class="superscript">{{ verseItem.verse }}</span> {{ verseItem.text }}</button>
+            </div>
+            <div class="flex items-center justify-between sticky bottom-2 w-full px-5">
+              <button
+                class="p-1 select-none outline-none transition rounded-full bg-gray-800 text-gray-100 dark:bg-gray-100 dark:text-gray-800 disabled:bg-gray-300 disabled:text-gray-600 shadow"
+                @click.prevent="prevChapter()"
+                :disabled="getChapter === 1"
+              ><chevronLeftIcon class="w-5 h-5" /></button>
+              <button
+                class="p-1 select-none outline-none transition rounded-full bg-gray-800 text-gray-100 dark:bg-gray-100 dark:text-gray-800 disabled:bg-gray-300 disabled:text-gray-600 shadow"
+                @click.prevent="nextChapter()"
+                :disabled="getChapter === uniqueChapters.length"
+              ><chevronRightIcon class="w-5 h-5" /></button>
+            </div>
           </div>
         </div>
-      </div>
-      <div v-if="getBook && getChapter">
-        <button class="fixed inset-y-0 left-0 my-auto h-64 flex items-center px-3 select-none outline-none transition text-transparent rounded-3xl" :class="{ 'bg-gray-300/10 text-gray-700 dark:bg-gray-600/10 dark:text-gray-200' : chapter.prev }" @click.prevent="prevChapter()">
-          <chevronDoubleLeftIcon class="w-5 h-5" />
-        </button>
-        <button class="fixed inset-y-0 right-0 my-auto h-64 flex items-center px-3 select-none outline-none transition text-transparent rounded-3xl" :class="{ 'bg-gray-300/10 text-gray-700 dark:bg-gray-600/10 dark:text-gray-200' : chapter.next }" @click.prevent="nextChapter()">
-          <chevronDoubleRightIcon class="w-5 h-5" />
-        </button>
       </div>
     </div>
   </div>
@@ -84,11 +90,11 @@ import shareIcon from '@/static/heroicons/outline/share.svg?inline';
 import documentCheckIcon from '@/static/heroicons/outline/document-check.svg?inline';
 import clipboardDocumentIcon from '@/static/heroicons/outline/clipboard-document.svg?inline';
 import xMarkIcon from '@/static/heroicons/outline/x-mark.svg?inline';
-import chevronDoubleLeftIcon from '@/static/heroicons/outline/chevron-double-left.svg?inline';
-import chevronDoubleRightIcon from '@/static/heroicons/outline/chevron-double-right.svg?inline';
+import chevronLeftIcon from '@/static/heroicons/outline/chevron-left.svg?inline';
+import chevronRightIcon from '@/static/heroicons/outline/chevron-right.svg?inline';
 
 export default {
-  components: { arrowlongleftIcon, shareIcon, documentCheckIcon, clipboardDocumentIcon, xMarkIcon, chevronDoubleLeftIcon, chevronDoubleRightIcon, },
+  components: { arrowlongleftIcon, shareIcon, documentCheckIcon, clipboardDocumentIcon, xMarkIcon, chevronLeftIcon, chevronRightIcon, },
   data() {
     return {
       loading: true,
@@ -98,10 +104,6 @@ export default {
       verse: null,
       filteredChapters: [],
       selectedVerse: [],
-      chapter: {
-        next: false,
-        prev: false
-      }
     };
   },
   async mounted() {
@@ -215,24 +217,14 @@ export default {
       this.selectedVerse = []
     },
     nextChapter() {
-      if(this.chapter.next) return 
-      this.chapter.next = true
       if(this.getChapter < this.uniqueChapters.length) {
         this.SET_CHAPTER(this.getChapter + 1)
       } else {
         this.SET_CHAPTER(null)
       }
-      setTimeout(() => {
-        this.chapter.next = false
-      }, 500)
     },
     prevChapter() {
-      if(this.chapter.prev) return 
-      this.chapter.prev = true
       this.SET_CHAPTER(this.getChapter - 1)
-      setTimeout(() => {
-        this.chapter.prev = false
-      }, 500)
     }
   },
   computed: {
