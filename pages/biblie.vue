@@ -64,6 +64,7 @@
                   @click.prevent="selectVerse(verseItem)"
                 ><span class="superscript">{{ verseItem.verse }}</span> {{ verseItem.text }}</button>
               </div>
+              <p class="mt-4 text-gray-400 dark:text-gray-500">{{ getDetailedInfo }}</p>
             </div>
             <div class="flex items-center justify-between sticky bottom-2 w-full px-5">
               <button
@@ -274,6 +275,17 @@ export default {
     uniqueChapters() {
       const verses = this.filteredVerses;
       return [...new Set(verses.map(verseItem => verseItem.chapter))];
+    },
+    getDetailedInfo() {
+      const metadata = this.metadata;
+
+      const detailedInfo = metadata?.find(item => item.key === "detailed_info");
+
+      if (detailedInfo) {
+        return detailedInfo.value;
+      } else {
+        return "Informação não encontrada";
+      }
     }
   }
 };
