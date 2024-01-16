@@ -56,13 +56,14 @@
         <div v-if="getBook && getChapter" class="h-full">
           <div class="flex flex-col space-y-2 overflow-y-auto h-full relative">
             <div class="flex flex-col mb-auto">
-              <button
-                v-for="verseItem in filteredChapter"
-                :key="verseItem.id"
-                class="text-left select-none outline-none mb-auto"
-                :class="{ 'bg-gray-300 dark:bg-gray-600' : selectedVerse.some(verse => verse.id === verseItem.id) }"
-                @click.prevent="selectVerse(verseItem)"
-              ><span class="superscript">{{ verseItem.verse }}</span> {{ verseItem.text }}</button>
+              <div v-for="verseItem in filteredChapter" :key="verseItem.id" class="flex flex-col">
+                <!--span class="text-center font-semibold text-base text-black dark:text-white">{{ getUniqueVerseTitles(verseItem).join(', ') }}</span-->
+                <button
+                  class="text-left select-none outline-none mb-auto"
+                  :class="{ 'bg-gray-300 dark:bg-gray-600' : selectedVerse.some(verse => verse.id === verseItem.id) }"
+                  @click.prevent="selectVerse(verseItem)"
+                ><span class="superscript">{{ verseItem.verse }}</span> {{ verseItem.text }}</button>
+              </div>
             </div>
             <div class="flex items-center justify-between sticky bottom-2 w-full px-5">
               <button
@@ -100,6 +101,7 @@ export default {
       loading: true,
       book: null,
       metadata: null,
+      stories: null,
       testament: null,
       verse: null,
       filteredChapters: [],
@@ -114,14 +116,16 @@ export default {
     ...mapMutations(['UPDATE_VERSION', 'SET_BOOK', 'SET_CHAPTER']),
     async loadVersionFiles() {
       const version = this.getVersion;
-      const [book, metadata, testament, verse] = await Promise.all([
+      const [book, metadata, stories, testament, verse] = await Promise.all([
         import(`@/assets/versions/${version}/book.json`),
         import(`@/assets/versions/${version}/metadata.json`),
+        import(`@/assets/versions/${version}/stories.json`),
         import(`@/assets/versions/${version}/testament.json`),
         import(`@/assets/versions/${version}/verse.json`)
       ]);
       this.book = book.default;
       this.metadata = metadata.default;
+      this.stories = stories.default;
       this.testament = testament.default;
       this.verse = verse.default;
       this.loading = false;
@@ -225,7 +229,17 @@ export default {
     },
     prevChapter() {
       this.SET_CHAPTER(this.getChapter - 1)
-    }
+    },
+    getUniqueVerseTitles(verseItem) {
+      const filteredStories = this.stories.filter(item =>
+        item.book_id === verseItem.book_id &&
+        item.chapter === verseItem.chapter &&
+        item.verse === verseItem.verse
+      );
+
+      const uniqueTitles = [...new Set(filteredStories.map(item => item.title))];
+      return uniqueTitles;
+    },
   },
   computed: {
     ...mapGetters(['getVersion', 'getBook', 'getChapter']),
