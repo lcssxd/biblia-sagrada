@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col h-full justify-between overflow-hidden">
     <Header class="relative flex items-center justify-center">
-      <button v-if="getBook && (getChapter || !getChapter )" class="absolute left-3 inset-y-0 p-2 cursor-pointer outline-none" @click.prevent="returnMenu">
+      <button v-if="getBook && (getChapter || !getChapter )" class="absolute left-1 inset-y-0 p-2 cursor-pointer outline-none" @click.prevent="returnMenu">
         <arrowlongleftIcon class="w-5 h-5" />
       </button>
       <span>{{ currentName }}</span>
@@ -21,23 +21,23 @@
       </div>
     </Header>
     <div class="relative overflow-y-auto h-full">
-      <div v-if="loading" class="h-full bg-gray-700 animate-pulse"></div>
+      <div v-if="loading" class="h-full bg-gray-300 dark:bg-gray-700 animate-pulse"></div>
       <div v-if="!getBook && !loading" class="h-full">
         <div class="flex flex-col h-full">
-          <div class="flex flex-col">
-            <span class="p-2 text-center font-medium text-base select-none bg-gray-600 border-b border-gray-600">Antigo Testamento</span>
+          <div class="flex flex-col divide-y divide-gray-200 dark:divide-gray-600">
+            <span class="p-2 text-center font-medium text-base select-none bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-100">Antigo Testamento</span>
             <button 
               v-for="(item, index) in filteredOldTestament" :key="index"
-              class="text-left p-2 outline-none select-none border-b border-gray-600"
+              class="text-left p-2 outline-none select-none"
               @click.prevent="SET_BOOK(item)"
               >{{ item.name }}
             </button>
           </div>
-          <div class="flex flex-col">
-            <span class="p-2 text-center font-medium text-base select-none bg-gray-600 border-b border-gray-600">Novo Testamento</span>
+          <div class="flex flex-col divide-y divide-gray-200 dark:divide-gray-600">
+            <span class="p-2 text-center font-medium text-base select-none bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-100">Novo Testamento</span>
             <button 
               v-for="(item, index) in filteredNewTestament" :key="index"
-              class="text-left p-2 outline-none select-none border-b border-gray-600"
+              class="text-left p-2 outline-none select-none"
               @click.prevent="SET_BOOK(item)"
               >{{ item.name }}
             </button>
@@ -48,7 +48,7 @@
         <div v-if="getBook && !getChapter" class="grid grid-cols-5 gap-1">
           <button
             v-for="chapter in uniqueChapters" :key="chapter.id"
-            class="p-2 border border-gray-600 outline-none"
+            class="p-2 bg-gray-200 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 outline-none"
             @click.prevent="SET_CHAPTER(chapter)"
             >{{ chapter }}
           </button>
@@ -58,7 +58,7 @@
             <button
               v-for="verseItem in filteredChapter" :key="verseItem.id"
               class="text-left select-none outline-none"
-              :class="{ 'bg-gray-600' : selectedVerse.some(verse => verse.id === verseItem.id) }"
+              :class="{ 'bg-gray-300 dark:bg-gray-600' : selectedVerse.some(verse => verse.id === verseItem.id) }"
               @click.prevent="selectVerse(verseItem)"
             ><span class="superscript">{{ verseItem.verse }}</span> {{ verseItem.text }}
             </button>
@@ -66,10 +66,10 @@
         </div>
       </div>
       <div v-if="getBook && getChapter">
-        <button class="fixed inset-y-0 left-0 my-auto h-64 flex items-center px-3 select-none outline-none transition text-transparent rounded-3xl" :class="{ 'bg-gray-600/10 text-gray-200' : chapter.prev }" @click.prevent="prevChapter()">
+        <button class="fixed inset-y-0 left-0 my-auto h-64 flex items-center px-3 select-none outline-none transition text-transparent rounded-3xl" :class="{ 'bg-gray-300/10 text-gray-700 dark:bg-gray-600/10 dark:text-gray-200' : chapter.prev }" @click.prevent="prevChapter()">
           <chevronDoubleLeftIcon class="w-5 h-5" />
         </button>
-        <button class="fixed inset-y-0 right-0 my-auto h-64 flex items-center px-3 select-none outline-none transition text-transparent rounded-3xl" :class="{ 'bg-gray-600/10 text-gray-200' : chapter.next }" @click.prevent="nextChapter()">
+        <button class="fixed inset-y-0 right-0 my-auto h-64 flex items-center px-3 select-none outline-none transition text-transparent rounded-3xl" :class="{ 'bg-gray-300/10 text-gray-700 dark:bg-gray-600/10 dark:text-gray-200' : chapter.next }" @click.prevent="nextChapter()">
           <chevronDoubleRightIcon class="w-5 h-5" />
         </button>
       </div>
@@ -277,6 +277,6 @@ export default {
 .superscript {
   vertical-align: super;
   font-size: smaller;
-  @apply text-gray-400;
+  @apply text-gray-600 dark:text-gray-400;
 }
 </style>
