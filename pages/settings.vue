@@ -37,10 +37,11 @@
       <div class="flex flex-col">
         <span class="p-2 text-center font-medium text-base select-none bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-100">Informações</span>
         <div class="flex flex-col divide-y divide-gray-200 dark:divide-gray-600">
-          <button 
+          <NuxtLink 
+            to="/about"
             class="p-2 outline-none select-none text-left"
             ><span class="text-sm">Sobre</span>
-          </button>
+          </NuxtLink>
         </div>
       </div>
     </div>
