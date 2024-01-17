@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import arrowlongleftIcon from '@/static/heroicons/outline/arrow-long-left.svg?inline'
+import arrowlongleftIcon from '@/static/heroicons/mini/arrow-long-left.svg?inline'
 
 export default {
   components: { arrowlongleftIcon },
