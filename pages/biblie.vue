@@ -68,12 +68,12 @@
             </div>
             <div class="flex items-center justify-between sticky bottom-2 w-full px-5">
               <button
-                class="p-1 select-none outline-none transition rounded-full bg-gray-800 text-gray-100 dark:bg-gray-100 dark:text-gray-800 disabled:bg-gray-300 disabled:text-gray-600 shadow"
+                class="p-1 select-none outline-none transition rounded-full text-gray-800 hover:bg-gray-800 hover:text-gray-100 dark:text-gray-100 hover:dark:bg-gray-100 hover:dark:text-gray-800 disabled:bg-gray-300 disabled:text-gray-600 disabled:dark:bg-gray-300 disabled:dark:text-gray-600 shadow"
                 @click.prevent="prevChapter()"
                 :disabled="getChapter === 1"
               ><chevronLeftIcon class="w-5 h-5" /></button>
               <button
-                class="p-1 select-none outline-none transition rounded-full bg-gray-800 text-gray-100 dark:bg-gray-100 dark:text-gray-800 disabled:bg-gray-300 disabled:text-gray-600 shadow"
+                class="p-1 select-none outline-none transition rounded-full text-gray-800 hover:bg-gray-800 hover:text-gray-100 dark:text-gray-100 hover:dark:bg-gray-100 hover:dark:text-gray-800 disabled:bg-gray-300 disabled:text-gray-600 shadow"
                 @click.prevent="nextChapter()"
                 :disabled="getChapter === uniqueChapters.length"
               ><chevronRightIcon class="w-5 h-5" /></button>
@@ -87,13 +87,13 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
-import arrowlongleftIcon from '@/static/heroicons/outline/arrow-long-left.svg?inline';
-import shareIcon from '@/static/heroicons/outline/share.svg?inline';
-import documentCheckIcon from '@/static/heroicons/outline/document-check.svg?inline';
-import clipboardDocumentIcon from '@/static/heroicons/outline/clipboard-document.svg?inline';
-import xMarkIcon from '@/static/heroicons/outline/x-mark.svg?inline';
-import chevronLeftIcon from '@/static/heroicons/outline/chevron-left.svg?inline';
-import chevronRightIcon from '@/static/heroicons/outline/chevron-right.svg?inline';
+import arrowlongleftIcon from '@/static/heroicons/mini/arrow-long-left.svg?inline';
+import shareIcon from '@/static/heroicons/mini/share.svg?inline';
+import documentCheckIcon from '@/static/heroicons/mini/document-check.svg?inline';
+import clipboardDocumentIcon from '@/static/heroicons/mini/clipboard-document.svg?inline';
+import xMarkIcon from '@/static/heroicons/mini/x-mark.svg?inline';
+import chevronLeftIcon from '@/static/heroicons/mini/chevron-left.svg?inline';
+import chevronRightIcon from '@/static/heroicons/mini/chevron-right.svg?inline';
 
 export default {
   components: { arrowlongleftIcon, shareIcon, documentCheckIcon, clipboardDocumentIcon, xMarkIcon, chevronLeftIcon, chevronRightIcon, },

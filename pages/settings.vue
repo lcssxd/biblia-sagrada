@@ -5,6 +5,21 @@
     </Header>
     <div class="overflow-y-auto h-full">
       <div class="flex flex-col">
+        <span class="p-2 text-center font-medium text-base select-none bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-100">Opções de Fonte</span>
+        <div class="flex flex-col divide-y divide-gray-200 dark:divide-gray-600">
+          <button 
+            v-for="(item, index) in fonts_family" :key="index"
+            class="relative p-2 outline-none select-none text-left"
+            @click.prevent="changeFontFamily(item.id)"
+            >
+            <span class="text-sm">{{ item.name }}</span>
+            <div v-if="font_family === item.id" class="absolute top-3 right-2 z-0">
+              <checkIcon class="w-4 h-4" />
+            </div>
+          </button>
+        </div>
+      </div>
+      <div class="flex flex-col">
         <span class="p-2 text-center font-medium text-base select-none bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-100">Versões</span>
         <div class="flex flex-col divide-y divide-gray-200 dark:divide-gray-600">
           <button 
@@ -50,8 +65,8 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
-import checkIcon from '@/static/heroicons/outline/check.svg?inline'
-import arrowlongleftIcon from '@/static/heroicons/outline/arrow-long-left.svg?inline'
+import checkIcon from '@/static/heroicons/mini/check.svg?inline'
+import arrowlongleftIcon from '@/static/heroicons/mini/arrow-long-left.svg?inline'
 
 export default {
   components: { checkIcon, arrowlongleftIcon },
@@ -78,16 +93,32 @@ export default {
           name: 'Escuro',
         }
       ],
+      fonts_family: [
+        {
+          id: '',
+          name: 'Padrão',
+        },
+        {
+          id: 'font-serif',
+          name: 'Font Serif',
+        },
+        {
+          id: 'font-mono',
+          name: 'Font Mono',
+        },
+      ],
       version: null,
       thema: null,
+      font_family: null,
     }
   },
   mounted() {
     this.updateVersion()
     this.updateThema()
+    this.updateFontFamily()
   },
   methods: {
-    ...mapMutations(['SET_VERSION', 'SET_THEMA']),
+    ...mapMutations(['SET_VERSION', 'SET_THEMA', 'SET_FONT_FAMILY']),
     changeVersion(version) {
       this.SET_VERSION(version)
       this.updateVersion()
@@ -96,15 +127,22 @@ export default {
       this.SET_THEMA(thema)
       this.updateThema()
     },
+    changeFontFamily(font) {
+      this.SET_FONT_FAMILY(font)
+      this.updateFontFamily()
+    },
     updateVersion() {
       this.version = this.getVersion
     },
     updateThema() {
       this.thema = this.getThema
     },
+    updateFontFamily() {
+      this.font_family = this.getFontFamily
+    },
   },
   computed: {
-    ...mapGetters(['getVersion', 'getThema']),
+    ...mapGetters(['getVersion', 'getThema', 'getFontFamily']),
   }
 }
 </script>

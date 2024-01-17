@@ -1,10 +1,7 @@
 export const state = () => ({
-  version_default: 'ARA',
-  thema_default: 'dark',
   version: 'ARA',
   thema: 'dark',
-  text_size_default: '',
-  text_size: '',
+  font_family: '',
   book: null,
   chapter: null,
 })
@@ -15,6 +12,9 @@ export const getters = {
   },
   getThema(state) {
     return state.thema;
+  },
+  getFontFamily(state) {
+    return state.font_family;
   },
   getBook(state) {
     return state.book;
@@ -39,7 +39,7 @@ export const mutations = {
     if (validVersions.includes(version)) {
       state.version = version;
     } else {
-      state.version = state.version_default;
+      state.version = validVersions[0];
     }
     localStorage.setItem('version', state.version);
   },
@@ -50,9 +50,20 @@ export const mutations = {
     if (validThemas.includes(thema)) {
       state.thema = thema;
     } else {
-      state.thema = state.thema_default;
+      state.thema = validThemas[0];
     }
     localStorage.setItem('thema', state.thema);
+  },
+  UPDATE_FONT_FAMILY(state) {
+    const fontFamily = localStorage.getItem('font_family');
+    const validFontsFamily = ['', 'font-serif', 'font-mono'];
+
+    if (validFontsFamily.includes(fontFamily)) {
+      state.font_family = fontFamily;
+    } else {
+      state.font_family = validFontsFamily[0];
+    }
+    localStorage.setItem('font_family', state.font_family);
   },
   SET_VERSION(state, payload) {
     const validVersions = ['ARA', 'NTLH'];
@@ -73,6 +84,14 @@ export const mutations = {
       }
       state.thema = payload;
       localStorage.setItem('thema', payload);
+    }
+  },
+  SET_FONT_FAMILY(state, payload) {
+    const validFontsFamily = ['', 'font-serif', 'font-mono'];
+
+    if (validFontsFamily.includes(payload)) {
+      state.font_family = payload;
+      localStorage.setItem('font_family', payload);
     }
   },
   SET_BOOK(state, payload) {

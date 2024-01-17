@@ -1,5 +1,5 @@
 <template>
-  <div class="app">
+  <div class="app" :class="`${getFontFamily}`">
     <Nuxt class="mb-auto" />
     <Footer />
   </div>
@@ -11,6 +11,7 @@ export default {
   created() {
     this.UPDATE_VERSION()
     this.UPDATE_THEMA()
+    this.UPDATE_FONT_FAMILY()
   },
   mounted() {
     this.$nextTick(function () {
@@ -19,12 +20,13 @@ export default {
     })
     this.SET_VERSION(this.getVersion)
     this.SET_THEMA(this.getThema)
+    this.SET_FONT_FAMILY(this.getFontFamily)
   },
   computed: {
-    ...mapGetters(['getVersion', 'getThema']),
+    ...mapGetters(['getVersion', 'getThema', 'getFontFamily']),
   },
   methods: {
-    ...mapMutations(['UPDATE_VERSION', 'UPDATE_THEMA', 'SET_VERSION', 'SET_THEMA']),
+    ...mapMutations(['UPDATE_VERSION', 'UPDATE_THEMA', 'UPDATE_FONT_FAMILY', 'SET_VERSION', 'SET_THEMA', 'SET_FONT_FAMILY']),
     getWindowHeight() {
       let vh = window.innerHeight * 0.01;
       document.documentElement.style.setProperty('--vh', `${vh}px`);
