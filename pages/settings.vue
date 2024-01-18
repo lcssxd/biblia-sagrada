@@ -96,15 +96,15 @@ export default {
       fonts_family: [
         {
           id: '',
-          name: 'Padrão',
+          name: 'Fonte Padrão',
         },
         {
           id: 'font-serif',
-          name: 'Font Serif',
+          name: 'Fonte Serifa',
         },
         {
           id: 'font-mono',
-          name: 'Font Mono',
+          name: 'Fonte Mono',
         },
       ],
       version: null,

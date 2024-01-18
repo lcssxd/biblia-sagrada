@@ -34,7 +34,7 @@ export default {
         },
         {
           name: 'Bíblia',
-          link: '/biblie',
+          link: '/bible',
           icon: 'bookOpenIcon'
         },
         {

@@ -5,7 +5,7 @@
         <arrowlongleftIcon class="w-5 h-5" />
       </button>
       <span>{{ currentName }}</span>
-      <div v-if="getBook && getChapter && selectedVerse && selectedVerse.length > 0" class="flex space-x-3 absolute right-1 inset-y-0 p-2">
+      <div v-if="getBook && getChapter && selectedVerse && selectedVerse.length > 0" class="flex space-x-2 absolute right-1 inset-y-0 p-2">
         <button class="cursor-pointer outline-none" @click.prevent="selectAllVerses">
           <documentCheckIcon class="w-5 h-5" />
         </button>
@@ -96,7 +96,15 @@ import chevronLeftIcon from '@/static/heroicons/mini/chevron-left.svg?inline';
 import chevronRightIcon from '@/static/heroicons/mini/chevron-right.svg?inline';
 
 export default {
-  components: { arrowlongleftIcon, shareIcon, documentCheckIcon, clipboardDocumentIcon, xMarkIcon, chevronLeftIcon, chevronRightIcon, },
+  components: { 
+    arrowlongleftIcon,
+    shareIcon,
+    documentCheckIcon,
+    clipboardDocumentIcon,
+    xMarkIcon,
+    chevronLeftIcon,
+    chevronRightIcon,
+  },
   data() {
     return {
       loading: true,
@@ -107,6 +115,7 @@ export default {
       verse: null,
       filteredChapters: [],
       selectedVerse: [],
+      favoritedChapters: []
     };
   },
   async mounted() {
