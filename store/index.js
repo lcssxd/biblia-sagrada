@@ -5,6 +5,7 @@ export const state = () => ({
   book: null,
   chapter: null,
   favorite_verse: [],
+  search_verse: [],
 })
 
 export const getters = {
@@ -25,6 +26,9 @@ export const getters = {
   },
   getFavoriteVerse(state) {
     return state.favorite_verse;
+  },
+  getSearchVerse(state) {
+    return state.search_verse;
   }
 }
 
@@ -60,7 +64,7 @@ export const mutations = {
   },
   UPDATE_FONT_FAMILY(state) {
     const fontFamily = localStorage.getItem('font_family');
-    const validFontsFamily = ['', 'font-serif', 'font-mono'];
+    const validFontsFamily = ['font-sans', 'font-serif', 'font-mono'];
 
     if (validFontsFamily.includes(fontFamily)) {
       state.font_family = fontFamily;
@@ -72,7 +76,7 @@ export const mutations = {
   UPDATE_FAVORITE_VERSE(state) {
     const favorite_verse = JSON.parse(localStorage.getItem('favorite_verse') || '[]');
     state.favorite_verse = favorite_verse;
-  },  
+  },
   SET_VERSION(state, payload) {
     const validVersions = ['ARA', 'NTLH'];
 
@@ -95,7 +99,7 @@ export const mutations = {
     }
   },
   SET_FONT_FAMILY(state, payload) {
-    const validFontsFamily = ['', 'font-serif', 'font-mono'];
+    const validFontsFamily = ['font-sans', 'font-serif', 'font-mono'];
 
     if (validFontsFamily.includes(payload)) {
       state.font_family = payload;
@@ -113,19 +117,27 @@ export const mutations = {
   FAVORITE_VERSE(state, payload) {
     state.favorite_verse = payload;
     localStorage.setItem('favorite_verse', JSON.stringify(payload));
+  },
+  SEARCH_VERSE(state, payload) {
+    if (Array.isArray(payload) && payload.length === 0) {
+      state.search_verse = [];
+    } else {
+      state.search_verse.push(payload);
+    }
+    localStorage.setItem('search_verse', JSON.stringify(state.search_verse));
   }
 }
 
 export const actions = {
   toggleFavoriteVerse({ commit, state }, verseItem) {
-    let updatedFavoriteVerse = [...state.favorite_verse]; // Cria uma cópia do estado atual
+    let updatedFavoriteVerse = [...state.favorite_verse];
 
     const toggleId = (item) => {
       const index = updatedFavoriteVerse.indexOf(item.id);
       if (index === -1) {
-        updatedFavoriteVerse.push(item.id); // Adiciona o ID se não estiver na lista
+        updatedFavoriteVerse.push(item.id);
       } else {
-        updatedFavoriteVerse.splice(index, 1); // Remove o ID se estiver na lista
+        updatedFavoriteVerse.splice(index, 1);
       }
     };
 
@@ -135,7 +147,7 @@ export const actions = {
       toggleId(verseItem);
     }
 
-    commit('FAVORITE_VERSE', updatedFavoriteVerse); // Chama a mutation com o novo estado
+    commit('FAVORITE_VERSE', updatedFavoriteVerse);
   }
 }
 

@@ -8,6 +8,9 @@
         <h1>{{ currentName }}</h1>
       </div>
       <div v-if="!getBook && !getChapter" class="flex items-center space-x-2">
+        <NuxtLink to="/search">
+          <magnifyingGlassIcon class="w-5 h-5" />
+        </NuxtLink>
         <NuxtLink to="/favorite">
           <bookmarkIcon class="w-5 h-5" />
         </NuxtLink>
@@ -103,6 +106,7 @@ import chevronLeftIcon from '@/static/heroicons/mini/chevron-left.svg?inline';
 import chevronRightIcon from '@/static/heroicons/mini/chevron-right.svg?inline';
 import bookmarkIcon from '@/static/heroicons/mini/bookmark.svg?inline';
 import bookmarkSlashIcon from '@/static/heroicons/mini/bookmark-slash.svg?inline';
+import magnifyingGlassIcon from '@/static/heroicons/mini/magnifying-glass.svg?inline'
 
 export default {
   components: { 
@@ -114,6 +118,7 @@ export default {
     chevronRightIcon,
     bookmarkIcon,
     bookmarkSlashIcon,
+    magnifyingGlassIcon,
   },
   data() {
     return {
@@ -128,12 +133,13 @@ export default {
     };
   },
   async mounted() {
-    await this.loadVersionFiles();
-    this.UPDATE_VERSION();
-    this.UPDATE_FAVORITE_VERSE();
+    await this.loadVersionFiles()
+    this.UPDATE_VERSION()
+    this.UPDATE_FAVORITE_VERSE()
+    this.selectedSearch()
   },
   methods: {
-    ...mapMutations(['UPDATE_VERSION', 'UPDATE_FAVORITE_VERSE', 'SET_BOOK', 'SET_CHAPTER']),
+    ...mapMutations(['UPDATE_VERSION', 'UPDATE_FAVORITE_VERSE', 'SET_BOOK', 'SET_CHAPTER', 'SEARCH_VERSE']),
     ...mapActions(['toggleFavoriteVerse']),
     async loadVersionFiles() {
       const version = this.getVersion;
@@ -214,7 +220,9 @@ export default {
       }
     },
     cancelSelected() {
-      this.selectedVerse = []
+      const cleanSelected = []
+      this.selectedVerse = cleanSelected
+      this.SEARCH_VERSE(cleanSelected)
     },
     nextChapter() {
       if(this.getChapter < this.uniqueChapters.length) {
@@ -239,10 +247,15 @@ export default {
     favoriteVerse(verseItem) {
       this.toggleFavoriteVerse(verseItem)
       this.cancelSelected()
+    },
+    selectedSearch() {
+      if(this.getSearchVerse && this.getSearchVerse.length > 0) {
+        this.selectedVerse = [...this.getSearchVerse]
+      }
     }
   },
   computed: {
-    ...mapGetters(['getVersion', 'getBook', 'getChapter', 'getFavoriteVerse']),
+    ...mapGetters(['getVersion', 'getBook', 'getChapter', 'getFavoriteVerse', 'getSearchVerse']),
     currentName() {
       let name = 'Bíblia Sagrada';
       if(this.getBook && !this.getChapter) {
