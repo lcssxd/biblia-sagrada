@@ -6,7 +6,7 @@
       </NuxtLink>
       <span>{{ title }}</span>
     </Header>
-    <div class="flex flex-col space-y-2 overflow-y-auto h-full divide-y divide-gray-200 dark:divide-gray-600">
+    <div class="flex flex-col overflow-y-auto h-full divide-y divide-gray-200 dark:divide-gray-600">
       <div v-if="loading" class="h-full bg-gray-300 dark:bg-gray-700 animate-pulse"></div>
       <div v-for="(item, index) in filteredVerses" :key="index" class="p-2">
         <div class="flex items-center justify-between">
