@@ -75,7 +75,7 @@
                   @click.prevent="selectVerse(verseItem)"
                 ><span class="superscript">{{ verseItem.verse }}</span> {{ verseItem.text }}</button>
               </div>
-              <p class="mt-4 text-gray-400 dark:text-gray-500">{{ getDetailedInfo }}</p>
+              <p class="mt-4 text-gray-400 dark:text-gray-500 select-none">{{ getDetailedInfo }}</p>
             </div>
             <div class="flex items-center justify-between sticky bottom-2 w-full px-5">
               <button
