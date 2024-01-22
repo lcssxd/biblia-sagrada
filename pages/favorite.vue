@@ -6,9 +6,9 @@
       </NuxtLink>
       <span>{{ title }}</span>
     </Header>
-    <div class="flex flex-col space-y-2 overflow-y-auto h-full">
+    <div class="flex flex-col space-y-2 overflow-y-auto h-full divide-y divide-gray-200 dark:divide-gray-600">
       <div v-if="loading" class="h-full bg-gray-300 dark:bg-gray-700 animate-pulse"></div>
-      <div v-for="(item, index) in filteredVerses" :key="index" class="border-b dark:border-gray-700">
+      <div v-for="(item, index) in filteredVerses" :key="index" class="p-2">
         <div class="flex items-center justify-between">
           <span class="font-semibold">{{ getBookAndChapterName(item.book_id, item.chapter, item.verse) }}</span>
           <div class="flex items-center space-x-2">
