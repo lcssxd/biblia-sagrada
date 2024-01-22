@@ -1,19 +1,27 @@
 <template>
   <div class="flex flex-col h-full justify-between overflow-hidden">
-    <Header class="relative flex items-center justify-center">
-      <button v-if="getBook && (getChapter || !getChapter )" class="absolute left-1 inset-y-0 p-2 cursor-pointer outline-none" @click.prevent="returnMenu">
-        <arrowlongleftIcon class="w-5 h-5" />
-      </button>
-      <span>{{ currentName }}</span>
-      <div v-if="getBook && getChapter && selectedVerse && selectedVerse.length > 0" class="flex space-x-2 absolute right-1 inset-y-0 p-2">
+    <Header class="flex items-center justify-between">
+      <div class="flex items-center space-x-2">
+        <button v-if="getBook && (getChapter || !getChapter )" class="cursor-pointer outline-none" @click.prevent="returnMenu">
+          <arrowlongleftIcon class="w-5 h-5" />
+        </button>
+        <h1>{{ currentName }}</h1>
+      </div>
+      <div v-if="!getBook && !getChapter" class="flex items-center space-x-2">
+        <NuxtLink to="/favorite">
+          <bookmarkIcon class="w-5 h-5" />
+        </NuxtLink>
+      </div>
+      <div v-if="getBook && getChapter && selectedVerse && selectedVerse.length > 0" class="flex items-center space-x-3">
         <button class="cursor-pointer outline-none" @click.prevent="selectAllVerses">
           <documentCheckIcon class="w-5 h-5" />
         </button>
         <button class="cursor-pointer outline-none" @click.prevent="copyCurrentVerse">
           <clipboardDocumentIcon class="w-5 h-5" />
         </button>
-        <button class="cursor-pointer outline-none" @click.prevent="shareVerse">
-          <shareIcon class="w-5 h-5" />
+        <button class="cursor-pointer outline-none" @click.prevent="favoriteVerse(selectedVerse)">
+          <bookmarkSlashIcon v-if="getFavoriteVerse.includes(selectedVerse[0].id)" class="w-5 h-5" />
+          <bookmarkIcon v-else class="w-5 h-5" />
         </button>
         <button class="cursor-pointer outline-none" @click.prevent="cancelSelected">
           <xMarkIcon class="w-5 h-5" />
@@ -25,7 +33,7 @@
       <div v-if="!getBook && !loading" class="h-full">
         <div class="flex flex-col h-full">
           <div class="flex flex-col divide-y divide-gray-200 dark:divide-gray-600">
-            <span class="sticky top-0 p-2 text-center font-medium text-base select-none bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-100">Antigo Testamento</span>
+            <h2 class="sticky top-0 p-2 text-center font-medium text-base select-none bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-100">Antigo Testamento</h2>
             <button 
               v-for="(item, index) in filteredOldTestament" :key="index"
               class="text-left p-2 outline-none select-none"
@@ -34,7 +42,7 @@
             </button>
           </div>
           <div class="flex flex-col divide-y divide-gray-200 dark:divide-gray-600">
-            <span class="sticky top-0 p-2 text-center font-medium text-base select-none bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-100">Novo Testamento</span>
+            <h2 class="sticky top-0 p-2 text-center font-medium text-base select-none bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-100">Novo Testamento</h2>
             <button 
               v-for="(item, index) in filteredNewTestament" :key="index"
               class="text-left p-2 outline-none select-none"
@@ -60,7 +68,7 @@
                 <!--span class="text-center font-semibold text-base text-black dark:text-white">{{ getUniqueVerseTitles(verseItem).join(', ') }}</span-->
                 <button
                   class="text-left select-none outline-none mb-auto"
-                  :class="{ 'bg-gray-300 dark:bg-gray-600' : selectedVerse.some(verse => verse.id === verseItem.id) }"
+                  :class="[{ 'bg-gray-300 dark:bg-gray-600' : selectedVerse.some(verse => verse.id === verseItem.id) }, { 'bg-gray-300/50 dark:bg-gray-600/50' : !selectedVerse.some(verse => verse.id === verseItem.id) && getFavoriteVerse.includes(verseItem.id) } ]"
                   @click.prevent="selectVerse(verseItem)"
                 ><span class="superscript">{{ verseItem.verse }}</span> {{ verseItem.text }}</button>
               </div>
@@ -86,24 +94,26 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 import arrowlongleftIcon from '@/static/heroicons/mini/arrow-long-left.svg?inline';
-import shareIcon from '@/static/heroicons/mini/share.svg?inline';
 import documentCheckIcon from '@/static/heroicons/mini/document-check.svg?inline';
 import clipboardDocumentIcon from '@/static/heroicons/mini/clipboard-document.svg?inline';
 import xMarkIcon from '@/static/heroicons/mini/x-mark.svg?inline';
 import chevronLeftIcon from '@/static/heroicons/mini/chevron-left.svg?inline';
 import chevronRightIcon from '@/static/heroicons/mini/chevron-right.svg?inline';
+import bookmarkIcon from '@/static/heroicons/mini/bookmark.svg?inline';
+import bookmarkSlashIcon from '@/static/heroicons/mini/bookmark-slash.svg?inline';
 
 export default {
   components: { 
     arrowlongleftIcon,
-    shareIcon,
     documentCheckIcon,
     clipboardDocumentIcon,
     xMarkIcon,
     chevronLeftIcon,
     chevronRightIcon,
+    bookmarkIcon,
+    bookmarkSlashIcon,
   },
   data() {
     return {
@@ -115,15 +125,16 @@ export default {
       verse: null,
       filteredChapters: [],
       selectedVerse: [],
-      favoritedChapters: []
     };
   },
   async mounted() {
     await this.loadVersionFiles();
     this.UPDATE_VERSION();
+    this.UPDATE_FAVORITE_VERSE();
   },
   methods: {
-    ...mapMutations(['UPDATE_VERSION', 'SET_BOOK', 'SET_CHAPTER']),
+    ...mapMutations(['UPDATE_VERSION', 'UPDATE_FAVORITE_VERSE', 'SET_BOOK', 'SET_CHAPTER']),
+    ...mapActions(['toggleFavoriteVerse']),
     async loadVersionFiles() {
       const version = this.getVersion;
       const [book, metadata, stories, testament, verse] = await Promise.all([
@@ -202,31 +213,6 @@ export default {
         console.log('A API Clipboard não é suportada neste navegador.');
       }
     },
-    shareVerse() {
-      const versesToShare = this.selectedVerse.map(verseItem => {
-        return `"${verseItem.text}" - ${this.currentName}:${verseItem.verse}`;
-      }).join('\n');
-
-      let shareTitle = this.currentName;
-      if (this.selectedVerse.length === 1) {
-        shareTitle += `:${this.selectedVerse[0].verse}`;
-      }
-
-      if (navigator.share) {
-        navigator.share({
-          title: shareTitle,
-          text: versesToShare,
-          url: window.location.href,
-        })
-        .then(() => {
-          console.log('Conteúdo compartilhado com sucesso!');
-          this.cancelSelected();
-        })
-        .catch((error) => console.error('Erro ao compartilhar:', error));
-      } else {
-        console.log('A Web Share API não é suportada neste navegador.');
-      }
-    },
     cancelSelected() {
       this.selectedVerse = []
     },
@@ -250,9 +236,13 @@ export default {
       const uniqueTitles = [...new Set(filteredStories.map(item => item.title))];
       return uniqueTitles;
     },
+    favoriteVerse(verseItem) {
+      this.toggleFavoriteVerse(verseItem)
+      this.cancelSelected()
+    }
   },
   computed: {
-    ...mapGetters(['getVersion', 'getBook', 'getChapter']),
+    ...mapGetters(['getVersion', 'getBook', 'getChapter', 'getFavoriteVerse']),
     currentName() {
       let name = 'Bíblia Sagrada';
       if(this.getBook && !this.getChapter) {
@@ -295,7 +285,7 @@ export default {
       } else {
         return "Informação não encontrada";
       }
-    }
+    },
   }
 };
 </script>

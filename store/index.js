@@ -4,6 +4,7 @@ export const state = () => ({
   font_family: '',
   book: null,
   chapter: null,
+  favorite_verse: [],
 })
 
 export const getters = {
@@ -22,6 +23,9 @@ export const getters = {
   getChapter(state) {
     return state.chapter;
   },
+  getFavoriteVerse(state) {
+    return state.favorite_verse;
+  }
 }
 
 export const mutations = {
@@ -65,6 +69,10 @@ export const mutations = {
     }
     localStorage.setItem('font_family', state.font_family);
   },
+  UPDATE_FAVORITE_VERSE(state) {
+    const favorite_verse = JSON.parse(localStorage.getItem('favorite_verse') || '[]');
+    state.favorite_verse = favorite_verse;
+  },  
   SET_VERSION(state, payload) {
     const validVersions = ['ARA', 'NTLH'];
 
@@ -102,4 +110,32 @@ export const mutations = {
     state.chapter = payload;
     localStorage.setItem('chapter', payload);
   },
+  FAVORITE_VERSE(state, payload) {
+    state.favorite_verse = payload;
+    localStorage.setItem('favorite_verse', JSON.stringify(payload));
+  }
 }
+
+export const actions = {
+  toggleFavoriteVerse({ commit, state }, verseItem) {
+    let updatedFavoriteVerse = [...state.favorite_verse]; // Cria uma cópia do estado atual
+
+    const toggleId = (item) => {
+      const index = updatedFavoriteVerse.indexOf(item.id);
+      if (index === -1) {
+        updatedFavoriteVerse.push(item.id); // Adiciona o ID se não estiver na lista
+      } else {
+        updatedFavoriteVerse.splice(index, 1); // Remove o ID se estiver na lista
+      }
+    };
+
+    if (Array.isArray(verseItem)) {
+      verseItem.forEach(toggleId);
+    } else {
+      toggleId(verseItem);
+    }
+
+    commit('FAVORITE_VERSE', updatedFavoriteVerse); // Chama a mutation com o novo estado
+  }
+}
+
