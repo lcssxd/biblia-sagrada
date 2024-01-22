@@ -6,21 +6,29 @@
       </NuxtLink>
       <span>{{ title }}</span>
     </Header>
-    <div class="flex flex-col overflow-y-auto h-full divide-y divide-gray-200 dark:divide-gray-600">
+    <div class="flex flex-col overflow-y-auto h-full">
       <div v-if="loading" class="h-full bg-gray-300 dark:bg-gray-700 animate-pulse"></div>
-      <div v-for="(item, index) in filteredVerses" :key="index" class="p-2">
-        <div class="flex items-center justify-between">
-          <span class="font-semibold">{{ getBookAndChapterName(item.book_id, item.chapter, item.verse) }}</span>
-          <div class="flex items-center space-x-2">
-            <button class="cursor-pointer outline-none" @click.prevent="copyVerse(item)">
-              <clipboardDocumentIcon class="w-5 h-5" />
-            </button>
-            <button class="cursor-pointer outline-none" @click.prevent="toggleFavoriteVerse(item)">
-              <trashIcon class="w-5 h-5" />
-            </button>
+      <div v-if="!loading && filteredVerses && filteredVerses.length > 0" class="divide-y divide-gray-200 dark:divide-gray-600">
+        <div v-for="(item, index) in filteredVerses" :key="index" class="p-2">
+          <div class="flex items-center justify-between">
+            <span class="font-semibold">{{ getBookAndChapterName(item.book_id, item.chapter, item.verse) }}</span>
+            <div class="flex items-center space-x-2">
+              <button class="cursor-pointer outline-none" @click.prevent="copyVerse(item)">
+                <clipboardDocumentIcon class="w-5 h-5" />
+              </button>
+              <button class="cursor-pointer outline-none" @click.prevent="toggleFavoriteVerse(item)">
+                <trashIcon class="w-5 h-5" />
+              </button>
+            </div>
           </div>
+          <p class="select-none outline-none">{{ item.text }}</p>
         </div>
-        <p class="select-none outline-none">{{ item.text }}</p>
+      </div>
+      <div v-if="!loading && filteredVerses && filteredVerses.length === 0" class="flex items-center justify-center h-full text-gray-800 dark:text-gray-50">
+        <div class="flex flex-col items-center space-y-4">
+          <bookmarkIcon class="w-16 h-16" />
+          <p class="text-lg select-none">Nenhum versículo salvo</p>
+        </div>
       </div>
     </div>
   </div>
@@ -31,12 +39,13 @@ import { mapGetters, mapMutations, mapActions } from 'vuex'
 import arrowlongleftIcon from '@/static/heroicons/mini/arrow-long-left.svg?inline'
 import clipboardDocumentIcon from '@/static/heroicons/mini/clipboard-document.svg?inline';
 import trashIcon from '@/static/heroicons/mini/trash.svg?inline';
+import bookmarkIcon from '@/static/heroicons/mini/bookmark.svg?inline';
 
 export default {
-  components: { arrowlongleftIcon, clipboardDocumentIcon, trashIcon },
+  components: { arrowlongleftIcon, clipboardDocumentIcon, trashIcon, bookmarkIcon },
   data() {
     return {
-      title: 'Favoritos',
+      title: 'Versículos',
       loading: true,
       verse: null,
       book: null,

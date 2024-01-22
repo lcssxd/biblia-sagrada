@@ -1,58 +1,53 @@
 <template>
   <div class="flex flex-col h-full overflow-hidden">
     <Header class="flex items-center space-x-2">
-      <NuxtLink to="/bible" class="flex items-center p-2 cursor-pointer outline-none">
+      <NuxtLink to="/bible" class="flex items-center cursor-pointer outline-none">
         <arrowlongleftIcon class="w-5 h-5" />
       </NuxtLink>
       <span>{{ title }}</span>
     </Header>
-    <div class="h-full">
-      <div>
-        <fieldset class="w-full space-y-1 text-gray-800 dark:text-gray-50">
-          <label for="Search" class="hidden">Procurar</label>
-          <div class="relative">
-            <span class="absolute inset-y-0 left-0 flex items-center pl-2">
-              <button type="button" title="search" class="p-1 outline-none" @click.prevent="searchText">
-                <magnifyingGlassIcon class="w-4 h-4" />
-              </button>
-            </span>
-            <input
-              type="search"
-              name="Search"
-              placeholder="Procurar..."
-              v-model="name"
-              class="w-full py-2 pl-10 pr-2 text-sm border dark:bg-transparent border-gray-200 dark:border-gray-700 outline-none"
-              required
-              autocomplete="off"
-              @keyup.enter="searchText"
-            >
-          </div>
-        </fieldset>
+    <fieldset class="flex flex-col w-full space-y-1 text-gray-800 dark:text-gray-50">
+      <label for="Search" class="hidden">Procurar</label>
+      <div class="relative">
+        <span class="absolute inset-y-0 left-0 flex items-center pl-2">
+          <button type="button" title="search" class="p-1 outline-none" @click.prevent="searchText">
+            <magnifyingGlassIcon class="w-4 h-4" />
+          </button>
+        </span>
+        <input
+          type="search"
+          name="Search"
+          placeholder="Procurar..."
+          v-model="name"
+          class="w-full py-2 pl-10 pr-2 text-sm border dark:bg-transparent border-gray-200 dark:border-gray-700 outline-none"
+          required
+          autocomplete="off"
+          @keyup.enter="searchText"
+        >
       </div>
-      <div class="overflow-y-auto h-full">
-        <div class="flex items-center justify-center h-full">
-          <div v-if="!loading && searchResults === null" class="flex items-center h-full text-gray-800 dark:text-gray-50">
-            <div class="flex flex-col items-center space-y-4">
-              <magnifyingGlassIcon class="w-16 h-16" />
-              <p class="text-lg select-none">Busque por um texto</p>
-            </div>
-          </div>
-          <div v-if="loading && searchResults && searchResults.length === 0" class="flex items-center justify-center space-x-2">
-            <div class="w-4 h-4 rounded-full animate-pulse bg-gray-100 dark:bg-gray-700"></div>
-            <div class="w-4 h-4 rounded-full animate-pulse bg-gray-100 dark:bg-gray-700"></div>
-            <div class="w-4 h-4 rounded-full animate-pulse bg-gray-100 dark:bg-gray-700"></div>
-          </div>
-          <div v-if="!loading && searchResults && searchResults.length > 0" class="flex flex-col overflow-y-auto h-full divide-y divide-gray-200 dark:divide-gray-600">
-            <div v-for="(item, index) in searchResults" :key="index" class="p-2">
-              <button class="text-left select-none outline-none" @click.prevent="goToText(item)">
-                <p>{{ item.text }} ({{ getBookAndChapterName(item.book_id, item.chapter, item.verse) }})</p>
-              </button>
-            </div>
-          </div>
-          <div v-if="!loading && searchResults && searchResults.length === 0">
-            <p class="text-lg select-none">Nenhuma palavra foi encontrada</p>
-          </div>
+    </fieldset>
+    <div class="overflow-y-auto h-full">
+      <div v-if="!loading && searchResults === null" class="flex items-center justify-center h-full text-gray-800 dark:text-gray-50">
+        <div class="flex flex-col items-center space-y-4">
+          <magnifyingGlassIcon class="w-16 h-16" />
+          <p class="text-lg select-none">Busque por um texto</p>
         </div>
+      </div>
+      <div v-if="loading && searchResults && searchResults.length === 0" class="flex items-center justify-center space-x-2">
+        <div class="w-4 h-4 rounded-full animate-pulse bg-gray-100 dark:bg-gray-700"></div>
+        <div class="w-4 h-4 rounded-full animate-pulse bg-gray-100 dark:bg-gray-700"></div>
+        <div class="w-4 h-4 rounded-full animate-pulse bg-gray-100 dark:bg-gray-700"></div>
+      </div>
+      <div v-if="!loading && searchResults && searchResults.length > 0" class="flex flex-col divide-y divide-gray-200 dark:divide-gray-600">
+        <div class="flex text-center text-gray-400 dark:text-gray-500 p-2">{{ searchResults.length }} resultados foram encontrados</div>
+        <div v-for="(item, index) in searchResults" :key="index" class="flex items-center p-2">
+          <button class="text-left select-none outline-none" @click.prevent="goToText(item)">
+            <p>{{ item.text }} ({{ getBookAndChapterName(item.book_id, item.chapter, item.verse) }})</p>
+          </button>
+        </div>
+      </div>
+      <div v-if="!loading && searchResults && searchResults.length === 0">
+        <p class="text-lg select-none">Nenhum texto foi encontrado</p>
       </div>
     </div>
   </div>
