@@ -23,7 +23,12 @@
           <clipboardDocumentIcon class="w-5 h-5" />
         </button>
         <button class="cursor-pointer outline-none" @click.prevent="favoriteVerse(selectedVerse)">
-          <bookmarkSlashIcon v-if="getFavoriteVerse.includes(selectedVerse[0].id)" class="w-5 h-5" />
+          <bookmarkSlashIcon 
+            v-if="getFavoriteVerse.some(favorite => 
+                favorite?.book_number === selectedVerse[0]?.book_number && 
+                favorite?.chapter === selectedVerse[0]?.chapter && 
+                favorite?.verse === selectedVerse[0]?.verse)" 
+            class="w-5 h-5" />
           <bookmarkIcon v-else class="w-5 h-5" />
         </button>
         <button class="cursor-pointer outline-none" @click.prevent="cancelSelected">
@@ -41,7 +46,7 @@
               v-for="(item, index) in filteredOldTestament" :key="index"
               class="text-left p-2 outline-none select-none"
               @click.prevent="SET_BOOK(item)"
-              >{{ item.name }}
+            >{{ item.name }}
             </button>
           </div>
           <div class="flex flex-col divide-y divide-gray-200 dark:divide-gray-600">
@@ -50,7 +55,7 @@
               v-for="(item, index) in filteredNewTestament" :key="index"
               class="text-left p-2 outline-none select-none"
               @click.prevent="SET_BOOK(item)"
-              >{{ item.name }}
+            >{{ item.name }}
             </button>
           </div>
         </div>
@@ -71,7 +76,7 @@
                 <!--span class="text-center font-semibold text-base text-black dark:text-white">{{ getUniqueVerseTitles(verseItem).join(', ') }}</span-->
                 <button
                   class="text-left select-none outline-none mb-auto"
-                  :class="[{ 'bg-gray-300 dark:bg-gray-600' : selectedVerse.some(verse => verse.id === verseItem.id) }, { 'bg-gray-300/50 dark:bg-gray-600/50' : !selectedVerse.some(verse => verse.id === verseItem.id) && getFavoriteVerse.includes(verseItem.id) } ]"
+                  :class="[{ 'bg-gray-300 dark:bg-gray-600' : selectedVerse.some(verse => verse.book_number === verseItem.book_number && verse.chapter === verseItem.chapter && verse.verse === verseItem.verse) }, { 'bg-gray-300/50 dark:bg-gray-600/50' : !selectedVerse.some(verse => verse.book_number === verseItem.book_number && verse.chapter === verseItem.chapter && verse.verse === verseItem.verse) && getFavoriteVerse.some(favorite => favorite?.book_number === verseItem?.book_number && favorite?.chapter === verseItem?.chapter && favorite?.verse === verseItem?.verse) } ]"
                   @click.prevent="selectVerse(verseItem)"
                 ><span class="superscript">{{ verseItem.verse }}</span> {{ verseItem.text }}</button>
               </div>
@@ -123,11 +128,11 @@ export default {
   data() {
     return {
       loading: true,
-      book: null,
-      metadata: null,
+      books: null,
+      info: null,
+      introductions: null,
       stories: null,
-      testament: null,
-      verse: null,
+      verses: null,
       filteredChapters: [],
       selectedVerse: [],
     };
@@ -143,18 +148,18 @@ export default {
     ...mapActions(['toggleFavoriteVerse']),
     async loadVersionFiles() {
       const version = this.getVersion;
-      const [book, metadata, stories, testament, verse] = await Promise.all([
-        import(`@/assets/versions/${version}/book.json`),
-        import(`@/assets/versions/${version}/metadata.json`),
+      const [books, info, introductions, stories, verses] = await Promise.all([
+        import(`@/assets/versions/${version}/books.json`),
+        import(`@/assets/versions/${version}/info.json`),
+        import(`@/assets/versions/${version}/introductions.json`),
         import(`@/assets/versions/${version}/stories.json`),
-        import(`@/assets/versions/${version}/testament.json`),
-        import(`@/assets/versions/${version}/verse.json`)
+        import(`@/assets/versions/${version}/verses.json`)
       ]);
-      this.book = book.default;
-      this.metadata = metadata.default;
+      this.books = books.default;
+      this.info = info.default;
+      this.introductions = introductions.default;
       this.stories = stories.default;
-      this.testament = testament.default;
-      this.verse = verse.default;
+      this.verses = verses.default;
       this.loading = false;
     },
     async returnMenu() {
@@ -166,7 +171,7 @@ export default {
       }
     },
     selectVerse(item) {
-      const index = this.selectedVerse.findIndex(verse => verse.id === item.id);
+      const index = this.selectedVerse.findIndex(verse => verse.book_number === item.book_number && verse.chapter === item.chapter && verse.verse === item.verse);
       if (index !== -1) {
         this.selectedVerse.splice(index, 1);
       } else {
@@ -236,7 +241,7 @@ export default {
     },
     getUniqueVerseTitles(verseItem) {
       const filteredStories = this.stories.filter(item =>
-        item.book_id === verseItem.book_id &&
+        item.book_number === verseItem.book_number &&
         item.chapter === verseItem.chapter &&
         item.verse === verseItem.verse
       );
@@ -266,21 +271,21 @@ export default {
       return name
     },
     filteredOldTestament() {
-      return this.book ? this.book.filter(item => item.testament_reference_id === 1) : [];
+      return this.books ? this.books.filter(item => item.book_number <= 460) : [];
     },
     filteredNewTestament() {
-      return this.book ? this.book.filter(item => item.testament_reference_id === 2) : [];
+      return this.books ? this.books.filter(item => item.book_number > 460) : [];
     },
     filteredVerses() {
-      return this.verse && this.getBook ? this.verse.filter(item => item.book_id === this.getBook.book_reference_id) : [];
+      return this.verses && this.getBook ? this.verses.filter(item => item.book_number === this.getBook.book_number) : [];
     },
     filteredChapter() {
-      if (!this.verse || !this.getBook || !this.getChapter) {
+      if (!this.verses || !this.getBook || !this.getChapter) {
         return [];
       }
 
-      return this.verse.filter(verseItem => 
-        verseItem.book_id === this.getBook.book_reference_id && 
+      return this.verses.filter(verseItem => 
+        verseItem.book_number === this.getBook.book_number && 
         verseItem.chapter === this.getChapter
       ).map(o => ({ ...o, select: false }));
     },
@@ -289,9 +294,9 @@ export default {
       return [...new Set(verses.map(verseItem => verseItem.chapter))];
     },
     getDetailedInfo() {
-      const metadata = this.metadata;
+      const info = this.info;
 
-      const detailedInfo = metadata?.find(item => item.key === "detailed_info");
+      const detailedInfo = info?.find(item => item.name === "detailed_info");
 
       if (detailedInfo) {
         return detailedInfo.value;

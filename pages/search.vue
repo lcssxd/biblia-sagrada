@@ -42,7 +42,7 @@
         <div class="flex text-center text-gray-400 dark:text-gray-500 p-2">{{ searchResults.length }} resultados foram encontrados</div>
         <div v-for="(item, index) in searchResults" :key="index" class="flex items-center p-2">
           <button class="text-left select-none outline-none" @click.prevent="goToText(item)">
-            <p>{{ item.text }} ({{ getBookAndChapterName(item.book_id, item.chapter, item.verse) }})</p>
+            <p>{{ item.text }} ({{ getBookAndChapterName(item.book_number, item.chapter, item.verse) }})</p>
           </button>
         </div>
       </div>
@@ -64,8 +64,8 @@ export default {
       title: 'Procurar na bíblia',
       name: '',
       loading: false,
-      verse: null,
-      book: null,
+      verses: null,
+      books: null,
       searchResults: null,
       searchTimeout: null,
     }
@@ -96,28 +96,28 @@ export default {
     ...mapMutations(['UPDATE_VERSION', 'SET_BOOK', 'SET_CHAPTER', 'SEARCH_VERSE']),
     async loadVersionFiles() {
       const version = this.getVersion;
-      const [book, verse] = await Promise.all([
-        import(`@/assets/versions/${version}/book.json`),
-        import(`@/assets/versions/${version}/verse.json`)
+      const [books, verses] = await Promise.all([
+        import(`@/assets/versions/${version}/books.json`),
+        import(`@/assets/versions/${version}/verses.json`)
       ]);
-      this.book = book.default;
-      this.verse = verse.default;
+      this.books = books.default;
+      this.verses = verses.default;
     },
     searchText() {
       if (!this.name) return
 
       this.loading = true
-      this.searchResults = this.verse.filter(v => 
+      this.searchResults = this.verses.filter(v => 
         v.text.toLowerCase().includes(this.name.toLowerCase())
       )
       this.loading = false
     },
     getBookAndChapterName(bookId, chapter, verse) {
-      if (!this.book || bookId === undefined || chapter === undefined || verse === undefined) {
+      if (!this.books || bookId === undefined || chapter === undefined || verse === undefined) {
         return '';
       }
 
-      const foundBook = this.book.find(item => item.book_reference_id === bookId);
+      const foundBook = this.books.find(item => item.book_number === bookId);
 
       if (!foundBook) {
         return 'Livro não encontrado';
@@ -126,7 +126,7 @@ export default {
       return `${foundBook.name} ${chapter}:${verse}`;
     },
     goToText(verseItem) {
-      const foundBook = this.book.find(item => item.book_reference_id === verseItem.book_id);
+      const foundBook = this.books.find(item => item.book_number === verseItem.book_number);
       this.SET_BOOK(foundBook)
       this.SET_CHAPTER(verseItem.chapter)
       this.SEARCH_VERSE(verseItem)

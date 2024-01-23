@@ -131,23 +131,31 @@ export const mutations = {
 export const actions = {
   toggleFavoriteVerse({ commit, state }, verseItem) {
     let updatedFavoriteVerse = [...state.favorite_verse];
-
-    const toggleId = (item) => {
-      const index = updatedFavoriteVerse.indexOf(item.id);
+  
+    const toggleItem = (item) => {
+      const index = updatedFavoriteVerse.findIndex(favorite => 
+        favorite?.book_number === item?.book_number && 
+        favorite?.chapter === item?.chapter && 
+        favorite?.verse === item?.verse
+      );
       if (index === -1) {
-        updatedFavoriteVerse.push(item.id);
+        updatedFavoriteVerse.push({ 
+          book_number: item.book_number, 
+          chapter: item.chapter, 
+          verse: item.verse 
+        });
       } else {
         updatedFavoriteVerse.splice(index, 1);
       }
     };
-
+  
     if (Array.isArray(verseItem)) {
-      verseItem.forEach(toggleId);
+      verseItem.forEach(toggleItem);
     } else {
-      toggleId(verseItem);
+      toggleItem(verseItem);
     }
-
+  
     commit('FAVORITE_VERSE', updatedFavoriteVerse);
-  }
+  }  
 }
 

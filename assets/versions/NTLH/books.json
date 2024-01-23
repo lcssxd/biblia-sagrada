@@ -1,0 +1,464 @@
+[
+    {
+        "book_number": 10,
+        "book_color": "#ccccff",
+        "short_name": "Gn",
+        "long_name": "Gênesis",
+        "name": "Gênesis"
+    },
+    {
+        "book_number": 20,
+        "book_color": "#ccccff",
+        "short_name": "Êx",
+        "long_name": "Êxodo",
+        "name": "Êxodo"
+    },
+    {
+        "book_number": 30,
+        "book_color": "#ccccff",
+        "short_name": "Lv",
+        "long_name": "Levítico",
+        "name": "Levítico"
+    },
+    {
+        "book_number": 40,
+        "book_color": "#ccccff",
+        "short_name": "Nm",
+        "long_name": "Números",
+        "name": "Números"
+    },
+    {
+        "book_number": 50,
+        "book_color": "#ccccff",
+        "short_name": "Dt",
+        "long_name": "Deuteronômio",
+        "name": "Deuteronômio"
+    },
+    {
+        "book_number": 60,
+        "book_color": "#ffcc99",
+        "short_name": "Js",
+        "long_name": "Josué",
+        "name": "Josué"
+    },
+    {
+        "book_number": 70,
+        "book_color": "#ffcc99",
+        "short_name": "Jz",
+        "long_name": "Juízes",
+        "name": "Juízes"
+    },
+    {
+        "book_number": 80,
+        "book_color": "#ffcc99",
+        "short_name": "Rt",
+        "long_name": "Rute",
+        "name": "Rute"
+    },
+    {
+        "book_number": 90,
+        "book_color": "#ffcc99",
+        "short_name": "1Sm",
+        "long_name": "O Primeiro Livro de Samuel",
+        "name": "1 Samuel"
+    },
+    {
+        "book_number": 100,
+        "book_color": "#ffcc99",
+        "short_name": "2Sm",
+        "long_name": "O Segundo Livro de Samuel",
+        "name": "2 Samuel"
+    },
+    {
+        "book_number": 110,
+        "book_color": "#ffcc99",
+        "short_name": "1Rs",
+        "long_name": "O Primeiro Livro dos Reis",
+        "name": "1 Reis"
+    },
+    {
+        "book_number": 120,
+        "book_color": "#ffcc99",
+        "short_name": "2Rs",
+        "long_name": "O Segundo Livro dos Reis",
+        "name": "2 Reis"
+    },
+    {
+        "book_number": 130,
+        "book_color": "#ffcc99",
+        "short_name": "1Cr",
+        "long_name": "O Primeiro Livro das Crônicas",
+        "name": "1 Crônicas"
+    },
+    {
+        "book_number": 140,
+        "book_color": "#ffcc99",
+        "short_name": "2Cr",
+        "long_name": "O Segundo Livro das Crônicas",
+        "name": "2 Crônicas"
+    },
+    {
+        "book_number": 150,
+        "book_color": "#ffcc99",
+        "short_name": "Ed",
+        "long_name": "Esdras",
+        "name": "Esdras"
+    },
+    {
+        "book_number": 160,
+        "book_color": "#ffcc99",
+        "short_name": "Ne",
+        "long_name": "Neemias",
+        "name": "Neemias"
+    },
+    {
+        "book_number": 190,
+        "book_color": "#ffcc99",
+        "short_name": "Et",
+        "long_name": "Ester",
+        "name": "Ester"
+    },
+    {
+        "book_number": 220,
+        "book_color": "#66ff99",
+        "short_name": "Jó",
+        "long_name": "Jó",
+        "name": "Jó"
+    },
+    {
+        "book_number": 230,
+        "book_color": "#66ff99",
+        "short_name": "Sl",
+        "long_name": "Salmos",
+        "name": "Salmos"
+    },
+    {
+        "book_number": 240,
+        "book_color": "#66ff99",
+        "short_name": "Pv",
+        "long_name": "Provérbios",
+        "name": "Provérbios"
+    },
+    {
+        "book_number": 250,
+        "book_color": "#66ff99",
+        "short_name": "Ec",
+        "long_name": "Eclesiastes ou o Sábio",
+        "name": "Eclesiastes"
+    },
+    {
+        "book_number": 260,
+        "book_color": "#66ff99",
+        "short_name": "Ct",
+        "long_name": "Cântico dos Cânticos",
+        "name": "Cântico dos Cânticos"
+    },
+    {
+        "book_number": 290,
+        "book_color": "#ff9fb4",
+        "short_name": "Is",
+        "long_name": "Isaías",
+        "name": "Isaías"
+    },
+    {
+        "book_number": 300,
+        "book_color": "#ff9fb4",
+        "short_name": "Jr",
+        "long_name": "Jeremias",
+        "name": "Jeremias"
+    },
+    {
+        "book_number": 310,
+        "book_color": "#ff9fb4",
+        "short_name": "Lm",
+        "long_name": "Lamentações",
+        "name": "Lamentações de Jeremias"
+    },
+    {
+        "book_number": 330,
+        "book_color": "#ff9fb4",
+        "short_name": "Ez",
+        "long_name": "Ezequiel",
+        "name": "Ezequiel"
+    },
+    {
+        "book_number": 340,
+        "book_color": "#ff9fb4",
+        "short_name": "Dn",
+        "long_name": "Daniel",
+        "name": "Daniel"
+    },
+    {
+        "book_number": 350,
+        "book_color": "#ffff99",
+        "short_name": "Os",
+        "long_name": "Oseias",
+        "name": "Oseias"
+    },
+    {
+        "book_number": 360,
+        "book_color": "#ffff99",
+        "short_name": "Jl",
+        "long_name": "Joel",
+        "name": "Joel"
+    },
+    {
+        "book_number": 370,
+        "book_color": "#ffff99",
+        "short_name": "Am",
+        "long_name": "Amós",
+        "name": "Amós"
+    },
+    {
+        "book_number": 380,
+        "book_color": "#ffff99",
+        "short_name": "Ob",
+        "long_name": "Obadias",
+        "name": "Obadias"
+    },
+    {
+        "book_number": 390,
+        "book_color": "#ffff99",
+        "short_name": "Jn",
+        "long_name": "Jonas",
+        "name": "Jonas"
+    },
+    {
+        "book_number": 400,
+        "book_color": "#ffff99",
+        "short_name": "Mq",
+        "long_name": "Miqueias",
+        "name": "Miqueias"
+    },
+    {
+        "book_number": 410,
+        "book_color": "#ffff99",
+        "short_name": "Na",
+        "long_name": "Naum",
+        "name": "Naum"
+    },
+    {
+        "book_number": 420,
+        "book_color": "#ffff99",
+        "short_name": "Hc",
+        "long_name": "Habacuque",
+        "name": "Habacuque"
+    },
+    {
+        "book_number": 430,
+        "book_color": "#ffff99",
+        "short_name": "Sf",
+        "long_name": "Sofonias",
+        "name": "Sofonias"
+    },
+    {
+        "book_number": 440,
+        "book_color": "#ffff99",
+        "short_name": "Ag",
+        "long_name": "Ageu",
+        "name": "Ageu"
+    },
+    {
+        "book_number": 450,
+        "book_color": "#ffff99",
+        "short_name": "Zc",
+        "long_name": "Zacarias",
+        "name": "Zacarias"
+    },
+    {
+        "book_number": 460,
+        "book_color": "#ffff99",
+        "short_name": "Ml",
+        "long_name": "Malaquias",
+        "name": "Malaquias"
+    },
+    {
+        "book_number": 470,
+        "book_color": "#ff6600",
+        "short_name": "Mt",
+        "long_name": "O Evangelho de Mateus",
+        "name": "Mateus"
+    },
+    {
+        "book_number": 480,
+        "book_color": "#ff6600",
+        "short_name": "Mc",
+        "long_name": "O Evangelho de Marcos",
+        "name": "Marcos"
+    },
+    {
+        "book_number": 490,
+        "book_color": "#ff6600",
+        "short_name": "Lc",
+        "long_name": "O Evangelho de Lucas",
+        "name": "Lucas"
+    },
+    {
+        "book_number": 500,
+        "book_color": "#ff6600",
+        "short_name": "Jo",
+        "long_name": "O Evangelho de João",
+        "name": "João"
+    },
+    {
+        "book_number": 510,
+        "book_color": "#00ffff",
+        "short_name": "At",
+        "long_name": "Atos dos Apóstolos",
+        "name": "Atos dos Apóstolos"
+    },
+    {
+        "book_number": 520,
+        "book_color": "#ffff00",
+        "short_name": "Rm",
+        "long_name": "Carta de Paulo aos Romanos",
+        "name": "Romanos"
+    },
+    {
+        "book_number": 530,
+        "book_color": "#ffff00",
+        "short_name": "1Co",
+        "long_name": "Primeira Carta de Paulo aos Coríntios",
+        "name": "1 Coríntios"
+    },
+    {
+        "book_number": 540,
+        "book_color": "#ffff00",
+        "short_name": "2Co",
+        "long_name": "Segunda Carta de Paulo aos Coríntios",
+        "name": "2 Coríntios"
+    },
+    {
+        "book_number": 550,
+        "book_color": "#ffff00",
+        "short_name": "Gl",
+        "long_name": "Carta de Paulo aos Gálatas",
+        "name": "Gálatas"
+    },
+    {
+        "book_number": 560,
+        "book_color": "#ffff00",
+        "short_name": "Ef",
+        "long_name": "Carta de Paulo aos Efésios",
+        "name": "Efésios"
+    },
+    {
+        "book_number": 570,
+        "book_color": "#ffff00",
+        "short_name": "Fp",
+        "long_name": "Carta de Paulo aos Filipenses",
+        "name": "Filipenses"
+    },
+    {
+        "book_number": 580,
+        "book_color": "#ffff00",
+        "short_name": "Cl",
+        "long_name": "Carta de Paulo aos Colossenses",
+        "name": "Colossenses"
+    },
+    {
+        "book_number": 590,
+        "book_color": "#ffff00",
+        "short_name": "1Ts",
+        "long_name": "Primeira Carta de Paulo aos Tessalonicenses",
+        "name": "1 Tessalonicenses"
+    },
+    {
+        "book_number": 600,
+        "book_color": "#ffff00",
+        "short_name": "2Ts",
+        "long_name": "Segunda Carta de Paulo aos Tessalonicenses",
+        "name": "2 Tessalonicenses"
+    },
+    {
+        "book_number": 610,
+        "book_color": "#ffff00",
+        "short_name": "1Tm",
+        "long_name": "Primeira Carta de Paulo a Timóteo",
+        "name": "1 Timóteo"
+    },
+    {
+        "book_number": 620,
+        "book_color": "#ffff00",
+        "short_name": "2Tm",
+        "long_name": "Segunda Carta de Paulo a Timóteo",
+        "name": "2 Timóteo"
+    },
+    {
+        "book_number": 630,
+        "book_color": "#ffff00",
+        "short_name": "Tt",
+        "long_name": "Carta de Paulo a Tito",
+        "name": "Tito"
+    },
+    {
+        "book_number": 640,
+        "book_color": "#ffff00",
+        "short_name": "Fm",
+        "long_name": "Carta de Paulo a Filemom",
+        "name": "Filemom"
+    },
+    {
+        "book_number": 650,
+        "book_color": "#ffff00",
+        "short_name": "Hb",
+        "long_name": "Carta aos Hebreus",
+        "name": "Hebreus"
+    },
+    {
+        "book_number": 660,
+        "book_color": "#00ff00",
+        "short_name": "Tg",
+        "long_name": "Carta de Tiago",
+        "name": "Tiago"
+    },
+    {
+        "book_number": 670,
+        "book_color": "#00ff00",
+        "short_name": "1Pe",
+        "long_name": "Primeira Carta de Pedro",
+        "name": "1 Pedro"
+    },
+    {
+        "book_number": 680,
+        "book_color": "#00ff00",
+        "short_name": "2Pe",
+        "long_name": "Segunda Carta de Pedro",
+        "name": "2 Pedro"
+    },
+    {
+        "book_number": 690,
+        "book_color": "#00ff00",
+        "short_name": "1Jo",
+        "long_name": "Primeira Carta de João",
+        "name": "1 João"
+    },
+    {
+        "book_number": 700,
+        "book_color": "#00ff00",
+        "short_name": "2Jo",
+        "long_name": "Segunda Carta de João",
+        "name": "2 João"
+    },
+    {
+        "book_number": 710,
+        "book_color": "#00ff00",
+        "short_name": "3Jo",
+        "long_name": "Terceira Carta de João",
+        "name": "3 João"
+    },
+    {
+        "book_number": 720,
+        "book_color": "#00ff00",
+        "short_name": "Jd",
+        "long_name": "Carta de Judas",
+        "name": "Judas"
+    },
+    {
+        "book_number": 730,
+        "book_color": "#ff7c80",
+        "short_name": "Ap",
+        "long_name": "Apocalipse ou a Revelação de Deus a João",
+        "name": "Apocalipse"
+    }
+]

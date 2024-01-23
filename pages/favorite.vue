@@ -11,7 +11,7 @@
       <div v-if="!loading && filteredVerses && filteredVerses.length > 0" class="divide-y divide-gray-200 dark:divide-gray-600">
         <div v-for="(item, index) in filteredVerses" :key="index" class="p-2">
           <div class="flex items-center justify-between">
-            <span class="font-semibold">{{ getBookAndChapterName(item.book_id, item.chapter, item.verse) }}</span>
+            <span class="font-semibold">{{ getBookAndChapterName(item.book_number, item.chapter, item.verse) }}</span>
             <div class="flex items-center space-x-2">
               <button class="cursor-pointer outline-none" @click.prevent="copyVerse(item)">
                 <clipboardDocumentIcon class="w-5 h-5" />
@@ -47,8 +47,8 @@ export default {
     return {
       title: 'Versículos',
       loading: true,
-      verse: null,
-      book: null,
+      verses: null,
+      books: null,
     }
   },
   async mounted() {
@@ -59,11 +59,17 @@ export default {
   computed: {
     ...mapGetters(['getVersion', 'getFavoriteVerse']),
     filteredVerses() {
-      if (!this.verse || !this.getFavoriteVerse) {
+      if (!this.verses || !this.getFavoriteVerse) {
         return [];
       }
 
-      return this.verse.filter(item => this.getFavoriteVerse.includes(item.id));
+      return this.verses.filter(verseItem => 
+        this.getFavoriteVerse.some(favorite => 
+          favorite.book_number === verseItem.book_number && 
+          favorite.chapter === verseItem.chapter && 
+          favorite.verse === verseItem.verse
+        )
+      )
     }
   },
   methods: {
@@ -71,20 +77,20 @@ export default {
     ...mapActions(['toggleFavoriteVerse']),
     async loadVersionFiles() {
       const version = this.getVersion;
-      const [book, verse] = await Promise.all([
-        import(`@/assets/versions/${version}/book.json`),
-        import(`@/assets/versions/${version}/verse.json`)
+      const [books, verses] = await Promise.all([
+        import(`@/assets/versions/${version}/books.json`),
+        import(`@/assets/versions/${version}/verses.json`)
       ]);
-      this.book = book.default;
-      this.verse = verse.default;
+      this.books = books.default;
+      this.verses = verses.default;
       this.loading = false;
     },
     getBookAndChapterName(bookId, chapter, verse) {
-      if (!this.book || bookId === undefined || chapter === undefined || verse === undefined) {
+      if (!this.books || bookId === undefined || chapter === undefined || verse === undefined) {
         return '';
       }
 
-      const foundBook = this.book.find(item => item.book_reference_id === bookId);
+      const foundBook = this.books.find(item => item.book_number === bookId);
 
       if (!foundBook) {
         return 'Livro não encontrado';
@@ -93,7 +99,7 @@ export default {
       return `${foundBook.name} ${chapter}:${verse}`;
     },
     copyVerse(verseItem) {
-      let verseToCopy = `"${verseItem.text}" (${this.getBookAndChapterName(verseItem.book_id, verseItem.chapter, verseItem.verse)})`;
+      let verseToCopy = `"${verseItem.text}" (${this.getBookAndChapterName(verseItem.book_number, verseItem.chapter, verseItem.verse)})`;
 
       if (navigator.clipboard) {
         navigator.clipboard.writeText(verseToCopy)
