@@ -42,12 +42,12 @@
         <div class="flex text-center text-gray-400 dark:text-gray-500 p-2">{{ searchResults.length }} resultados foram encontrados</div>
         <div v-for="(item, index) in searchResults" :key="index" class="flex items-center p-2">
           <button class="text-left select-none outline-none" @click.prevent="goToText(item)">
-            <p>{{ item.text }} ({{ getBookAndChapterName(item.book_number, item.chapter, item.verse) }})</p>
+            <p>"<span v-html="changeTags(item.text)"></span>" {{ getBookAndChapterName(item.book_number, item.chapter, item.verse) }}</p>
           </button>
         </div>
       </div>
       <div v-if="!loading && searchResults && searchResults.length === 0">
-        <p class="text-lg select-none">Nenhum texto foi encontrado</p>
+        <div class="flex text-center text-gray-400 dark:text-gray-500 p-2">Nenhum texto foi encontrado</div>
       </div>
     </div>
   </div>
@@ -131,7 +131,12 @@ export default {
       this.SET_CHAPTER(verseItem.chapter)
       this.SEARCH_VERSE(verseItem)
       this.$router.push('/bible');
-    }
+    },
+    changeTags(text) {
+      const styledText = text.replace(/<J>(.*?)<\/J>/g, '<span class="j-tag">$1</span>');
+      const cleanedText = styledText.replace(/<pb\/>|<f>.*?<\/f>|<t>|<\/t>|<br\/>|<x>.*?<\/x>/g, '');
+      return cleanedText;
+    },
   }
 }
 </script>

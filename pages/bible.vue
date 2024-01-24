@@ -73,14 +73,17 @@
           <div class="flex flex-col space-y-2 overflow-y-auto h-full relative">
             <div class="flex flex-col mb-auto">
               <div v-for="verseItem in filteredChapter" :key="verseItem.id" class="flex flex-col">
-                <!--span class="text-center font-semibold text-base text-black dark:text-white">{{ getUniqueVerseTitles(verseItem).join(', ') }}</span-->
+                <span class="text-center font-semibold text-base select-none text-black dark:text-white">{{ changeTags(getUniqueVerseTitles(verseItem).join('')) }}</span>
                 <button
+                  v-show="verseItem.text !== ''"
                   class="text-left select-none outline-none mb-auto"
                   :class="[{ 'bg-gray-300 dark:bg-gray-600' : selectedVerse.some(verse => verse.book_number === verseItem.book_number && verse.chapter === verseItem.chapter && verse.verse === verseItem.verse) }, { 'bg-gray-300/50 dark:bg-gray-600/50' : !selectedVerse.some(verse => verse.book_number === verseItem.book_number && verse.chapter === verseItem.chapter && verse.verse === verseItem.verse) && getFavoriteVerse.some(favorite => favorite?.book_number === verseItem?.book_number && favorite?.chapter === verseItem?.chapter && favorite?.verse === verseItem?.verse) } ]"
                   @click.prevent="selectVerse(verseItem)"
-                ><span class="superscript">{{ verseItem.verse }}</span> {{ verseItem.text }}</button>
+                >
+                  <span class="superscript">{{ verseItem.verse }}</span> <span v-html="changeTags(verseItem.text)"></span>
+                </button>
               </div>
-              <p class="mt-4 text-gray-400 dark:text-gray-500 select-none">{{ getDetailedInfo }}</p>
+              <p class="mt-4 text-gray-400 dark:text-gray-500 select-none">{{ changeTags(getDetailedInfo) }}</p>
             </div>
             <div class="flex items-center justify-between sticky bottom-2 w-full px-5">
               <button
@@ -257,6 +260,11 @@ export default {
       if(this.getSearchVerse && this.getSearchVerse.length > 0) {
         this.selectedVerse = [...this.getSearchVerse]
       }
+    },
+    changeTags(text) {
+      const styledText = text.replace(/<J>(.*?)<\/J>/g, '<span class="j-tag">$1</span>');
+      const cleanedText = styledText.replace(/<pb\/>|<f>.*?<\/f>|<t>|<\/t>|<br\/>|<x>.*?<\/x>/g, '');
+      return cleanedText;
     }
   },
   computed: {
@@ -313,5 +321,8 @@ export default {
   vertical-align: super;
   font-size: smaller;
   @apply text-gray-600 dark:text-gray-400;
+}
+.j-tag {
+  @apply text-red-500;
 }
 </style>

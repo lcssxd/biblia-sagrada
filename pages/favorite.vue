@@ -11,7 +11,7 @@
       <div v-if="!loading && filteredVerses && filteredVerses.length > 0" class="divide-y divide-gray-200 dark:divide-gray-600">
         <div v-for="(item, index) in filteredVerses" :key="index" class="p-2">
           <div class="flex items-center justify-between">
-            <span class="font-semibold">{{ getBookAndChapterName(item.book_number, item.chapter, item.verse) }}</span>
+            <span class="font-semibold select-none">{{ getBookAndChapterName(item.book_number, item.chapter, item.verse) }}</span>
             <div class="flex items-center space-x-2">
               <button class="cursor-pointer outline-none" @click.prevent="copyVerse(item)">
                 <clipboardDocumentIcon class="w-5 h-5" />
@@ -21,7 +21,7 @@
               </button>
             </div>
           </div>
-          <p class="select-none outline-none">{{ item.text }}</p>
+          <p class="select-none"><span v-html="changeTags(item.text)"></span></p>
         </div>
       </div>
       <div v-if="!loading && filteredVerses && filteredVerses.length === 0" class="flex items-center justify-center h-full text-gray-800 dark:text-gray-50">
@@ -125,6 +125,11 @@ export default {
       } else {
         console.log('A API Clipboard não é suportada neste navegador.');
       }
+    },
+    changeTags(text) {
+      const styledText = text.replace(/<J>(.*?)<\/J>/g, '<span class="j-tag">$1</span>');
+      const cleanedText = styledText.replace(/<pb\/>|<f>.*?<\/f>|<t>|<\/t>|<br\/>|<x>.*?<\/x>/g, '');
+      return cleanedText;
     },
   }
 }
