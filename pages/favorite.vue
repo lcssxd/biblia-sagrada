@@ -21,7 +21,7 @@
               </button>
             </div>
           </div>
-          <p class="select-none"><span v-html="changeTags(item.text)"></span></p>
+          <button class="select-none text-left" @click.prevent="goToText(item)"><span v-html="changeTags(item.text)"></span></button>
         </div>
       </div>
       <div v-if="!loading && filteredVerses && filteredVerses.length === 0" class="flex items-center justify-center h-full text-gray-800 dark:text-gray-50">
@@ -73,7 +73,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['UPDATE_VERSION', 'UPDATE_FAVORITE_VERSE']),
+    ...mapMutations(['UPDATE_VERSION', 'UPDATE_FAVORITE_VERSE', 'SET_BOOK', 'SET_CHAPTER']),
     ...mapActions(['toggleFavoriteVerse']),
     async loadVersionFiles() {
       const version = this.getVersion;
@@ -125,6 +125,12 @@ export default {
       } else {
         console.log('A API Clipboard não é suportada neste navegador.');
       }
+    },
+    goToText(verseItem) {
+      const foundBook = this.books.find(item => item.book_number === verseItem.book_number);
+      this.SET_BOOK(foundBook)
+      this.SET_CHAPTER(verseItem.chapter)
+      this.$router.push('/bible');
     },
     changeTags(text) {
       const styledText = text.replace(/<J>(.*?)<\/J>/g, '<span class="j-tag">$1</span>');

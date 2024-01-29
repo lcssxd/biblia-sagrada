@@ -2,51 +2,51 @@
     {
         "book_number": 10,
         "short_name": "Gn",
-        "long_name": "O Primeiro Livro de Moises chamado Genesis",
+        "long_name": "O Primeiro Livro de Mois\u00e9s chamado G\u00eanesis",
         "book_color": "#ccccff",
-        "name": "Genesis"
+        "name": "G\u00eanesis"
     },
     {
         "book_number": 20,
-        "short_name": "Ex",
-        "long_name": "O Segundo Livro de Moises chamado Exodo",
+        "short_name": "\u00cax",
+        "long_name": "O Segundo Livro de Mois\u00e9s chamado \u00caxodo",
         "book_color": "#ccccff",
-        "name": "Exodo"
+        "name": "\u00caxodo"
     },
     {
         "book_number": 30,
         "short_name": "Lv",
-        "long_name": "O Terceiro Livro de Moises chamado Levitico",
+        "long_name": "O Terceiro Livro de Mois\u00e9s chamado Lev\u00edtico",
         "book_color": "#ccccff",
-        "name": "Levitico"
+        "name": "Lev\u00edtico"
     },
     {
         "book_number": 40,
         "short_name": "Nm",
-        "long_name": "O Quarto Livro de Moises chamado Numeros",
+        "long_name": "O Quarto Livro de Mois\u00e9s chamado N\u00fameros",
         "book_color": "#ccccff",
-        "name": "Numeros"
+        "name": "N\u00fameros"
     },
     {
         "book_number": 50,
         "short_name": "Dt",
-        "long_name": "O Quinto Livro de Moises chamado Deuteronomio",
+        "long_name": "O Quinto Livro de Mois\u00e9s chamado Deuteron\u00f4mio",
         "book_color": "#ccccff",
-        "name": "Deuteronomio"
+        "name": "Deuteron\u00f4mio"
     },
     {
         "book_number": 60,
         "short_name": "Js",
-        "long_name": "O Livro de Josue",
+        "long_name": "O Livro de Josu\u00e9",
         "book_color": "#ffcc99",
-        "name": "Josue"
+        "name": "Josu\u00e9"
     },
     {
         "book_number": 70,
         "short_name": "Jz",
-        "long_name": "O Livro dos Juizes",
+        "long_name": "O Livro dos Ju\u00edzes",
         "book_color": "#ffcc99",
-        "name": "Juizes"
+        "name": "Ju\u00edzes"
     },
     {
         "book_number": 80,
@@ -60,42 +60,42 @@
         "short_name": "1Sm",
         "long_name": "O Primeiro Livro de Samuel",
         "book_color": "#ffcc99",
-        "name": "1 Samuel"
+        "name": "1Samuel"
     },
     {
         "book_number": 100,
         "short_name": "2Sm",
         "long_name": "O Segundo Livro de Samuel",
         "book_color": "#ffcc99",
-        "name": "2 Samuel"
+        "name": "2Samuel"
     },
     {
         "book_number": 110,
         "short_name": "1Rs",
         "long_name": "O Primeiro Livro dos Reis",
         "book_color": "#ffcc99",
-        "name": "1 Reis"
+        "name": "1Reis"
     },
     {
         "book_number": 120,
         "short_name": "2Rs",
         "long_name": "O Segundo Livro dos Reis",
         "book_color": "#ffcc99",
-        "name": "2 Reis"
+        "name": "2Reis"
     },
     {
         "book_number": 130,
         "short_name": "1Cr",
-        "long_name": "O Primeiro Livro das Cronicas",
+        "long_name": "O Primeiro Livro das Cr\u00f4nicas",
         "book_color": "#ffcc99",
-        "name": "1 Cronicas"
+        "name": "1Cr\u00f4nicas"
     },
     {
         "book_number": 140,
         "short_name": "2Cr",
-        "long_name": "O Segundo Livro das Cronicas",
+        "long_name": "O Segundo Livro das Cr\u00f4nicas",
         "book_color": "#ffcc99",
-        "name": "2 Cronicas"
+        "name": "2Cr\u00f4nicas"
     },
     {
         "book_number": 150,
@@ -120,10 +120,10 @@
     },
     {
         "book_number": 220,
-        "short_name": "Jo",
-        "long_name": "O Livro de Jo",
+        "short_name": "J\u00f3",
+        "long_name": "O Livro de J\u00f3",
         "book_color": "#66ff99",
-        "name": "Jo"
+        "name": "J\u00f3"
     },
     {
         "book_number": 230,
@@ -135,9 +135,9 @@
     {
         "book_number": 240,
         "short_name": "Pv",
-        "long_name": "Proverbios de Salomao",
+        "long_name": "Prov\u00e9rbios de Salom\u00e3o",
         "book_color": "#66ff99",
-        "name": "Proverbios"
+        "name": "Prov\u00e9rbios"
     },
     {
         "book_number": 250,
@@ -149,16 +149,16 @@
     {
         "book_number": 260,
         "short_name": "Ct",
-        "long_name": "Cantico dos Canticos de Salomao",
+        "long_name": "C\u00e2ntico dos C\u00e2nticos de Salom\u00e3o",
         "book_color": "#66ff99",
-        "name": "Cantico dos Canticos"
+        "name": "C\u00e2ntico"
     },
     {
         "book_number": 290,
         "short_name": "Is",
-        "long_name": "Isaias",
+        "long_name": "Isa\u00edas",
         "book_color": "#ff9fb4",
-        "name": "Isaias"
+        "name": "Isa\u00edas"
     },
     {
         "book_number": 300,
@@ -170,9 +170,9 @@
     {
         "book_number": 310,
         "short_name": "Lm",
-        "long_name": "Lamentacoes de Jeremias",
+        "long_name": "Lamenta\u00e7\u00f5es de Jeremias",
         "book_color": "#ff9fb4",
-        "name": "Lamentacoes de Jeremias"
+        "name": "Lamenta\u00e7\u00f5es"
     },
     {
         "book_number": 330,
@@ -205,9 +205,9 @@
     {
         "book_number": 370,
         "short_name": "Am",
-        "long_name": "Amos",
+        "long_name": "Am\u00f3s",
         "book_color": "#ffff99",
-        "name": "Amos"
+        "name": "Am\u00f3s"
     },
     {
         "book_number": 380,
@@ -296,168 +296,168 @@
     {
         "book_number": 500,
         "short_name": "Jo",
-        "long_name": "O Evangelho segundo Joao",
+        "long_name": "O Evangelho segundo Jo\u00e3o",
         "book_color": "#ff6600",
-        "name": "Joao"
+        "name": "Jo\u00e3o"
     },
     {
         "book_number": 510,
         "short_name": "At",
-        "long_name": "Atos dos Apostolos",
+        "long_name": "Atos dos Ap\u00f3stolos",
         "book_color": "#00ffff",
-        "name": "Atos dos Apostolos"
+        "name": "Atos"
     },
     {
         "book_number": 520,
         "short_name": "Rm",
-        "long_name": "Epistola de Paulo aos Romanos",
+        "long_name": "Ep\u00edstola de Paulo aos Romanos",
         "book_color": "#ffff00",
         "name": "Romanos"
     },
     {
         "book_number": 530,
         "short_name": "1Co",
-        "long_name": "Primeira Epistola de Paulo aos Corintios",
+        "long_name": "Primeira Ep\u00edstola de Paulo aos Cor\u00edntios",
         "book_color": "#ffff00",
-        "name": "1 Corintios"
+        "name": "1Cor\u00edntios"
     },
     {
         "book_number": 540,
         "short_name": "2Co",
-        "long_name": "Segunda Epistola de Paulo aos Corintios",
+        "long_name": "Segunda Ep\u00edstola de Paulo aos Cor\u00edntios",
         "book_color": "#ffff00",
-        "name": "2 Corintios"
+        "name": "2Cor\u00edntios"
     },
     {
         "book_number": 550,
         "short_name": "Gl",
-        "long_name": "Epistola de Paulo aos Galatas",
+        "long_name": "Ep\u00edstola de Paulo aos G\u00e1latas",
         "book_color": "#ffff00",
-        "name": "Galatas"
+        "name": "G\u00e1latas"
     },
     {
         "book_number": 560,
         "short_name": "Ef",
-        "long_name": "Epistola de Paulo aos Efesios",
+        "long_name": "Ep\u00edstola de Paulo aos Ef\u00e9sios",
         "book_color": "#ffff00",
-        "name": "Efesios"
+        "name": "Ef\u00e9sios"
     },
     {
         "book_number": 570,
         "short_name": "Fp",
-        "long_name": "Epistola de Paulo aos Filipenses",
+        "long_name": "Ep\u00edstola de Paulo aos Filipenses",
         "book_color": "#ffff00",
         "name": "Filipenses"
     },
     {
         "book_number": 580,
         "short_name": "Cl",
-        "long_name": "Epistola de Paulo aos Colossenses",
+        "long_name": "Ep\u00edstola de Paulo aos Colossenses",
         "book_color": "#ffff00",
         "name": "Colossenses"
     },
     {
         "book_number": 590,
         "short_name": "1Ts",
-        "long_name": "Primeira Epistola de Paulo aos Tessalonicenses",
+        "long_name": "Primeira Ep\u00edstola de Paulo aos Tessalonicenses",
         "book_color": "#ffff00",
-        "name": "1 Tessalonicenses"
+        "name": "1Tessalonicenses"
     },
     {
         "book_number": 600,
         "short_name": "2Ts",
-        "long_name": "Segunda Epistola de Paulo aos Tessalonicenses",
+        "long_name": "Segunda Ep\u00edstola de Paulo aos Tessalonicenses",
         "book_color": "#ffff00",
-        "name": "2 Tessalonicenses"
+        "name": "2Tessalonicenses"
     },
     {
         "book_number": 610,
         "short_name": "1Tm",
-        "long_name": "Primeira Epistola de Paulo a Timoteo",
+        "long_name": "Primeira Ep\u00edstola de Paulo a Tim\u00f3teo",
         "book_color": "#ffff00",
-        "name": "1 Timoteo"
+        "name": "1Tim\u00f3teo"
     },
     {
         "book_number": 620,
         "short_name": "2Tm",
-        "long_name": "Segunda Epistola de Paulo a Timoteo",
+        "long_name": "Segunda Ep\u00edstola de Paulo a Tim\u00f3teo",
         "book_color": "#ffff00",
-        "name": "2 Timoteo"
+        "name": "2Tim\u00f3teo"
     },
     {
         "book_number": 630,
         "short_name": "Tt",
-        "long_name": "Epistola de Paulo a Tito",
+        "long_name": "Ep\u00edstola de Paulo a Tito",
         "book_color": "#ffff00",
         "name": "Tito"
     },
     {
         "book_number": 640,
         "short_name": "Fm",
-        "long_name": "Epistola de Paulo a Filemom",
+        "long_name": "Ep\u00edstola de Paulo a Filemom",
         "book_color": "#ffff00",
         "name": "Filemom"
     },
     {
         "book_number": 650,
         "short_name": "Hb",
-        "long_name": "Epistola aos Hebreus",
+        "long_name": "Ep\u00edstola aos Hebreus",
         "book_color": "#ffff00",
         "name": "Hebreus"
     },
     {
         "book_number": 660,
         "short_name": "Tg",
-        "long_name": "Epistola de Tiago",
+        "long_name": "Ep\u00edstola de Tiago",
         "book_color": "#00ff00",
         "name": "Tiago"
     },
     {
         "book_number": 670,
         "short_name": "1Pe",
-        "long_name": "Primeira Epistola de Pedro",
+        "long_name": "Primeira Ep\u00edstola de Pedro",
         "book_color": "#00ff00",
-        "name": "1 Pedro"
+        "name": "1Pedro"
     },
     {
         "book_number": 680,
         "short_name": "2Pe",
-        "long_name": "Segunda Epistola de Pedro",
+        "long_name": "Segunda Ep\u00edstola de Pedro",
         "book_color": "#00ff00",
-        "name": "2 Pedro"
+        "name": "2Pedro"
     },
     {
         "book_number": 690,
         "short_name": "1Jo",
-        "long_name": "Primeira Epistola de Joao",
+        "long_name": "Primeira Ep\u00edstola de Jo\u00e3o",
         "book_color": "#00ff00",
-        "name": "1 Joao"
+        "name": "1Jo\u00e3o"
     },
     {
         "book_number": 700,
         "short_name": "2Jo",
-        "long_name": "Segunda Epistola de Joao",
+        "long_name": "Segunda Ep\u00edstola de Jo\u00e3o",
         "book_color": "#00ff00",
-        "name": "2 Joao"
+        "name": "2Jo\u00e3o"
     },
     {
         "book_number": 710,
         "short_name": "3Jo",
-        "long_name": "Terceira Epistola de Joao",
+        "long_name": "Terceira Ep\u00edstola de Jo\u00e3o",
         "book_color": "#00ff00",
-        "name": "3 Joao"
+        "name": "3Jo\u00e3o"
     },
     {
         "book_number": 720,
         "short_name": "Jd",
-        "long_name": "Epistola de Judas",
+        "long_name": "Ep\u00edstola de Judas",
         "book_color": "#00ff00",
         "name": "Judas"
     },
     {
         "book_number": 730,
         "short_name": "Ap",
-        "long_name": "Apocalipse de Joao",
+        "long_name": "Apocalipse de Jo\u00e3o",
         "book_color": "#ff7c80",
         "name": "Apocalipse"
     }

@@ -44,7 +44,7 @@
             <h2 class="sticky top-0 p-2 text-center font-medium text-base select-none bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-100">Antigo Testamento</h2>
             <button 
               v-for="(item, index) in filteredOldTestament" :key="index"
-              class="text-left p-2 outline-none select-none"
+              class="text-left font-normal p-2 outline-none select-none"
               @click.prevent="SET_BOOK(item)"
             >{{ item.name }}
             </button>
@@ -53,7 +53,7 @@
             <h2 class="sticky top-0 p-2 text-center font-medium text-base select-none bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-100">Novo Testamento</h2>
             <button 
               v-for="(item, index) in filteredNewTestament" :key="index"
-              class="text-left p-2 outline-none select-none"
+              class="text-left font-normal p-2 outline-none select-none"
               @click.prevent="SET_BOOK(item)"
             >{{ item.name }}
             </button>
@@ -73,7 +73,7 @@
           <div class="flex flex-col space-y-2 overflow-y-auto h-full relative">
             <div class="flex flex-col mb-auto">
               <div v-for="verseItem in filteredChapter" :key="verseItem.id" class="flex flex-col">
-                <span class="text-center font-semibold text-base select-none text-black dark:text-white">{{ changeTags(getUniqueVerseTitles(verseItem).join('')) }}</span>
+                <span v-if="getUniqueVerseTitles(verseItem) && getUniqueVerseTitles(verseItem).length > 0" class="text-center font-bold select-none text-black dark:text-white mt-5">{{ changeTags(getUniqueVerseTitles(verseItem).join('')) }}</span>
                 <button
                   v-show="verseItem.text !== ''"
                   class="text-left select-none outline-none mb-auto"
@@ -83,7 +83,7 @@
                   <span class="superscript">{{ verseItem.verse }}</span> <span v-html="changeTags(verseItem.text)"></span>
                 </button>
               </div>
-              <p class="mt-4 text-gray-400 dark:text-gray-500 select-none">{{ changeTags(getDetailedInfo) }}</p>
+              <p class="mt-5 text-base text-gray-400 dark:text-gray-500 select-none">{{ changeTags(getDetailedInfo) }}</p>
             </div>
             <div class="flex items-center justify-between sticky bottom-2 w-full px-5">
               <button
