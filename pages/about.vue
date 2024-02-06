@@ -26,7 +26,7 @@ export default {
       abouts: [
         {
           name: 'Versão',
-          desc: ['0.1.0']
+          desc: ['1.0.0']
         },
         {
           name: 'Traduções',
