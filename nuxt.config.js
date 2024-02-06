@@ -7,7 +7,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'Biblia Sagrada',
+    title: 'Bíblia Sagrada',
     htmlAttrs: {
       lang: 'pt-BR'
     },

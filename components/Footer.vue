@@ -5,7 +5,6 @@
       :exact-active-class="`active-link`"
     >
       <component :is="item.icon" class="w-5 h-5"></component>
-      <!--span class="text-xs font-medium truncate">{{ item.name }}</span-->
     </NuxtLink>
   </div>
 </template>
@@ -14,16 +13,8 @@
 import homeIcon from '@/static/heroicons/mini/home.svg?inline'
 import bookOpenIcon from '@/static/heroicons/mini/book-open.svg?inline'
 import cog8ToothIcon from '@/static/heroicons/mini/cog-8-tooth.svg?inline'
-import musicalNoteIcon from '@/static/heroicons/mini/musical-note.svg?inline'
-import documentTextIcon from '@/static/heroicons/mini/document-text.svg?inline'
 export default {
-  components: {
-    homeIcon,
-    bookOpenIcon,
-    cog8ToothIcon,
-    musicalNoteIcon,
-    documentTextIcon,
-  },
+  components: { homeIcon, bookOpenIcon, cog8ToothIcon },
   data() {
     return {
       menu: [
@@ -37,16 +28,6 @@ export default {
           link: '/bible',
           icon: 'bookOpenIcon'
         },
-        /*{
-          name: 'Hinário',
-          link: '/hymnal',
-          icon: 'musicalNoteIcon'
-        },
-        {
-          name: 'Símbolos de Fé',
-          link: '/symboloffaith',
-          icon: 'documentTextIcon'
-        },*/
         {
           name: 'Configurações',
           link: '/settings',
