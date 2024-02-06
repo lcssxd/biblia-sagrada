@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-5 py-3">
+  <div class="grid py-3" :style="`grid-template-columns: repeat(${menu.length}, minmax(0, 1fr));`">
     <NuxtLink v-for="(item, index) in menu" :key="index" :to="item.link"
       class="flex flex-col items-center justify-center space-y-1 outline-none text-gray-600 dark:text-gray-400 transition select-none"
       :exact-active-class="`active-link`"
@@ -37,7 +37,7 @@ export default {
           link: '/bible',
           icon: 'bookOpenIcon'
         },
-        {
+        /*{
           name: 'Hinário',
           link: '/hymnal',
           icon: 'musicalNoteIcon'
@@ -46,7 +46,7 @@ export default {
           name: 'Símbolos de Fé',
           link: '/symboloffaith',
           icon: 'documentTextIcon'
-        },
+        },*/
         {
           name: 'Configurações',
           link: '/settings',
