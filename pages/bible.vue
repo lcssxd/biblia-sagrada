@@ -61,17 +61,17 @@
         </div>
       </div>
       <div v-else class="h-full relative">
-        <div v-if="getBook && !getChapter" class="grid grid-cols-5 gap-1">
+        <div v-if="getBook && !getChapter" class="grid grid-cols-6 gap-1 p-1">
           <button
             v-for="chapter in uniqueChapters" :key="chapter.id"
-            class="p-2 bg-gray-200 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 outline-none select-none"
+            class="p-1 bg-gray-200 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 outline-none select-none"
             @click.prevent="SET_CHAPTER(chapter)"
             >{{ chapter }}
           </button>
         </div>
         <div v-if="getBook && getChapter" class="h-full">
           <div class="flex flex-col space-y-2 overflow-y-auto h-full relative">
-            <div class="flex flex-col mb-auto">
+            <div class="flex flex-col mb-auto px-2">
               <div v-for="verseItem in filteredChapter" :key="verseItem.id" class="flex flex-col">
                 <span v-if="getUniqueVerseTitles(verseItem) && getUniqueVerseTitles(verseItem).length > 0" class="text-center font-bold select-none text-black dark:text-white mt-5">{{ changeTags(getUniqueVerseTitles(verseItem).join('')) }}</span>
                 <button
