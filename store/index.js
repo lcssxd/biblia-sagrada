@@ -1,6 +1,7 @@
 export const state = () => ({
   version: 'ARA',
   thema: 'dark',
+  font_size: '',
   font_family: '',
   book: null,
   chapter: null,
@@ -14,6 +15,9 @@ export const getters = {
   },
   getThema(state) {
     return state.thema;
+  },
+  getFontSize(state) {
+    return state.font_size;
   },
   getFontFamily(state) {
     return state.font_family;
@@ -62,6 +66,17 @@ export const mutations = {
     }
     localStorage.setItem('thema', state.thema);
   },
+  UPDATE_FONT_SIZE(state) {
+    const fontSize = localStorage.getItem('font_size');
+    const validFontsSize = ['text-xs', 'text-sm', 'text-base', 'text-lg', 'text-xl', 'text-2xl'];
+
+    if (validFontsSize.includes(fontSize)) {
+      state.font_size = fontSize;
+    } else {
+      state.font_size = validFontsSize[0];
+    }
+    localStorage.setItem('font_size', state.font_size);
+  },
   UPDATE_FONT_FAMILY(state) {
     const fontFamily = localStorage.getItem('font_family');
     const validFontsFamily = ['font-sans', 'font-serif', 'font-mono'];
@@ -96,6 +111,14 @@ export const mutations = {
       }
       state.thema = payload;
       localStorage.setItem('thema', payload);
+    }
+  },
+  SET_FONT_SIZE(state, payload) {
+    const validFontsSize = ['text-xs', 'text-sm', 'text-base', 'text-lg', 'text-xl', 'text-2xl'];
+
+    if (validFontsSize.includes(payload)) {
+      state.font_size = payload;
+      localStorage.setItem('font_size', payload);
     }
   },
   SET_FONT_FAMILY(state, payload) {
