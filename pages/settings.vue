@@ -12,9 +12,9 @@
               <span>Tamanho da Fonte</span>
             </div>
             <div class="flex items-center">
-              <button class="flex outline-none" @click.prevent="changeFontSize('+')">A<arrowUpIcon class="w-3 h-3" /></button>
-              <span class="px-4">{{ isFontSize }}</span>
-              <button class="flex outline-none" @click.prevent="changeFontSize('-')">A<arrowDownIcon class="w-3 h-3" /></button>
+              <button class="flex outline-none transition duration-100" :class="{ 'text-gray-500' : isFontSize===20 }" @click.prevent="changeFontSize('+')" :disabled="isFontSize===20">A<arrowUpIcon class="w-3 h-3" /></button>
+              <span class="px-4">{{ isFontSize }}</span> 
+              <button class="flex outline-none transition duration-100" :class="{ 'text-gray-500' : isFontSize===10 }"  @click.prevent="changeFontSize('-')" :disabled="isFontSize===10">A<arrowDownIcon class="w-3 h-3" /></button>
             </div>
           </div>
           <button 
