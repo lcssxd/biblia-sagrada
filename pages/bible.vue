@@ -70,7 +70,7 @@
           </button>
         </div>
         <div v-if="getBook && getChapter" class="h-full">
-          <div class="flex flex-col space-y-2 overflow-y-auto h-full relative">
+          <div class="flex flex-col space-y-2 overflow-y-auto h-full relative" ref="scrollContainer">
             <div class="flex flex-col mb-auto px-2">
               <div v-for="verseItem in filteredChapter" :key="verseItem.id" class="flex flex-col">
                 <span v-if="getUniqueVerseTitles(verseItem) && getUniqueVerseTitles(verseItem).length > 0" class="text-center font-bold select-none text-black dark:text-white mt-5">{{ changeTags(getUniqueVerseTitles(verseItem).join('')) }}</span>
@@ -144,6 +144,13 @@ export default {
     this.UPDATE_VERSION()
     this.UPDATE_FAVORITE_VERSE()
     this.selectedSearch()
+  },
+  watch: {
+    getChapter(val) {
+      this.$nextTick(() => {
+        this.scrollToTopOfDiv();
+      });
+    }
   },
   methods: {
     ...mapMutations(['UPDATE_VERSION', 'UPDATE_FAVORITE_VERSE', 'SET_BOOK', 'SET_CHAPTER', 'SEARCH_VERSE']),
@@ -240,6 +247,16 @@ export default {
     },
     prevChapter() {
       this.SET_CHAPTER(this.getChapter - 1)
+    },
+    scrollToTopOfDiv() {
+      const scrollContainer = this.$refs.scrollContainer;
+      if (scrollContainer && scrollContainer.scrollTop > 0) {
+        scrollContainer.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: 'smooth'
+        });
+      }
     },
     getUniqueVerseTitles(verseItem) {
       const filteredStories = this.stories.filter(item =>
