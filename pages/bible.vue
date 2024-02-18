@@ -115,7 +115,6 @@ import chevronRightIcon from '@/static/heroicons/mini/chevron-right.svg?inline';
 import bookmarkIcon from '@/static/heroicons/mini/bookmark.svg?inline';
 import bookmarkSlashIcon from '@/static/heroicons/mini/bookmark-slash.svg?inline';
 import magnifyingGlassIcon from '@/static/heroicons/mini/magnifying-glass.svg?inline'
-
 export default {
   components: { 
     arrowlongleftIcon,
@@ -152,7 +151,7 @@ export default {
     async loadVersionFiles() {
       const version = this.getVersion;
       const [books, info, introductions, stories, verses] = await Promise.all([
-        import(`@/assets/versions/${version}/books.json`),
+        import(`@/assets/versions/books.json`),
         import(`@/assets/versions/${version}/info.json`),
         import(`@/assets/versions/${version}/introductions.json`),
         import(`@/assets/versions/${version}/stories.json`),

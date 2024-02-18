@@ -40,7 +40,6 @@ import arrowlongleftIcon from '@/static/heroicons/mini/arrow-long-left.svg?inlin
 import clipboardDocumentIcon from '@/static/heroicons/mini/clipboard-document.svg?inline';
 import trashIcon from '@/static/heroicons/mini/trash.svg?inline';
 import bookmarkIcon from '@/static/heroicons/mini/bookmark.svg?inline';
-
 export default {
   components: { arrowlongleftIcon, clipboardDocumentIcon, trashIcon, bookmarkIcon },
   data() {
@@ -78,7 +77,7 @@ export default {
     async loadVersionFiles() {
       const version = this.getVersion;
       const [books, verses] = await Promise.all([
-        import(`@/assets/versions/${version}/books.json`),
+        import(`@/assets/versions/books.json`),
         import(`@/assets/versions/${version}/verses.json`)
       ]);
       this.books = books.default;
