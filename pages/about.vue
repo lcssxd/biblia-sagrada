@@ -6,10 +6,13 @@
       </NuxtLink>
       <span>{{ title }}</span>
     </Header>
-    <div class="space-y-3">
+    <div class="space-y-3 px-2">
       <div v-for="(item, index) in abouts" :key="index">
         <h2 class="font-semibold text-lg select-none">{{ item.name }}</h2>
-        <p v-for="obj in item.desc" :key="obj" :class="{ 'select-none' : obj != abouts[2].desc[1] }">{{ obj }}</p>
+        <span v-for="(obj, index) in item.desc" :key="index" class="flex flex-col">
+          <span v-if="obj != abouts[3].desc[0]" class="text-sm" :class="{ 'select-none' : obj != abouts[3].desc[0] }">{{ obj }}</span>
+          <a v-else :href="obj" class="text-sm w-fit" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        </span>
       </div>
     </div>
   </div>
@@ -17,7 +20,6 @@
 
 <script>
 import arrowlongleftIcon from '@/static/heroicons/mini/arrow-long-left.svg?inline'
-
 export default {
   components: { arrowlongleftIcon },
   data() {
@@ -33,8 +35,12 @@ export default {
           desc: ['Almeida Revista e Atualizada (ARA)', 'Nova Tradução na Linguagem de Hoje (NTLH)']
         },
         {
+          name: 'Desenvolvedor',
+          desc: ['Luan Soares']
+        },
+        {
           name: 'Contato',
-          desc: ['Luan Soares', 'WhatsApp: +5583993577540']
+          desc: ['https://wa.me/+5583993577540/']
         }
       ]
     }
