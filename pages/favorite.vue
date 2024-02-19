@@ -1,9 +1,6 @@
 <template>
   <div class="flex flex-col h-full overflow-hidden">
-    <Header class="flex items-center space-x-2">
-      <NuxtLink to="/bible" class="cursor-pointer outline-none">
-        <arrowlongleftIcon class="w-5 h-5" />
-      </NuxtLink>
+    <Header>
       <span>{{ title }}</span>
     </Header>
     <div class="flex flex-col overflow-y-auto h-full">
@@ -44,7 +41,7 @@ export default {
   components: { arrowlongleftIcon, clipboardDocumentIcon, trashIcon, bookmarkIcon },
   data() {
     return {
-      title: 'Versículos',
+      title: 'Favoritos',
       loading: true,
       verses: null,
       books: null,

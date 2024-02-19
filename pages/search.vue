@@ -1,18 +1,13 @@
 <template>
   <div class="flex flex-col h-full overflow-hidden">
-    <Header class="flex items-center space-x-2">
-      <NuxtLink to="/bible" class="flex items-center cursor-pointer outline-none">
-        <arrowlongleftIcon class="w-5 h-5" />
-      </NuxtLink>
+    <Header>
       <span>{{ title }}</span>
     </Header>
     <fieldset class="flex flex-col w-full space-y-1 text-gray-800 dark:text-gray-50">
       <label for="Search" class="hidden">Procurar</label>
       <div class="relative">
         <span class="absolute inset-y-0 left-0 flex items-center pl-2">
-          <button type="button" title="search" class="p-1 outline-none" @click.prevent="searchText">
-            <magnifyingGlassIcon class="w-4 h-4" />
-          </button>
+          <magnifyingGlassIcon class="w-4 h-4" />
         </span>
         <input
           type="search"
@@ -21,6 +16,7 @@
           v-model="name"
           class="w-full py-2 pl-10 pr-2 text-sm border dark:bg-transparent border-gray-200 dark:border-gray-700 outline-none"
           required
+          autofocus
           autocomplete="off"
           @keyup.enter="searchText"
         >
@@ -61,7 +57,7 @@ export default {
   components: { arrowlongleftIcon, magnifyingGlassIcon },
   data() {
     return {
-      title: 'Procurar na bíblia',
+      title: 'Procurar',
       name: '',
       loading: false,
       verses: null,
