@@ -70,6 +70,7 @@
                   v-show="verseItem.text !== ''"
                   class="text-left select-none outline-none mb-auto"
                   :class="[{ 'bg-gray-300 dark:bg-gray-600' : selectedVerse.some(verse => verse.book_number === verseItem.book_number && verse.chapter === verseItem.chapter && verse.verse === verseItem.verse) }, { 'bg-gray-300/50 dark:bg-gray-600/50' : !selectedVerse.some(verse => verse.book_number === verseItem.book_number && verse.chapter === verseItem.chapter && verse.verse === verseItem.verse) && getFavoriteVerse.some(favorite => favorite?.book_number === verseItem?.book_number && favorite?.chapter === verseItem?.chapter && favorite?.verse === verseItem?.verse) } ]"
+                  :ref="'verse-' + verseItem.chapter + '-' + verseItem.verse"
                   @click.prevent="selectVerse(verseItem)"
                 >
                   <span class="superscript">{{ verseItem.verse }}</span> <span v-html="changeTags(verseItem.text)"></span>
@@ -265,12 +266,33 @@ export default {
     selectedSearch() {
       if(this.getSearchVerse && this.getSearchVerse.length > 0) {
         this.selectedVerse = [...this.getSearchVerse]
+        this.scrollToSelectedVerse();
       }
     },
     changeTags(text) {
       const styledText = text.replace(/<J>(.*?)<\/J>/g, '<span class="j-tag">$1</span>');
       const cleanedText = styledText.replace(/<pb\/>|<f>.*?<\/f>|<t>|<\/t>|<br\/>|<x>.*?<\/x>/g, '');
       return cleanedText;
+    },
+    scrollToSelectedVerse() {
+      this.$nextTick(() => {
+        if(this.selectedVerse && this.selectedVerse.length > 0) {
+          const selectedRef = 'verse-' + this.selectedVerse[0].chapter + '-' + this.selectedVerse[0].verse;
+          const verseElement = this.$refs[selectedRef];
+
+          if(verseElement && verseElement[0]) {
+            const scrollContainer = this.$refs.scrollContainer;
+            const verseTop = verseElement[0].offsetTop;
+
+            if(scrollContainer) {
+              scrollContainer.scrollTo({
+                top: verseTop,
+                behavior: 'smooth'
+              });
+            }
+          }
+        }
+      });
     }
   },
   computed: {
@@ -317,7 +339,7 @@ export default {
       } else {
         return "Informação não encontrada";
       }
-    },
+    }
   }
 };
 </script>
