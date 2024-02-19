@@ -140,6 +140,7 @@ export default {
     getChapter(val) {
       this.$nextTick(() => {
         this.scrollToTopOfDiv();
+        this.cancelSelected();
       });
     }
   },
