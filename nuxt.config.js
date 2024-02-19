@@ -77,7 +77,7 @@ export default {
       theme_color: '#1F2937',
       icons: [
         {
-          src: '/static/favicon.ico',
+          src: 'static/favicon.ico',
           sizes: '512x512',
           type: 'image/x-icon',
           purpose: 'any maskable',
@@ -92,7 +92,6 @@ export default {
         '/about',
         '/bible',
         '/favorite',
-        '/index',
         '/search',
         '/settings',
       ],
