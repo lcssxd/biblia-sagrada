@@ -45,7 +45,6 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    '@nuxtjs/pwa',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -61,54 +60,6 @@ export default {
         tailwindcss: {},
         autoprefixer: {},
       },
-    },
-  },
-
-  // PWA Setup: https://pwa.nuxtjs.org/setup
-  pwa: {
-    manifest: {
-      name: 'Biblia Sagrada',
-      short_name: 'Biblia',
-      description: 'Acesse a Bíblia Sagrada a qualquer momento, em qualquer lugar',
-      lang: 'pt-BR',
-      start_url: '/',
-      display: 'standalone',
-      background_color: '#1F2937',
-      theme_color: '#1F2937',
-      icons: [
-        {
-          src: '/static/favicon.ico',
-          sizes: '512x512',
-          type: 'image/x-icon',
-          purpose: 'any maskable',
-          background_color: '#1F2937',
-        },
-      ],
-    },
-    workbox: {
-      offline: true,
-      precaching: [
-        '/',
-        '/about',
-        '/bible',
-        '/favorite',
-        '/index',
-        '/search',
-        '/settings',
-      ],
-      runtimeCaching: [
-        {
-          urlPattern: '^https://biblia-sagrada-vue.vercel.app/.*',
-          handler: 'NetworkFirst',
-          options: {
-            cacheName: 'apiCache',
-            expiration: {
-              maxEntries: 100,
-              maxAgeSeconds: 24 * 60 * 60,
-            },
-          },
-        },
-      ],
     },
   },
 }
