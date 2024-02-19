@@ -13,8 +13,10 @@
 import homeIcon from '@/static/heroicons/mini/home.svg?inline'
 import bookOpenIcon from '@/static/heroicons/mini/book-open.svg?inline'
 import cog8ToothIcon from '@/static/heroicons/mini/cog-8-tooth.svg?inline'
+import magnifyingGlassIcon from '@/static/heroicons/mini/magnifying-glass.svg?inline'
+import bookmarkIcon from '@/static/heroicons/mini/bookmark.svg?inline';
 export default {
-  components: { homeIcon, bookOpenIcon, cog8ToothIcon },
+  components: { homeIcon, bookOpenIcon, cog8ToothIcon, magnifyingGlassIcon, bookmarkIcon },
   data() {
     return {
       menu: [
@@ -24,9 +26,19 @@ export default {
           icon: 'homeIcon'
         },
         {
+          name: 'Procurar',
+          link: '/search',
+          icon: 'magnifyingGlassIcon'
+        },
+        {
           name: 'Bíblia',
           link: '/bible',
           icon: 'bookOpenIcon'
+        },
+        {
+          name: 'Favorito',
+          link: '/favorite',
+          icon: 'bookmarkIcon'
         },
         {
           name: 'Configurações',

@@ -7,14 +7,6 @@
         </button>
         <h1>{{ currentName }}</h1>
       </div>
-      <div v-if="!getBook && !getChapter" class="flex items-center space-x-2">
-        <NuxtLink to="/search">
-          <magnifyingGlassIcon class="w-5 h-5" />
-        </NuxtLink>
-        <NuxtLink to="/favorite">
-          <bookmarkIcon class="w-5 h-5" />
-        </NuxtLink>
-      </div>
       <div v-if="getBook && getChapter && selectedVerse && selectedVerse.length > 0" class="flex items-center space-x-3">
         <button class="cursor-pointer outline-none" @click.prevent="selectAllVerses">
           <documentCheckIcon class="w-5 h-5" />
@@ -114,7 +106,6 @@ import chevronLeftIcon from '@/static/heroicons/mini/chevron-left.svg?inline';
 import chevronRightIcon from '@/static/heroicons/mini/chevron-right.svg?inline';
 import bookmarkIcon from '@/static/heroicons/mini/bookmark.svg?inline';
 import bookmarkSlashIcon from '@/static/heroicons/mini/bookmark-slash.svg?inline';
-import magnifyingGlassIcon from '@/static/heroicons/mini/magnifying-glass.svg?inline'
 export default {
   components: { 
     arrowlongleftIcon,
@@ -125,7 +116,6 @@ export default {
     chevronRightIcon,
     bookmarkIcon,
     bookmarkSlashIcon,
-    magnifyingGlassIcon,
   },
   data() {
     return {
