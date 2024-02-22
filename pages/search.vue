@@ -3,10 +3,10 @@
     <Header>
       <span>{{ title }}</span>
     </Header>
-    <fieldset class="flex flex-col w-full space-y-1 text-gray-800 dark:text-gray-50">
+    <fieldset class="text-gray-800 dark:text-gray-50 px-2">
       <label for="Search" class="hidden">Procurar</label>
       <div class="relative">
-        <span class="absolute inset-y-0 left-0 flex items-center pl-2">
+        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
           <magnifyingGlassIcon class="w-4 h-4" />
         </span>
         <input
@@ -14,7 +14,7 @@
           name="Search"
           placeholder="Procurar..."
           v-model="name"
-          class="w-full py-2 pl-10 pr-2 text-sm border dark:bg-transparent border-gray-200 dark:border-gray-700 outline-none"
+          class="w-full py-2 pl-10 pr-2 text-sm border rounded-md dark:bg-transparent border-gray-200 dark:border-gray-700 outline-none"
           required
           autofocus
           autocomplete="off"
