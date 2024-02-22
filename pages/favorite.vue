@@ -11,7 +11,7 @@
             <span class="font-semibold select-none">{{ getBookAndChapterName(item.book_number, item.chapter, item.verse) }}</span>
             <div class="flex items-center space-x-2">
               <button class="cursor-pointer outline-none" @click.prevent="copyVerse(item)">
-                <clipboardDocumentIcon class="w-5 h-5" />
+                <copyIcon class="w-5 h-5" />
               </button>
               <button class="cursor-pointer outline-none" @click.prevent="toggleFavoriteVerse(item)">
                 <trashIcon class="w-5 h-5" />
@@ -34,11 +34,11 @@
 <script>
 import { mapGetters, mapMutations, mapActions } from 'vuex'
 import arrowlongleftIcon from '@/static/heroicons/mini/arrow-long-left.svg?inline'
-import clipboardDocumentIcon from '@/static/heroicons/mini/clipboard-document.svg?inline';
+import copyIcon from '@/static/svgrepo/copy.svg?inline';
 import trashIcon from '@/static/heroicons/mini/trash.svg?inline';
 import bookmarkIcon from '@/static/heroicons/mini/bookmark.svg?inline';
 export default {
-  components: { arrowlongleftIcon, clipboardDocumentIcon, trashIcon, bookmarkIcon },
+  components: { arrowlongleftIcon, copyIcon, trashIcon, bookmarkIcon },
   data() {
     return {
       title: 'Favoritos',

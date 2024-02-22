@@ -9,10 +9,10 @@
       </div>
       <div v-if="getBook && getChapter && selectedVerse && selectedVerse.length > 0" class="flex items-center space-x-3">
         <button class="cursor-pointer outline-none" @click.prevent="selectAllVerses">
-          <documentCheckIcon class="w-5 h-5" />
+          <selectAllIcon class="w-5 h-5" />
         </button>
         <button class="cursor-pointer outline-none" @click.prevent="copyCurrentVerse">
-          <clipboardDocumentIcon class="w-5 h-5" />
+          <copyIcon class="w-5 h-5" />
         </button>
         <button class="cursor-pointer outline-none" @click.prevent="favoriteVerse(selectedVerse)">
           <bookmarkSlashIcon 
@@ -100,8 +100,8 @@
 <script>
 import { mapGetters, mapMutations, mapActions } from 'vuex'
 import arrowlongleftIcon from '@/static/heroicons/mini/arrow-long-left.svg?inline';
-import documentCheckIcon from '@/static/heroicons/mini/document-check.svg?inline';
-import clipboardDocumentIcon from '@/static/heroicons/mini/clipboard-document.svg?inline';
+import selectAllIcon from '@/static/svgrepo/select-all.svg?inline';
+import copyIcon from '@/static/svgrepo/copy.svg?inline';
 import xMarkIcon from '@/static/heroicons/mini/x-mark.svg?inline';
 import chevronLeftIcon from '@/static/heroicons/mini/chevron-left.svg?inline';
 import chevronRightIcon from '@/static/heroicons/mini/chevron-right.svg?inline';
@@ -110,8 +110,8 @@ import bookmarkSlashIcon from '@/static/heroicons/mini/bookmark-slash.svg?inline
 export default {
   components: { 
     arrowlongleftIcon,
-    documentCheckIcon,
-    clipboardDocumentIcon,
+    selectAllIcon,
+    copyIcon,
     xMarkIcon,
     chevronLeftIcon,
     chevronRightIcon,
