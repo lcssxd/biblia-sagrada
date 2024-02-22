@@ -63,21 +63,23 @@
         </div>
         <div v-if="getBook && getChapter" class="h-full">
           <div class="flex flex-col space-y-2 overflow-y-auto h-full relative" ref="scrollContainer">
-            <div class="flex flex-col mb-auto px-2">
-              <div v-for="verseItem in filteredChapter" :key="verseItem.id" class="flex flex-col">
-                <span v-if="getUniqueVerseTitles(verseItem) && getUniqueVerseTitles(verseItem).length > 0" class="text-center font-bold select-none text-black dark:text-white mt-5">{{ changeTags(getUniqueVerseTitles(verseItem).join('')) }}</span>
-                <button
-                  v-show="verseItem.text !== ''"
-                  class="text-left select-none outline-none mb-auto"
-                  :class="[{ 'bg-gray-300 dark:bg-gray-600' : selectedVerse.some(verse => verse.book_number === verseItem.book_number && verse.chapter === verseItem.chapter && verse.verse === verseItem.verse) }, { 'bg-gray-300/50 dark:bg-gray-600/50' : !selectedVerse.some(verse => verse.book_number === verseItem.book_number && verse.chapter === verseItem.chapter && verse.verse === verseItem.verse) && getFavoriteVerse.some(favorite => favorite?.book_number === verseItem?.book_number && favorite?.chapter === verseItem?.chapter && favorite?.verse === verseItem?.verse) } ]"
-                  :ref="'verse-' + verseItem.chapter + '-' + verseItem.verse"
-                  @click.prevent="selectVerse(verseItem)"
-                >
-                  <span class="superscript">{{ verseItem.verse }}</span> <span v-html="changeTags(verseItem.text)"></span>
-                </button>
+            <Transition name="fade" mode="out-in">
+              <div class="flex flex-col mb-auto px-2" :key="currentChapterKey">
+                <div v-for="verseItem in filteredChapter" :key="verseItem.id" class="flex flex-col">
+                  <span v-if="getUniqueVerseTitles(verseItem) && getUniqueVerseTitles(verseItem).length > 0" class="text-center font-bold select-none text-black dark:text-white mt-5">{{ changeTags(getUniqueVerseTitles(verseItem).join('')) }}</span>
+                  <button
+                    v-show="verseItem.text !== ''"
+                    class="text-left select-none outline-none mb-auto"
+                    :class="[{ 'bg-gray-300 dark:bg-gray-600' : selectedVerse.some(verse => verse.book_number === verseItem.book_number && verse.chapter === verseItem.chapter && verse.verse === verseItem.verse) }, { 'bg-gray-300/50 dark:bg-gray-600/50' : !selectedVerse.some(verse => verse.book_number === verseItem.book_number && verse.chapter === verseItem.chapter && verse.verse === verseItem.verse) && getFavoriteVerse.some(favorite => favorite?.book_number === verseItem?.book_number && favorite?.chapter === verseItem?.chapter && favorite?.verse === verseItem?.verse) }]"
+                    :ref="'verse-' + verseItem.chapter + '-' + verseItem.verse"
+                    @click.prevent="selectVerse(verseItem)"
+                  >
+                    <span class="superscript">{{ verseItem.verse }}</span> <span v-html="changeTags(verseItem.text)"></span>
+                  </button>
+                </div>
+                <p class="mt-5 text-base text-gray-400 dark:text-gray-500 select-none">{{ changeTags(getDetailedInfo) }}</p>
               </div>
-              <p class="mt-5 text-base text-gray-400 dark:text-gray-500 select-none">{{ changeTags(getDetailedInfo) }}</p>
-            </div>
+            </Transition>
             <div class="flex items-center justify-between sticky bottom-2 w-full px-5">
               <button
                 class="p-1 select-none outline-none transition rounded-full text-gray-800 hover:bg-gray-800 hover:text-gray-100 dark:text-gray-100 hover:dark:bg-gray-100 hover:dark:text-gray-800 disabled:bg-gray-300 disabled:text-gray-600 disabled:dark:bg-gray-300 disabled:dark:text-gray-600 shadow"
@@ -340,7 +342,10 @@ export default {
       } else {
         return "Informação não encontrada";
       }
-    }
+    },
+    currentChapterKey() {
+      return `${this.getBook?.book_number}-${this.getChapter}`;
+    },
   }
 };
 </script>
@@ -351,7 +356,18 @@ export default {
   font-size: smaller;
   @apply text-gray-600 dark:text-gray-400;
 }
+
 .j-tag {
   @apply text-red-500;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
