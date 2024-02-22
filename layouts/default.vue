@@ -1,6 +1,8 @@
 <template>
   <div class="app" :class="`${getFontFamily} ${getFontSize}`">
-    <Nuxt class="mb-auto" />
+    <Transition name="fade" mode="out-in">
+      <Nuxt class="mb-auto" :key="routePath" />
+    </Transition>
     <Footer />
   </div>
 </template>
@@ -26,6 +28,9 @@ export default {
   },
   computed: {
     ...mapGetters(['getVersion', 'getThema', 'getFontSize', 'getFontFamily']),
+    routePath() {
+      return this.$route.path
+    }
   },
   methods: {
     ...mapMutations(['UPDATE_VERSION', 'UPDATE_THEMA', 'UPDATE_FONT_SIZE', 'UPDATE_FONT_FAMILY', 'SET_VERSION', 'SET_THEMA', 'SET_FONT_SIZE', 'SET_FONT_FAMILY']),
@@ -38,12 +43,22 @@ export default {
 </script>
 
 <style>
-  .h-full-screen {
-    height: 100vh;
-    height: calc(var(--vh, 1vh) * 100);
-  }
+.h-full-screen {
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
+}
 
-  .app {
-    @apply flex flex-col h-full-screen w-full justify-between min-w-[320px] bg-gray-50 text-gray-800 dark:text-gray-50 dark:bg-gray-800;
-  }
+.app {
+  @apply flex flex-col h-full-screen w-full justify-between min-w-[320px] bg-gray-50 text-gray-800 dark:text-gray-50 dark:bg-gray-800;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
 </style>

@@ -7,48 +7,54 @@
         </button>
         <h1>{{ currentName }}</h1>
       </div>
-      <div v-if="getBook && getChapter && selectedVerse && selectedVerse.length > 0" class="flex items-center space-x-3">
-        <button class="cursor-pointer outline-none" @click.prevent="selectAllVerses">
-          <selectAllIcon class="w-5 h-5" />
-        </button>
-        <button class="cursor-pointer outline-none" @click.prevent="copyCurrentVerse">
-          <copyIcon class="w-5 h-5" />
-        </button>
-        <button class="cursor-pointer outline-none" @click.prevent="favoriteVerse(selectedVerse)">
-          <bookmarkSlashIcon 
-            v-if="getFavoriteVerse.some(favorite => 
-                favorite?.book_number === selectedVerse[0]?.book_number && 
-                favorite?.chapter === selectedVerse[0]?.chapter && 
-                favorite?.verse === selectedVerse[0]?.verse)" 
-            class="w-5 h-5" />
-          <bookmarkIcon v-else class="w-5 h-5" />
-        </button>
-        <button class="cursor-pointer outline-none" @click.prevent="cancelSelected">
-          <xMarkIcon class="w-5 h-5" />
-        </button>
-      </div>
+      <Transition name="fade" mode="out-in">
+        <div v-if="getBook && getChapter && selectedVerse && selectedVerse.length > 0" class="flex items-center space-x-3">
+          <button class="cursor-pointer outline-none" @click.prevent="selectAllVerses">
+            <selectAllIcon class="w-5 h-5" />
+          </button>
+          <button class="cursor-pointer outline-none" @click.prevent="copyCurrentVerse">
+            <copyIcon class="w-5 h-5" />
+          </button>
+          <button class="cursor-pointer outline-none" @click.prevent="favoriteVerse(selectedVerse)">
+            <bookmarkSlashIcon 
+              v-if="getFavoriteVerse.some(favorite => 
+                  favorite?.book_number === selectedVerse[0]?.book_number && 
+                  favorite?.chapter === selectedVerse[0]?.chapter && 
+                  favorite?.verse === selectedVerse[0]?.verse)" 
+              class="w-5 h-5" />
+            <bookmarkIcon v-else class="w-5 h-5" />
+          </button>
+          <button class="cursor-pointer outline-none" @click.prevent="cancelSelected">
+            <xMarkIcon class="w-5 h-5" />
+          </button>
+        </div>
+      </Transition>
     </Header>
     <div class="relative overflow-y-auto h-full">
       <div v-if="loading" class="h-full bg-gray-300 dark:bg-gray-700 animate-pulse"></div>
-      <div v-if="!getBook && !loading" class="h-full">
-        <div class="flex flex-col h-full">
-          <div class="flex flex-col divide-y divide-gray-200 dark:divide-gray-600">
-            <h2 class="sticky top-0 p-2 text-center font-medium text-base select-none bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-100">Antigo Testamento</h2>
-            <button 
-              v-for="(item, index) in filteredOldTestament" :key="index"
-              class="text-left font-normal p-2 outline-none select-none"
-              @click.prevent="SET_BOOK(item)"
-            >{{ item.name }}
-            </button>
-          </div>
-          <div class="flex flex-col divide-y divide-gray-200 dark:divide-gray-600">
-            <h2 class="sticky top-0 p-2 text-center font-medium text-base select-none bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-100">Novo Testamento</h2>
-            <button 
-              v-for="(item, index) in filteredNewTestament" :key="index"
-              class="text-left font-normal p-2 outline-none select-none"
-              @click.prevent="SET_BOOK(item)"
-            >{{ item.name }}
-            </button>
+      <Transition name="fade" mode="out-in">
+        <div class="h-full" :key="currentChapterKey">
+          <div v-if="!getBook && !loading" class="h-full">
+            <div class="flex flex-col h-full">
+              <div class="flex flex-col divide-y divide-gray-200 dark:divide-gray-600">
+                <h2 class="sticky top-0 p-2 text-center font-medium text-base select-none bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-100">Antigo Testamento</h2>
+                <button 
+                  v-for="(item, index) in filteredOldTestament" :key="index"
+                  class="text-left font-normal p-2 outline-none select-none"
+                  @click.prevent="SET_BOOK(item)"
+                >{{ item.name }}
+                </button>
+              </div>
+              <div class="flex flex-col divide-y divide-gray-200 dark:divide-gray-600">
+                <h2 class="sticky top-0 p-2 text-center font-medium text-base select-none bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-100">Novo Testamento</h2>
+                <button 
+                  v-for="(item, index) in filteredNewTestament" :key="index"
+                  class="text-left font-normal p-2 outline-none select-none"
+                  @click.prevent="SET_BOOK(item)"
+                >{{ item.name }}
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -94,7 +100,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </Transition>
     </div>
   </div>
 </template>
@@ -359,15 +365,5 @@ export default {
 
 .j-tag {
   @apply text-red-500;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
 }
 </style>
