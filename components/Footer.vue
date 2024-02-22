@@ -4,7 +4,7 @@
       class="flex flex-col items-center justify-center space-y-1 outline-none text-gray-600 dark:text-gray-400 transition select-none"
       :exact-active-class="`active-link`"
     >
-      <component :is="item.icon" class="w-5 h-5"></component>
+      <component :is="item.icon" class="w-6 h-6"></component>
     </NuxtLink>
   </div>
 </template>
