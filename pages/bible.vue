@@ -198,7 +198,7 @@ export default {
     copyCurrentVerse() {
       const sortedSelectedVerses = [...this.selectedVerse].sort((a, b) => a.verse - b.verse);
 
-      const versesText = sortedSelectedVerses.map(verseItem => `${verseItem.verse} ${verseItem.text}`).join(' ');
+      const versesText = this.removeTags(sortedSelectedVerses.map(verseItem => `${verseItem.verse} ${verseItem.text}`).join(' '));
 
       const startVerse = sortedSelectedVerses[0].verse;
       const endVerse = sortedSelectedVerses[sortedSelectedVerses.length - 1].verse;
@@ -281,6 +281,10 @@ export default {
     changeTags(text) {
       const styledText = text.replace(/<J>(.*?)<\/J>/g, '<span class="j-tag">$1</span>');
       const cleanedText = styledText.replace(/<pb\/>|<f>.*?<\/f>|<t>|<\/t>|<br\/>|<x>.*?<\/x>/g, '');
+      return cleanedText;
+    },
+    removeTags(text) {
+      const cleanedText = text.replace(/<pb\/>|<f>.*?<\/f>|<t>|<\/t>|<br\/>|<x>.*?<\/x>|<J>|<\/J>/g, '');
       return cleanedText;
     },
     scrollToSelectedVerse() {

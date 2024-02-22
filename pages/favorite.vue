@@ -95,7 +95,7 @@ export default {
       return `${foundBook.name} ${chapter}:${verse}`;
     },
     copyVerse(verseItem) {
-      let verseToCopy = `"${verseItem.text}" (${this.getBookAndChapterName(verseItem.book_number, verseItem.chapter, verseItem.verse)})`;
+      let verseToCopy = `"${this.removeTags(verseItem.text)}" (${this.getBookAndChapterName(verseItem.book_number, verseItem.chapter, verseItem.verse)})`;
 
       if (navigator.clipboard) {
         navigator.clipboard.writeText(verseToCopy)
@@ -131,6 +131,10 @@ export default {
     changeTags(text) {
       const styledText = text.replace(/<J>(.*?)<\/J>/g, '<span class="j-tag">$1</span>');
       const cleanedText = styledText.replace(/<pb\/>|<f>.*?<\/f>|<t>|<\/t>|<br\/>|<x>.*?<\/x>/g, '');
+      return cleanedText;
+    },
+    removeTags(text) {
+      const cleanedText = text.replace(/<pb\/>|<f>.*?<\/f>|<t>|<\/t>|<br\/>|<x>.*?<\/x>|<J>|<\/J>/g, '');
       return cleanedText;
     },
   }
