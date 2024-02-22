@@ -130,9 +130,9 @@ export default {
     },
     changeTags(text) {
       const styledText = text.replace(/<J>(.*?)<\/J>/g, '<span class="j-tag">$1</span>');
-      const cleanedText = styledText.replace(/<pb\/>|<f>.*?<\/f>|<t>|<\/t>|<br\/>|<x>.*?<\/x>/g, '');
+      const cleanedText = styledText.replace(/<pb\/>|<f>.*?<\/f>|<t>|<\/t>|<br\/>|<x>.*?<\/x>/g, '').replace(/\s{2,}/g, ' ');
       return cleanedText;
-    },
+    }
   }
 }
 </script>
