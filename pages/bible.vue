@@ -195,16 +195,33 @@ export default {
     },
     copyCurrentVerse() {
       const sortedSelectedVerses = [...this.selectedVerse].sort((a, b) => a.verse - b.verse);
-
       const versesText = this.removeTags(sortedSelectedVerses.map(verseItem => `${verseItem.verse} ${verseItem.text}`).join(' '));
 
-      const startVerse = sortedSelectedVerses[0].verse;
-      const endVerse = sortedSelectedVerses[sortedSelectedVerses.length - 1].verse;
+      let referenceGroups = [];
+      let currentGroup = [];
+      sortedSelectedVerses.forEach((verse, index) => {
+        if (currentGroup.length === 0) {
+          currentGroup.push(verse.verse);
+        } else {
+          const lastVerseInGroup = currentGroup[currentGroup.length - 1];
+          if (verse.verse === lastVerseInGroup + 1) {
+            currentGroup.push(verse.verse);
+          } else {
+            referenceGroups.push(currentGroup);
+            currentGroup = [verse.verse];
+          }
+        }
+        if (index === sortedSelectedVerses.length - 1) {
+          referenceGroups.push(currentGroup);
+        }
+      });
 
-      let verseToCopy = this.selectedVerse.length > 1
-        ? `"${versesText}" (${this.currentName}:${startVerse}-${endVerse})`
-        : `"${versesText}" (${this.currentName}:${startVerse})`;
+      const reference = referenceGroups.map(group => {
+        return group.length > 1 ? `${group[0]}-${group[group.length - 1]}` : `${group[0]}`;
+      }).join(', ');
 
+      const verseToCopy = `"${versesText}" (${this.currentName}:${reference})`;
+      
       if (navigator.clipboard) {
         navigator.clipboard.writeText(verseToCopy)
           .then(() => {
