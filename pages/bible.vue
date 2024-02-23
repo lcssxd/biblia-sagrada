@@ -84,14 +84,14 @@
                 </div>
                 <div class="flex items-center justify-between sticky bottom-2 w-full px-5">
                   <button
-                    class="p-1 select-none outline-none transition rounded-full text-gray-800 hover:bg-gray-800 hover:text-gray-100 dark:text-gray-100 hover:dark:bg-gray-100 hover:dark:text-gray-800 disabled:bg-gray-300 disabled:text-gray-600 disabled:dark:bg-gray-300 disabled:dark:text-gray-600 shadow"
+                    class="p-1 select-none outline-none transition duration-100 rounded-full text-gray-800 hover:bg-gray-800/30 dark:text-gray-50 hover:dark:bg-gray-100/30"
+                    :class="{ 'invisible' : isFistChapter }"
                     @click.prevent="prevChapter()"
-                    :disabled="getChapter === 1"
                   ><chevronLeftIcon class="w-6 h-6" /></button>
                   <button
-                    class="p-1 select-none outline-none transition rounded-full text-gray-800 hover:bg-gray-800 hover:text-gray-100 dark:text-gray-100 hover:dark:bg-gray-100 hover:dark:text-gray-800 disabled:bg-gray-300 disabled:text-gray-600 shadow"
+                    class="p-1 select-none outline-none transition duration-100 rounded-full text-gray-800 hover:bg-gray-800/30 dark:text-gray-50 hover:dark:bg-gray-100/30"
+                    :class="{ 'invisible' : isLastChapter }"
                     @click.prevent="nextChapter()"
-                    :disabled="getChapter === uniqueChapters.length"
                   ><chevronRightIcon class="w-6 h-6" /></button>
                 </div>
               </div>
@@ -370,6 +370,12 @@ export default {
     },
     currentChapterKey() {
       return `${this.getBook?.book_number}-${this.getChapter}`;
+    },
+    isFistChapter() {
+      return this.getChapter === 1 ? true : false
+    },
+    isLastChapter() {
+      return this.getChapter === this.uniqueChapters.length ? true : false
     }
   }
 };
