@@ -69,7 +69,7 @@
               <div class="flex flex-col space-y-2 overflow-y-auto h-full relative" ref="scrollContainer">
                 <div class="flex flex-col mb-auto">
                   <div v-for="verseItem in filteredChapter" :key="verseItem.id" class="flex flex-col">
-                    <span v-if="getUniqueVerseTitles(verseItem) && getUniqueVerseTitles(verseItem).length > 0" class="text-center font-bold select-none text-black dark:text-white mt-5">{{ changeTags(getUniqueVerseTitles(verseItem).join('')) }}</span>
+                    <span v-if="getUniqueVerseTitles(verseItem) && getUniqueVerseTitles(verseItem).length > 0" class="text-center font-bold select-none text-black dark:text-white mt-5">{{ removeTagsTitle(getUniqueVerseTitles(verseItem).join('')) }}</span>
                     <button
                       v-show="verseItem.text !== ''"
                       class="px-2 text-left select-none outline-none mb-auto transition duration-200"
@@ -84,12 +84,12 @@
                 </div>
                 <div class="flex items-center justify-between sticky bottom-2 w-full px-5">
                   <button
-                    class="p-1 select-none outline-none transition duration-100 rounded-full text-gray-800 hover:bg-gray-800/30 dark:text-gray-50 hover:dark:bg-gray-100/30"
+                    class="p-2 select-none outline-none transition duration-100 rounded-full text-gray-800 hover:bg-gray-800/30 dark:text-gray-50 hover:dark:bg-gray-100/30"
                     :class="{ 'invisible' : isFistChapter }"
                     @click.prevent="prevChapter()"
                   ><chevronLeftIcon class="w-6 h-6" /></button>
                   <button
-                    class="p-1 select-none outline-none transition duration-100 rounded-full text-gray-800 hover:bg-gray-800/30 dark:text-gray-50 hover:dark:bg-gray-100/30"
+                    class="p-2 select-none outline-none transition duration-100 rounded-full text-gray-800 hover:bg-gray-800/30 dark:text-gray-50 hover:dark:bg-gray-100/30"
                     :class="{ 'invisible' : isLastChapter }"
                     @click.prevent="nextChapter()"
                   ><chevronRightIcon class="w-6 h-6" /></button>
@@ -300,6 +300,10 @@ export default {
     },
     removeTags(text) {
       const cleanedText = text.replace(/<pb\/>|<f>.*?<\/f>|<t>|<\/t>|<br\/>|<x>.*?<\/x>|<J>|<\/J>/g, '').replace(/\s{2,}/g, ' ');
+      return cleanedText;
+    },
+    removeTagsTitle(text) {
+      const cleanedText = text.replace(/<pb\/>|<f>.*?<\/f>|<t>|<\/t>|<br\/>|<x>.*?<\/x>|<J>|<\/J>|—|;/g, '').replace(/\s{2,}/g, ' ');
       return cleanedText;
     },
     scrollToSelectedVerse() {
