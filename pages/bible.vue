@@ -9,13 +9,13 @@
       </div>
       <Transition name="fade" mode="out-in">
         <div v-if="getBook && getChapter && selectedVerse && selectedVerse.length > 0" class="flex items-center space-x-3">
-          <button class="cursor-pointer outline-none" @click.prevent="selectAllVerses">
+          <button class="outline-none" @click.prevent="selectAllVerses">
             <selectAllIcon class="w-5 h-5" />
           </button>
-          <button class="cursor-pointer outline-none" @click.prevent="copyCurrentVerse">
+          <button class="outline-none" @click.prevent="copyCurrentVerse">
             <copyIcon class="w-5 h-5" />
           </button>
-          <button class="cursor-pointer outline-none" @click.prevent="favoriteVerse(selectedVerse)">
+          <button class="outline-none" @click.prevent="favoriteVerse(selectedVerse)">
             <bookmarkSlashIcon 
               v-if="getFavoriteVerse.some(favorite => 
                   favorite?.book_number === selectedVerse[0]?.book_number && 
@@ -24,7 +24,10 @@
               class="w-5 h-5" />
             <bookmarkIcon v-else class="w-5 h-5" />
           </button>
-          <button class="cursor-pointer outline-none" @click.prevent="cancelSelected">
+          <button class="outline-none" @click.prevent="shareVerse">
+            <shareIcon class="w-5 h-5" />
+          </button>
+          <button class="outline-none" @click.prevent="cancelSelected">
             <xMarkIcon class="w-5 h-5" />
           </button>
         </div>
@@ -113,6 +116,7 @@ import chevronLeftIcon from '@/static/heroicons/mini/chevron-left.svg?inline';
 import chevronRightIcon from '@/static/heroicons/mini/chevron-right.svg?inline';
 import bookmarkIcon from '@/static/heroicons/mini/bookmark.svg?inline';
 import bookmarkSlashIcon from '@/static/heroicons/mini/bookmark-slash.svg?inline';
+import shareIcon from '@/static/heroicons/mini/share.svg?inline';
 export default {
   components: { 
     arrowlongleftIcon,
@@ -123,6 +127,7 @@ export default {
     chevronRightIcon,
     bookmarkIcon,
     bookmarkSlashIcon,
+    shareIcon
   },
   data() {
     return {
@@ -225,7 +230,7 @@ export default {
       if (navigator.clipboard) {
         navigator.clipboard.writeText(verseToCopy)
           .then(() => {
-            this.$toast.success("Copiado!", {
+            this.$toast.success("Copiado com sucesso!", {
               position: "top-right",
               timeout: 3000,
               closeOnClick: true,
@@ -243,6 +248,62 @@ export default {
           })
           .catch(err => {
             console.error('Erro ao copiar os versículos:', err);
+          });
+      } else {
+        console.log('A API Clipboard não é suportada neste navegador.');
+      }
+    },
+    shareVerse() {
+      const bookNumber = this.getBook?.book_number;
+      const chapterNumber = this.getChapter;
+      const sortedSelectedVerses = [...this.selectedVerse].sort((a, b) => a.verse - b.verse);
+
+      let referenceGroups = [];
+      let currentGroup = [];
+      sortedSelectedVerses.forEach((verse, index) => {
+        if (currentGroup.length === 0) {
+          currentGroup.push(verse.verse);
+        } else {
+          const lastVerseInGroup = currentGroup[currentGroup.length - 1];
+          if (verse.verse === lastVerseInGroup + 1) {
+            currentGroup.push(verse.verse);
+          } else {
+            referenceGroups.push(currentGroup);
+            currentGroup = [verse.verse];
+          }
+        }
+        if (index === sortedSelectedVerses.length - 1) {
+          referenceGroups.push(currentGroup);
+        }
+      });
+
+      const reference = referenceGroups.map(group => {
+        return group.length > 1 ? `${group[0]}-${group[group.length - 1]}` : `${group[0]}`;
+      }).join(',');
+
+      const shareURL = `${window.location.origin}/shared?book=${bookNumber}&chapter=${chapterNumber}&verse=${reference}`;
+
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(shareURL)
+          .then(() => {
+            this.$toast.success("Copiado com sucesso!", {
+              position: "top-right",
+              timeout: 3000,
+              closeOnClick: true,
+              pauseOnFocusLoss: true,
+              pauseOnHover: true,
+              draggable: true,
+              draggablePercent: 0.6,
+              showCloseButtonOnHover: false,
+              hideProgressBar: true,
+              closeButton: "button",
+              icon: true,
+              rtl: false
+            });
+            this.cancelSelected();
+          })
+          .catch(err => {
+            console.error('Erro ao copiar o link de compartilhamento:', err);
           });
       } else {
         console.log('A API Clipboard não é suportada neste navegador.');
@@ -385,13 +446,5 @@ export default {
 </script>
 
 <style>
-.superscript {
-  vertical-align: super;
-  font-size: smaller;
-  @apply text-gray-600 dark:text-gray-400;
-}
 
-.j-tag {
-  @apply text-red-500;
-}
 </style>
