@@ -24,6 +24,7 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    '@/assets/css/main.css',
     '@/assets/css/scrollbar.css',
     '@/assets/css/tailwind.css',
   ],

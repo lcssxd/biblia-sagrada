@@ -1,0 +1,9 @@
+.superscript {
+  vertical-align: super;
+  font-size: smaller;
+  @apply text-gray-600 dark:text-gray-400;
+}
+
+.j-tag {
+  @apply text-red-500;
+}
