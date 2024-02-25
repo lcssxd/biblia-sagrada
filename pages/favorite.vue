@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col h-full overflow-hidden">
     <Header>
-      <span>{{ title }}</span>
+      <h1 class="text-lg">{{ title }}</h1>
     </Header>
     <div class="flex flex-col overflow-y-auto h-full">
       <div v-if="loading" class="h-full bg-gray-300 dark:bg-gray-700 animate-pulse"></div>

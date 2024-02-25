@@ -5,7 +5,7 @@
         <button v-if="getBook && (getChapter || !getChapter )" class="cursor-pointer outline-none" @click.prevent="returnMenu">
           <arrowlongleftIcon class="w-5 h-5" />
         </button>
-        <h1>{{ currentName }}</h1>
+        <h1 class="text-lg">{{ currentName }}</h1>
       </div>
       <Transition name="fade" mode="out-in">
         <div v-if="getBook && getChapter && selectedVerse && selectedVerse.length > 0" class="flex items-center space-x-3">

@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col h-full overflow-hidden">
     <Header>
-      <span>{{ title }}</span>
+      <h1 class="text-lg">{{ title }}</h1>
     </Header>
     <fieldset class="text-gray-800 dark:text-gray-50 px-2">
       <label for="Search" class="hidden">Procurar</label>

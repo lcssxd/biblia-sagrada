@@ -4,7 +4,7 @@
       <NuxtLink to="/settings" class="flex items-center cursor-pointer outline-none">
         <arrowlongleftIcon class="w-5 h-5" />
       </NuxtLink>
-      <span>{{ title }}</span>
+      <h1 class="text-lg">{{ title }}</h1>
     </Header>
     <div class="space-y-3 px-2">
       <div v-for="(item, index) in abouts" :key="index">

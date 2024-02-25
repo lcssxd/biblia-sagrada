@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col h-full justify-between overflow-hidden">
     <Header>
-      <span>{{ title }}</span>
+      <h1 class="text-lg">{{ title }}</h1>
     </Header>
     <div class="overflow-y-auto h-full">
       <div class="flex flex-col">
