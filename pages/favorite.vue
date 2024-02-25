@@ -69,7 +69,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['UPDATE_VERSION', 'UPDATE_FAVORITE_VERSE', 'SET_BOOK', 'SET_CHAPTER']),
+    ...mapMutations(['UPDATE_VERSION', 'UPDATE_FAVORITE_VERSE', 'SET_BOOK', 'SET_CHAPTER', 'SEARCH_VERSE']),
     ...mapActions(['toggleFavoriteVerse']),
     async loadVersionFiles() {
       const version = this.getVersion;
@@ -124,8 +124,10 @@ export default {
     },
     goToText(verseItem) {
       const foundBook = this.books.find(item => item.book_number === verseItem.book_number);
+      this.cancelSelected()
       this.SET_BOOK(foundBook)
       this.SET_CHAPTER(verseItem.chapter)
+      this.SEARCH_VERSE(verseItem)
       this.$router.push('/bible');
     },
     changeTags(text) {
@@ -136,6 +138,9 @@ export default {
     removeTags(text) {
       const cleanedText = text.replace(/<pb\/>|<f>.*?<\/f>|<t>|<\/t>|<br\/>|<x>.*?<\/x>|<J>|<\/J>/g, '').replace(/\s{2,}/g, ' ');
       return cleanedText;
+    },
+    cancelSelected() {
+      this.SEARCH_VERSE([]);     
     }
   }
 }

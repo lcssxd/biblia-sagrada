@@ -249,9 +249,8 @@ export default {
       }
     },
     cancelSelected() {
-      const cleanSelected = []
-      this.selectedVerse = cleanSelected
-      this.SEARCH_VERSE(cleanSelected)
+      this.selectedVerse = []
+      this.SEARCH_VERSE(this.selectedVerse);
     },
     nextChapter() {
       if(this.getChapter < this.uniqueChapters.length) {

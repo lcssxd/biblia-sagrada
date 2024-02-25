@@ -86,7 +86,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getVersion']),
+    ...mapGetters(['getVersion', 'getSearchVerse']),
   },
   methods: {
     ...mapMutations(['UPDATE_VERSION', 'SET_BOOK', 'SET_CHAPTER', 'SEARCH_VERSE']),
@@ -123,6 +123,7 @@ export default {
     },
     goToText(verseItem) {
       const foundBook = this.books.find(item => item.book_number === verseItem.book_number);
+      this.cancelSelected()
       this.SET_BOOK(foundBook)
       this.SET_CHAPTER(verseItem.chapter)
       this.SEARCH_VERSE(verseItem)
@@ -132,7 +133,10 @@ export default {
       const styledText = text.replace(/<J>(.*?)<\/J>/g, '<span class="j-tag">$1</span>');
       const cleanedText = styledText.replace(/<pb\/>|<f>.*?<\/f>|<t>|<\/t>|<br\/>|<x>.*?<\/x>/g, '').replace(/\s{2,}/g, ' ');
       return cleanedText;
-    }
+    },
+    cancelSelected() {
+      this.SEARCH_VERSE([]);   
+    },
   }
 }
 </script>
