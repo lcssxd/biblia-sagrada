@@ -30,10 +30,6 @@ Se você sentir vontade de contribuir com o desenvolvimento deste aplicativo, fi
 - **Documentação**: Melhore a documentação do projeto.
 - **Feedback**: Compartilhe suas ideias e sugestões para tornar o aplicativo ainda melhor.
 
-### Chave PIX Aleatória
-
-- Se você desejar apoiar financeiramente o projeto, você pode utilizar a seguinte chave PIX aleatória: **d4289062-602d-4931-82a2-9a0eb3a6a288**
-
 ## Configuração do Cliente
 
 Para configurar o cliente do aplicativo, siga os passos abaixo:
