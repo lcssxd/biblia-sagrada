@@ -1,7 +1,10 @@
 <template>
   <div class="flex flex-col h-full overflow-hidden">
-    <Header>
+    <Header class="flex items-center justify-between">
       <h1 class="text-lg">{{ title }}</h1>
+      <button v-if="!loading && filteredVerses && filteredVerses.length > 0" class="cursor-pointer outline-none" @click.prevent="copyVerse()">
+        <copyIcon class="w-5 h-5" />
+      </button>
     </Header>
     <div class="flex flex-col overflow-y-auto h-full">
       <div v-if="loading" class="h-full bg-gray-300 dark:bg-gray-700 animate-pulse"></div>
@@ -10,13 +13,6 @@
           {{ getBookAndChapterName }}
         </span>
         <div v-for="(item, index) in filteredVerses" :key="index">
-          <!-- <div class="flex items-center justify-between">
-            <div class="flex items-center space-x-2">
-              <button class="cursor-pointer outline-none" @click.prevent="copyVerse(item)">
-                <copyIcon class="w-5 h-5" />
-              </button>
-            </div>
-          </div> -->
           <button class="px-2 text-left select-none outline-none" @click.prevent="goToText(item)">
             <span class="superscript">{{ item.verse }}</span> <span v-html="changeTags(item.text)"></span>
           </button>
@@ -119,26 +115,22 @@ export default {
   methods: {
     ...mapMutations(['UPDATE_VERSION', 'SET_BOOK', 'SET_CHAPTER', 'SEARCH_VERSE']),
     addSharedVerses() {
-      const currentBook = Number(this.$route.query.book);
-      const currentChapter = Number(this.$route.query.chapter);
-      const verseQuery = this.$route.query.verse;
-
-      const verseParts = verseQuery.split(',').map(part => part.trim());
+      const verseParts = this.verseQuery.split(',').map(part => part.trim());
 
       verseParts.forEach(part => {
         if (part.includes('-')) {
           const [start, end] = part.split('-').map(Number);
           for (let verse = start; verse <= end; verse++) {
             this.shared.push({
-              "book_number": currentBook,
-              "chapter": currentChapter,
+              "book_number": this.currentBook,
+              "chapter": this.currentChapter,
               "verse": verse
             });
           }
         } else {
           this.shared.push({
-            "book_number": currentBook,
-            "chapter": currentChapter,
+            "book_number": this.currentBook,
+            "chapter": this.currentChapter,
             "verse": Number(part)
           });
         }
@@ -154,8 +146,10 @@ export default {
       this.verses = verses.default;
       this.loading = false;
     },
-    copyVerse(verseItem) {
-      let verseToCopy = `"${this.removeTags(verseItem.text)}" (${this.getBookAndChapterName})`;
+    copyVerse() {
+      const sortedSelectedVerses = [...this.filteredVerses].sort((a, b) => a.verse - b.verse);
+      const versesText = this.removeTags(sortedSelectedVerses.map(verseItem => `${verseItem.verse} ${verseItem.text}`).join(' '));
+      const verseToCopy = `"${versesText}" (${this.getBookAndChapterName})`;
 
       if (navigator.clipboard) {
         navigator.clipboard.writeText(verseToCopy)
