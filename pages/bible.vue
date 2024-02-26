@@ -72,7 +72,10 @@
               <div class="flex flex-col space-y-2 overflow-y-auto h-full relative" ref="scrollContainer">
                 <div class="flex flex-col mb-auto">
                   <div v-for="verseItem in filteredChapter" :key="verseItem.id" class="flex flex-col">
-                    <span v-if="getUniqueVerseTitles(verseItem) && getUniqueVerseTitles(verseItem).length > 0" class="text-center font-bold select-none text-black dark:text-white mt-5">{{ removeTagsTitle(getUniqueVerseTitles(verseItem).join('')) }}</span>
+                    <span 
+                      v-if="getUniqueVerseTitles(verseItem) && getUniqueVerseTitles(verseItem).length > 0"
+                      class="text-center font-bold select-none text-black dark:text-white mt-5"
+                    >{{ removeTagsTitle(getUniqueVerseTitles(verseItem).join('')) }}</span>
                     <button
                       v-show="verseItem.text !== ''"
                       class="px-2 text-left select-none outline-none mb-auto transition duration-200"
@@ -363,7 +366,7 @@ export default {
       return cleanedText;
     },
     removeTagsTitle(text) {
-      const cleanedText = text.replace(/<pb\/>|<f>.*?<\/f>|<t>|<\/t>|<br\/>|<x>.*?<\/x>|<J>|<\/J>|—|;/g, '').replace(/\s{2,}/g, ' ');
+      const cleanedText = text.replace(/<pb\/>|<f>.*?<\/f>|<t>|<\/t>|<br\/>|<x>.*?<\/x>|<J>|<\/J>|—|;|,/g, '').replace(/\s{2,}/g, ' ');
       return cleanedText;
     },
     scrollToSelectedVerse() {
