@@ -256,10 +256,11 @@ export default {
         console.log('A API Clipboard não é suportada neste navegador.');
       }
     },
-    shareVerse() {
+    async shareVerse() {
       const bookNumber = this.getBook?.book_number;
       const chapterNumber = this.getChapter;
       const sortedSelectedVerses = [...this.selectedVerse].sort((a, b) => a.verse - b.verse);
+      const versesText = this.removeTags(sortedSelectedVerses.map(verseItem => `${verseItem.verse} ${verseItem.text}`).join(' '));
 
       let referenceGroups = [];
       let currentGroup = [];
@@ -284,32 +285,21 @@ export default {
         return group.length > 1 ? `${group[0]}-${group[group.length - 1]}` : `${group[0]}`;
       }).join(',');
 
+      const verseToCopy = `"${versesText}" (${this.currentName}:${reference})`;
+
       const shareURL = `${window.location.origin}/shared?book=${bookNumber}&chapter=${chapterNumber}&verse=${reference}`;
 
-      if (navigator.clipboard) {
-        navigator.clipboard.writeText(shareURL)
-          .then(() => {
-            this.$toast.success("Copiado com sucesso!", {
-              position: "top-right",
-              timeout: 3000,
-              closeOnClick: true,
-              pauseOnFocusLoss: true,
-              pauseOnHover: true,
-              draggable: true,
-              draggablePercent: 0.6,
-              showCloseButtonOnHover: false,
-              hideProgressBar: true,
-              closeButton: "button",
-              icon: true,
-              rtl: false
-            });
-            this.cancelSelected();
-          })
-          .catch(err => {
-            console.error('Erro ao copiar o link de compartilhamento:', err);
-          });
-      } else {
-        console.log('A API Clipboard não é suportada neste navegador.');
+      const shareData = {
+        title: `(${this.currentName}:${reference})`,
+        text: verseToCopy,
+        url: shareURL,
+      };
+
+      try {
+        await navigator.share(shareData);
+        this.cancelSelected();
+      } catch (err) {
+        console.error('Erro ao compartilhar:', err);
       }
     },
     cancelSelected() {
