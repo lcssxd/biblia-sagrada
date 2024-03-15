@@ -130,8 +130,11 @@ export default {
       this.$router.push('/bible');
     },
     changeTags(text) {
-      const styledText = text.replace(/<J>(.*?)<\/J>/g, '<span class="j-tag">$1</span>');
+      const regex = new RegExp(`(${this.name})`, 'gi');
+      const highlightedText = text.replace(regex, `<span class="bg-gray-300 dark:bg-gray-600">$1</span>`);
+      const styledText = highlightedText.replace(/<J>(.*?)<\/J>/g, '<span class="j-tag">$1</span>');
       const cleanedText = styledText.replace(/<pb\/>|<f>.*?<\/f>|<t>|<\/t>|<br\/>|<x>.*?<\/x>/g, '').replace(/\s{2,}/g, ' ');
+
       return cleanedText;
     },
     cancelSelected() {
