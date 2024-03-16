@@ -90,6 +90,10 @@ export default {
           title: 'Almeida Revista e Atualizada - 1993',
         },
         {
+          id: 'NAA',
+          title: 'Nova Almeida Atualizada - 2017',
+        },
+        {
           id: 'NTLH',
           title: 'Nova Tradução na Linguagem de Hoje - 1988',
         }
