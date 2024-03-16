@@ -137,7 +137,6 @@ export default {
       loading: true,
       books: null,
       info: null,
-      introductions: null,
       stories: null,
       verses: null,
       filteredChapters: [],
@@ -163,16 +162,14 @@ export default {
     ...mapActions(['toggleFavoriteVerse']),
     async loadVersionFiles() {
       const version = this.getVersion;
-      const [books, info, introductions, stories, verses] = await Promise.all([
+      const [books, info, stories, verses] = await Promise.all([
         import(`@/assets/versions/books.json`),
         import(`@/assets/versions/${version}/info.json`),
-        import(`@/assets/versions/${version}/introductions.json`),
         import(`@/assets/versions/${version}/stories.json`),
         import(`@/assets/versions/${version}/verses.json`)
       ]);
       this.books = books.default;
       this.info = info.default;
-      this.introductions = introductions.default;
       this.stories = stories.default;
       this.verses = verses.default;
       this.loading = false;
