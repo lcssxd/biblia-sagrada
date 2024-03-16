@@ -1,34 +1,6 @@
 [
-    {
-        "name": "description",
-        "value": "Nova Tradução na Linguagem de Hoje, 2000"
-    },
-    {
-        "name": "language",
-        "value": "pt"
-    },
-    {
-        "name": "chapter_string",
-        "value": "Capítulo"
-    },
-    {
-        "name": "chapter_string_ps",
-        "value": "Salmo"
-    },
-    {
-        "name": "introduction_string",
-        "value": "Introdução"
-    },
-    {
-        "name": "russian_numbering",
-        "value": "false"
-    },
-    {
-        "name": "contains_accents",
-        "value": "true"
-    },
-    {
-        "name": "detailed_info",
-        "value": "NTLH © 2000 Sociedade Bíblica do Brasil. Todos os direitos reservados.\n<br/>Portuguese (Brazil) - Português (Brasil)"
-    }
+  {
+    "name": "detailed_info",
+    "value": "NTLH © 2000. Sociedade Biblica do Brasil. Todos os direitos reservados."
+  }
 ]
