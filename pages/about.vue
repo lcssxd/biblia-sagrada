@@ -6,13 +6,19 @@
       </NuxtLink>
       <h1 class="text-lg">{{ title }}</h1>
     </Header>
-    <div class="space-y-3 px-2">
-      <div v-for="(item, index) in abouts" :key="index">
-        <h2 class="font-semibold text-lg select-none">{{ item.name }}</h2>
-        <span v-for="(obj, index) in item.desc" :key="index" class="flex flex-col">
-          <span v-if="obj != abouts[3].desc[0]" class="text-sm" :class="{ 'select-none' : obj != abouts[3].desc[0] }">{{ obj }}</span>
-          <a v-else :href="obj" class="text-sm w-fit" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-        </span>
+    <div class="overflow-y-auto h-full">
+      <div class="flex flex-col">
+        <div v-for="(item, index) in abouts" :key="index" class="flex flex-col">
+          <span class="p-2 text-center font-medium text-base select-none bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-100">{{ item.title }}</span>
+          <span v-if="item.type === 'text'" class="p-2 outline-none select-none text-left text-sm">{{ item.value }}</span>
+          <div v-if="item.type === 'array'" class="flex flex-col divide-y divide-gray-200 dark:divide-gray-600 text-sm">
+            <span v-for="array in item.value" :key="array" class="p-2 outline-none select-none text-left text-sm">{{ array }}</span>
+          </div>
+          <a v-if="item.type === 'link'" :href="item.value" class="flex items-center space-x-1 p-2 outline-none select-none text-left text-sm w-fit" target="_blank" rel="noopener noreferrer">
+            <span>{{ item.name }}</span>
+            <newWindowIcon class="w-4 h-4" />
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -20,27 +26,41 @@
 
 <script>
 import arrowlongleftIcon from '@/static/heroicons/mini/arrow-long-left.svg?inline'
+import newWindowIcon from '@/static/svgrepo/new-window.svg?inline'
 export default {
-  components: { arrowlongleftIcon },
+  components: { 
+    arrowlongleftIcon,
+    newWindowIcon
+  },
   data() {
     return {
       title: 'Sobre',
       abouts: [
-        {
-          name: 'Versão',
-          desc: ['1.0.0']
+        { 
+          type: 'text',
+          title: 'Versão',
+          value: '1.0.0'
         },
-        {
-          name: 'Traduções',
-          desc: ['Almeida Revista e Atualizada (ARA)', 'Nova Tradução na Linguagem de Hoje (NTLH)']
+        { 
+          type: 'array',
+          title: 'Traduções',
+          value: [
+            'Almeida Revista e Atualizada, 1993',
+            'Nova Almeida Atualizadam, 2017',
+            'Nova Tradução na Linguagem de Hoje, 2000'
+          ] 
         },
-        {
-          name: 'Desenvolvedor',
-          desc: ['Luan Soares']
+        { 
+          type: 'link',
+          title: 'Repositório',
+          name: 'GithHub',
+          value: 'https://github.com/lcssxd/biblia-sagrada'
         },
-        {
-          name: 'Contato',
-          desc: ['https://wa.me/+5583993577540/']
+        { 
+          type: 'link',
+          title: 'Contato',
+          name: 'WhatApp',
+          value: 'https://wa.me/+5583993577540/'
         }
       ]
     }
