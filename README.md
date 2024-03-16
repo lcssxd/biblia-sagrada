@@ -6,13 +6,14 @@ Este é um aplicativo da Bíblia Sagrada desenvolvido por **Luan Soares**. Para 
 
 O aplicativo da Bíblia Sagrada oferece várias funcionalidades úteis, incluindo:
 
-- Pesquisa de textos bíblicos.
+- Pesquisa de textos bíblicos com palavra destacada.
 - Capacidade de salvar versículos.
 - Seleção fácil de versículos.
 - Navegação rápida para o próximo e o versículo anterior.
 - Opções de escolha de fontes.
 - Disponibilidade das versões ARA (Almeida Revista e Atualizada), NAA (Nova Almeida Atualizada) e NTLH (Nova Tradução na Linguagem de Hoje).
 - Temas claros e escuros para personalização.
+- Exporar e importar preferências
 
 ## Frameworks Utilizados
 

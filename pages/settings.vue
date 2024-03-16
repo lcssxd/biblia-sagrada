@@ -60,6 +60,18 @@
         </div>
       </div>
       <div class="flex flex-col">
+        <span class="p-2 text-center font-medium text-base select-none bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-100">Exportar/Importar Preferências</span>
+        <div class="flex flex-col divide-y divide-gray-200 dark:divide-gray-600 text-sm">
+          <button class="relative p-2 outline-none select-none text-left" @click.prevent="exportSettings()">
+            <span class="text-sm">Exportar</span>
+          </button>
+          <input ref="importSets" type="file" class="hidden" @change="handleFileUpload($event)">
+          <button class="relative p-2 outline-none select-none text-left" @click.prevent="importSettings()">
+            <span class="text-sm">Importar</span>
+          </button>
+        </div>
+      </div>
+      <div class="flex flex-col">
         <span class="p-2 text-center font-medium text-base select-none bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-100">Informações</span>
         <div class="flex flex-col divide-y divide-gray-200 dark:divide-gray-600 text-sm">
           <NuxtLink 
@@ -83,6 +95,10 @@ export default {
   data() {
     return {
       title: 'Configurações',
+      version: null,
+      thema: null,
+      font_size: null,
+      font_family: null,
       versions: [
         {
           id: 'ARA',
@@ -121,11 +137,14 @@ export default {
           name: 'Mono',
         },
       ],
-      fonts_size: ['text-xs', 'text-sm', 'text-base', 'text-lg', 'text-xl', 'text-2xl'],
-      version: null,
-      thema: null,
-      font_size: null,
-      font_family: null,
+      fonts_size: [
+        'text-xs',
+        'text-sm',
+        'text-base',
+        'text-lg',
+        'text-xl',
+        'text-2xl'
+      ]
     }
   },
   mounted() {
@@ -134,7 +153,13 @@ export default {
     this.updateFontFamily()
   },
   methods: {
-    ...mapMutations(['SET_VERSION', 'SET_THEMA', 'SET_FONT_SIZE', 'SET_FONT_FAMILY']),
+    ...mapMutations([
+      'SET_VERSION',
+      'SET_THEMA',
+      'SET_FONT_SIZE',
+      'SET_FONT_FAMILY',
+      'FAVORITE_VERSE'
+    ]),
     changeVersion(version) {
       this.SET_VERSION(version)
       this.updateVersion()
@@ -179,13 +204,68 @@ export default {
     updateFontFamily() {
       this.font_family = this.getFontFamily
     },
+    exportSettings() {
+      const data = {
+        version: this.getStoreState.version,
+        thema: this.getStoreState.thema,
+        font_size: this.getStoreState.font_size,
+        font_family: this.getStoreState.font_family,
+        favorite_verse: this.getStoreState.favorite_verse
+      }
+      const jsonString = JSON.stringify(data);
+      const blob = new Blob([jsonString], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'biblia-sagrada-export.json');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    },
+    importSettings() {
+      this.getRefImportSets.click()
+    },
+    handleFileUpload(event) {
+      const fileReader = new FileReader();
+      fileReader.readAsText(event.target.files[0], "UTF-8");
+      fileReader.onload = e => {
+        try {
+          const importedSettings = JSON.parse(e.target.result);
+          this.SET_VERSION(importedSettings.version);
+          this.SET_THEMA(importedSettings.thema);
+          this.SET_FONT_SIZE(importedSettings.font_size);
+          this.SET_FONT_FAMILY(importedSettings.font_family);
+          if (importedSettings.favorite_verse) {
+            this.FAVORITE_VERSE(importedSettings.favorite_verse);
+          }
+          this.updateVersion();
+          this.updateThema();
+          this.updateFontSize();
+          this.updateFontFamily();
+        } catch (error) {
+          console.error("Error parsing JSON:", error);
+        }
+      };
+    }
   },
   computed: {
-    ...mapGetters(['getVersion', 'getThema', 'getFontSize', 'getFontFamily']),
+    ...mapGetters([
+      'getVersion',
+      'getThema',
+      'getFontSize',
+      'getFontFamily'
+    ]),
     isFontSize() {
       const fonts = this.fonts_size;
       const fontIndex = fonts.indexOf(this.getFontSize);
       return (fontIndex * 2) + 10
+    },
+    getStoreState() {
+      return this.$store.state
+    },
+    getRefImportSets() {
+      return this.$refs.importSets
     }
   }
 }
