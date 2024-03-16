@@ -21,7 +21,7 @@
             v-for="(item, index) in fonts_family" :key="index"
             class="relative p-2 outline-none select-none text-left"
             @click.prevent="changeFontFamily(item.id)"
-            >
+          >
             <span>{{ item.name }}</span>
             <div v-if="font_family === item.id" class="absolute top-3 right-2 z-0">
               <checkIcon class="w-4 h-4" />
@@ -36,7 +36,7 @@
             v-for="(item, index) in versions" :key="index"
             class="relative p-2 outline-none select-none text-left"
             @click.prevent="changeVersion(item.id)"
-            >
+          >
             <span class="text-sm">{{ item.id }} - {{ item.title }}</span>
             <div v-if="version === item.id" class="absolute top-3 right-2 z-0">
               <checkIcon class="w-4 h-4" />
@@ -51,7 +51,7 @@
             v-for="(item, index) in themas" :key="index"
             class="relative p-2 outline-none select-none text-left"
             @click.prevent="changeThema(item.id)"
-            >
+          >
             <span class="text-sm">{{ item.name }}</span>
             <div v-if="thema === item.id" class="absolute top-3 right-2 z-0">
               <checkIcon class="w-4 h-4" />
@@ -64,9 +64,8 @@
         <div class="flex flex-col divide-y divide-gray-200 dark:divide-gray-600 text-sm">
           <NuxtLink 
             to="/about"
-            class="p-2 outline-none select-none text-left"
-            ><span class="text-sm">Sobre</span>
-          </NuxtLink>
+            class="p-2 outline-none select-none text-left text-sm"
+          >Sobre</NuxtLink>
         </div>
       </div>
     </div>
