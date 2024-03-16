@@ -64,6 +64,7 @@ export default {
       books: null,
       searchResults: null,
       searchTimeout: null,
+      searchTextSelected: '',
     }
   },
   async mounted() {
@@ -75,6 +76,7 @@ export default {
       if(val === '') {
         this.loading = false
         this.searchResults = null
+        this.searchTextSelected = ''
       } else {
         if(this.searchTimeout) {
           clearTimeout(this.searchTimeout)
@@ -107,6 +109,7 @@ export default {
         v.text.toLowerCase().includes(this.name.toLowerCase())
       )
       this.loading = false
+      this.searchTextSelected = this.name
     },
     getBookAndChapterName(bookId, chapter, verse) {
       if (!this.books || bookId === undefined || chapter === undefined || verse === undefined) {
@@ -130,7 +133,7 @@ export default {
       this.$router.push('/bible');
     },
     changeTags(text) {
-      const regex = new RegExp(`(${this.name})`, 'gi');
+      const regex = new RegExp(`(${this.searchTextSelected})`, 'gi');
       const highlightedText = text.replace(regex, `<span class="bg-gray-300 dark:bg-gray-600">$1</span>`);
       const styledText = highlightedText.replace(/<J>(.*?)<\/J>/g, '<span class="j-tag">$1</span>');
       const cleanedText = styledText.replace(/<pb\/>|<f>.*?<\/f>|<t>|<\/t>|<br\/>|<x>.*?<\/x>/g, '').replace(/\s{2,}/g, ' ');
