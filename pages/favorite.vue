@@ -14,7 +14,7 @@
                 <copyIcon class="w-5 h-5" />
               </button>
               <button class="cursor-pointer outline-none" @click.prevent="toggleFavoriteVerse(item)">
-                <trashIcon class="w-5 h-5" />
+                <bookmarkSlashIcon class="w-5 h-5" />
               </button>
             </div>
           </div>
@@ -35,10 +35,10 @@
 import { mapGetters, mapMutations, mapActions } from 'vuex'
 import arrowlongleftIcon from '@/static/heroicons/mini/arrow-long-left.svg?inline'
 import copyIcon from '@/static/svgrepo/copy.svg?inline';
-import trashIcon from '@/static/heroicons/mini/trash.svg?inline';
 import bookmarkIcon from '@/static/heroicons/mini/bookmark.svg?inline';
+import bookmarkSlashIcon from '@/static/heroicons/mini/bookmark-slash.svg?inline';
 export default {
-  components: { arrowlongleftIcon, copyIcon, trashIcon, bookmarkIcon },
+  components: { arrowlongleftIcon, copyIcon, bookmarkIcon, bookmarkSlashIcon },
   data() {
     return {
       title: 'Favoritos',
