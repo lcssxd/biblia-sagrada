@@ -148,9 +148,7 @@ export default {
     }
   },
   mounted() {
-    this.updateVersion()
-    this.updateThema()
-    this.updateFontFamily()
+    this.updates()
   },
   methods: {
     ...mapMutations([
@@ -158,7 +156,7 @@ export default {
       'SET_THEMA',
       'SET_FONT_SIZE',
       'SET_FONT_FAMILY',
-      'FAVORITE_VERSE'
+      'UPDATE_FAVORITE_VERSE'
     ]),
     changeVersion(version) {
       this.SET_VERSION(version)
@@ -224,7 +222,7 @@ export default {
       URL.revokeObjectURL(url);
     },
     importSettings() {
-      this.getRefImportSets.click()
+      this.$refs.importSets.click();
     },
     handleFileUpload(event) {
       const fileReader = new FileReader();
@@ -236,17 +234,21 @@ export default {
           this.SET_THEMA(importedSettings.thema);
           this.SET_FONT_SIZE(importedSettings.font_size);
           this.SET_FONT_FAMILY(importedSettings.font_family);
-          if (importedSettings.favorite_verse) {
-            this.FAVORITE_VERSE(importedSettings.favorite_verse);
-          }
-          this.updateVersion();
-          this.updateThema();
-          this.updateFontSize();
-          this.updateFontFamily();
+          this.FAVORITE_VERSE(importedSettings.favorite_verse);
+          this.updates()
+          this.$toast.success("Preferências atualizadas");
         } catch (error) {
           console.error("Error parsing JSON:", error);
+          this.$toast.error("Formato incompatível");
         }
       };
+    },
+    updates() {
+      this.updateVersion()
+      this.updateThema()
+      this.updateFontSize()
+      this.updateFontFamily()
+      this.UPDATE_FAVORITE_VERSE()
     }
   },
   computed: {
@@ -263,9 +265,6 @@ export default {
     },
     getStoreState() {
       return this.$store.state
-    },
-    getRefImportSets() {
-      return this.$refs.importSets
     }
   }
 }
