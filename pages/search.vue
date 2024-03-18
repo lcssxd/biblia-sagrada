@@ -14,7 +14,7 @@
           name="Search"
           placeholder="Procurar..."
           v-model="name"
-          class="w-full py-2 pl-10 pr-2 text-sm border-b bg-transparent border-gray-200 dark:border-gray-600 old:border-brown-300 placeholder-color outline-none"
+          class="w-full py-2 pl-10 pr-2 text-sm border-b bg-transparent border-gray-200 dark:border-gray-600 old:border-brown-500 placeholder-color outline-none"
           required
           autofocus
           autocomplete="off"
@@ -29,7 +29,7 @@
           <p class="text-lg select-none">Busque por um texto</p>
         </div>
         <div v-if="loading" class="flex items-center justify-center space-x-2">
-          <div v-for="index in 3" :key="index" class="w-4 h-4 rounded-full animate-pulse bg-gray-100 dark:bg-gray-700 old:bg-brown-700"></div>
+          <div v-for="index in 3" :key="index" class="w-4 h-4 rounded-full animate-pulse bg-gray-300 dark:bg-gray-700 old:bg-brown-700"></div>
         </div>
       </div>
       <div v-if="foundResults" class="divider-y">
@@ -169,6 +169,6 @@ export default {
 
 <style scoped>
 .flex-result {
-  @apply flex text-center text-gray-400 dark:text-gray-500 old:text-brown-500 p-2;
+  @apply flex text-center text-gray-400 dark:text-gray-500 old:text-brown-600 p-2;
 }
 </style>

@@ -9,11 +9,11 @@
 }
 
 .title {
-  @apply p-2 text-center font-medium text-base select-none bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-100 old:bg-brown-300 old:text-brown-700
+  @apply p-2 text-center font-medium text-base select-none bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-100 old:bg-brown-600 old:text-brown-200
 }
 
 .text-color {
-  @apply text-gray-800 dark:text-gray-50 old:text-brown-800
+  @apply text-gray-800 dark:text-gray-50 old:text-brown-900
 }
 
 .text-color-title {
@@ -25,7 +25,7 @@
 }
 
 .divider-y {
-  @apply flex flex-col divide-y divide-gray-200 dark:divide-gray-600 old:divide-brown-300
+  @apply flex flex-col divide-y divide-gray-200 dark:divide-gray-600 old:divide-brown-500
 }
 
 .selected-verse {

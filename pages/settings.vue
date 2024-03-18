@@ -33,9 +33,7 @@
             @click.prevent="changeFontFamily(item.id)"
           >
             <span>{{ item.name }}</span>
-            <div v-if="font_family === item.id" class="absolute top-3 right-2 z-0">
-              <checkIcon class="w-4 h-4" />
-            </div>
+            <Selected v-if="font_family === item.id" />
           </button>
         </div>
       </div>
@@ -48,9 +46,7 @@
             @click.prevent="changeVersion(item.id)"
           >
             <span class="text-sm">{{ item.id }} - {{ item.title }}</span>
-            <div v-if="version === item.id" class="absolute top-3 right-2 z-0">
-              <checkIcon class="w-4 h-4" />
-            </div>
+            <Selected v-if="version === item.id" />
           </button>
         </div>
       </div>
@@ -63,9 +59,7 @@
             @click.prevent="changeThema(item.id)"
           >
             <span class="text-sm">{{ item.name }}</span>
-            <div v-if="thema === item.id" class="absolute top-3 right-2 z-0">
-              <checkIcon class="w-4 h-4" />
-            </div>
+            <Selected v-if="thema === item.id" />
           </button>
         </div>
       </div>
@@ -96,12 +90,12 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
-import checkIcon from '@/static/heroicons/mini/check.svg?inline'
 import arrowlongleftIcon from '@/static/heroicons/mini/arrow-long-left.svg?inline'
 import arrowUpIcon from '@/static/heroicons/mini/arrow-up.svg?inline'
 import arrowDownIcon from '@/static/heroicons/mini/arrow-down.svg?inline'
+import Selected from '~/components/Selected.vue'
 export default {
-  components: { checkIcon, arrowlongleftIcon, arrowUpIcon, arrowDownIcon },
+  components: { arrowlongleftIcon, arrowUpIcon, arrowDownIcon, Selected },
   data() {
     return {
       title: 'Configurações',
