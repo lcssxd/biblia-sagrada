@@ -45,9 +45,11 @@ export default {
           type: 'array',
           title: 'Traduções',
           value: [
+            'Almeida Corrigida Fiel, 2011',
             'Almeida Revista e Atualizada, 1993',
             'Nova Almeida Atualizadam, 2017',
-            'Nova Tradução na Linguagem de Hoje, 2000'
+            'Nova Tradução na Linguagem de Hoje, 2000',
+            'Nova Versão Internacional, 1993'
           ] 
         },
         { 

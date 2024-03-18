@@ -46,7 +46,7 @@ export const mutations = {
   },
   UPDATE_VERSION(state) {
     const version = localStorage.getItem('version');
-    const validVersions = ['ARA', 'NAA', 'NTLH'];
+    const validVersions = ['ACF', 'ARA', 'NAA', 'NTLH', 'NVI'];
 
     if (validVersions.includes(version)) {
       state.version = version;
@@ -93,7 +93,7 @@ export const mutations = {
     state.favorite_verse = favorite_verse;
   },
   SET_VERSION(state, payload) {
-    const validVersions = ['ARA', 'NAA', 'NTLH'];
+    const validVersions = ['ACF', 'ARA', 'NAA', 'NTLH', 'NVI'];
 
     if (validVersions.includes(payload)) {
       state.version = payload;

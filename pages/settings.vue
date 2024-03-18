@@ -111,6 +111,10 @@ export default {
       font_family: null,
       versions: [
         {
+          id: 'ACF',
+          title: 'Almeida Corrigida Fiel - 2011',
+        },
+        {
           id: 'ARA',
           title: 'Almeida Revista e Atualizada - 1993',
         },
@@ -120,7 +124,11 @@ export default {
         },
         {
           id: 'NTLH',
-          title: 'Nova Tradução na Linguagem de Hoje - 1988',
+          title: 'Nova Tradução na Linguagem de Hoje - 2000',
+        },
+        {
+          id: 'NVI',
+          title: 'Nova Versão Internacional - 1993',
         }
       ],
       themas: [
