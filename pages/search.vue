@@ -23,16 +23,16 @@
       </div>
     </fieldset>
     <div class="overflow-y-auto h-full">
-      <div v-if="!loading && searchResults === null && searchTextSelected === ''" class="flex items-center justify-center h-full text-color">
-        <div v-if="emptyName" class="flex flex-col items-center space-y-4">
+      <div v-if="nothingSearch || loading" class="flex items-center justify-center h-full text-color">
+        <div v-if="nothingSearch" class="flex flex-col items-center space-y-4">
           <magnifyingGlassIcon class="w-16 h-16" />
           <p class="text-lg select-none">Busque por um texto</p>
         </div>
-        <div v-if="foundName" class="flex items-center justify-center space-x-2">
+        <div v-if="loading" class="flex items-center justify-center space-x-2">
           <div v-for="index in 3" :key="index" class="w-4 h-4 rounded-full animate-pulse bg-gray-100 dark:bg-gray-700 old:bg-brown-700"></div>
         </div>
       </div>
-      <div v-if="!loading && searchResults && searchResults.length > 0" class="divider-y">
+      <div v-if="foundResults" class="divider-y">
         <div class="flex-result">{{ searchResults.length }} resultados foram encontrados</div>
         <div v-for="(item, index) in searchResults" :key="index" class="flex items-center p-2">
           <button class="text-left select-none outline-none" @click.prevent="goToText(item)">
@@ -40,7 +40,7 @@
           </button>
         </div>
       </div>
-      <div v-if="!loading && searchResults && searchResults.length === 0">
+      <div v-if="notFoundResults">
         <div class="flex-result">Nenhum texto foi encontrado</div>
       </div>
     </div>
@@ -60,9 +60,9 @@ export default {
       loading: false,
       verses: null,
       books: null,
-      searchResults: null,
+      searchResults: [],
       searchTimeout: null,
-      searchTextSelected: '',
+      searchTextSelected: ''
     }
   },
   async mounted() {
@@ -70,18 +70,11 @@ export default {
     this.UPDATE_VERSION()
   },
   watch: {
-    name(val) {
-      if(val === '') {
-        this.loading = false
-        this.searchResults = null
-        this.searchTextSelected = ''
-      } else {
-        if(this.searchTimeout) {
-          clearTimeout(this.searchTimeout)
-        }
-        this.searchTimeout = setTimeout(() => {
-          this.searchText()
-        }, 1000)
+    name(newVal, oldVal) {
+      if (newVal === '') {
+        this.resetSearchState();
+      } else if (oldVal !== newVal) {
+        this.initiateSearchWithDebounce();
       }
     }
   },
@@ -92,6 +85,15 @@ export default {
     },
     foundName() {
       return this.name !== '' ? true : false
+    },
+    nothingSearch() {
+      return !this.loading && this.emptyName && this.searchResults && this.searchResults.length === 0 && this.searchTextSelected === ''
+    },
+    foundResults() {
+      return !this.loading && this.searchResults && this.searchResults.length > 0
+    },
+    notFoundResults() {
+      return !this.loading && this.searchResults && this.searchResults.length === 0
     }
   },
   methods: {
@@ -106,14 +108,13 @@ export default {
       this.verses = verses.default;
     },
     searchText() {
-      if (!this.name) return
-
-      this.loading = true
-      this.searchResults = this.verses.filter(v => 
-        v.text.toLowerCase().includes(this.name.toLowerCase())
-      )
-      this.loading = false
-      this.searchTextSelected = this.name
+      if(this.foundName) {
+        this.searchResults = this.verses.filter(v => 
+          v.text.toLowerCase().includes(this.name.toLowerCase())
+        )
+        this.loading = false
+        this.searchTextSelected = this.name
+      }
     },
     getBookAndChapterName(bookId, chapter, verse) {
       if (!this.books || bookId === undefined || chapter === undefined || verse === undefined) {
@@ -146,6 +147,21 @@ export default {
     },
     cancelSelected() {
       this.SEARCH_VERSE([]);   
+    },
+    resetSearchState() {
+      this.searchResults = [];
+      this.searchTimeout = null;
+      this.searchTextSelected = '';
+      this.loading = false;
+    },
+    initiateSearchWithDebounce() {
+      this.loading = true;
+      if (this.searchTimeout) {
+        clearTimeout(this.searchTimeout);
+      }
+      this.searchTimeout = setTimeout(() => {
+        this.searchText();
+      }, 1000);
     },
   }
 }

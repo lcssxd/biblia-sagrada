@@ -14,9 +14,9 @@
           <div v-if="item.type === 'array'" class="divider-y text-sm">
             <span v-for="array in item.value" :key="array" class="p-2 outline-none select-none text-left text-sm">{{ array }}</span>
           </div>
-          <a v-if="item.type === 'link'" :href="item.value" class="flex items-center space-x-1 p-2 outline-none select-none text-left text-sm w-fit" target="_blank" rel="noopener noreferrer">
-            <span>{{ item.name }}</span>
-            <newWindowIcon class="w-4 h-4" />
+          <a v-if="item.type === 'link'" :href="item.value" class="flex items-center space-x-1 p-2 outline-none select-none text-left w-fit" target="_blank" rel="noopener noreferrer">
+            <span class="text-sm">{{ item.name }}</span>
+            <newWindowIcon class="w-3 h-3" />
           </a>
         </div>
       </div>

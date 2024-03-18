@@ -178,6 +178,7 @@ export default {
       'SET_THEMA',
       'SET_FONT_SIZE',
       'SET_FONT_FAMILY',
+      'FAVORITE_VERSE',
       'UPDATE_FAVORITE_VERSE'
     ]),
     changeVersion(version) {
@@ -260,8 +261,8 @@ export default {
           this.updates()
           this.$toast.success("Preferências atualizadas");
         } catch (error) {
-          console.error("Error parsing JSON:", error);
           this.$toast.error("Formato incompatível");
+          console.error("Error parsing JSON:", error);
         }
       };
     },

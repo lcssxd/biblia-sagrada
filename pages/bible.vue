@@ -86,7 +86,7 @@
                       <span class="superscript">{{ verseItem.verse }}</span> <span v-html="changeTags(verseItem.text)"></span>
                     </button>
                   </div>
-                  <p class="mt-5 px-2 text-base text-gray-400 dark:text-gray-500 old:text-brown-700 select-none">{{ changeTags(getDetailedInfo) }}</p>
+                  <p class="mt-5 px-2 text-base text-gray-400 dark:text-gray-500 old:text-brown-700 select-none">{{ getDetailedInfo }}</p>
                 </div>
                 <div class="flex items-center justify-between sticky bottom-2 w-full px-5">
                   <button
@@ -164,16 +164,25 @@ export default {
     ...mapActions(['toggleFavoriteVerse']),
     async loadVersionFiles() {
       const version = this.getVersion;
-      const [books, info, stories, verses] = await Promise.all([
+      const [books, info] = await Promise.all([
         import(`@/assets/versions/books.json`),
-        import(`@/assets/versions/${version}/info.json`),
-        import(`@/assets/versions/${version}/stories.json`),
-        import(`@/assets/versions/${version}/verses.json`)
+        import(`@/assets/versions/infos.json`)
       ]);
       this.books = books.default;
       this.info = info.default;
-      this.stories = stories.default;
-      this.verses = verses.default;
+
+      if (this.isACFVersion) {
+        const verses = await import(`@/assets/versions/${version}/verses.json`);
+        this.verses = verses.default;
+      } else {
+        const [stories, verses] = await Promise.all([
+          import(`@/assets/versions/${version}/stories.json`),
+          import(`@/assets/versions/${version}/verses.json`)
+        ]);
+        this.stories = stories.default;
+        this.verses = verses.default;
+      }
+
       this.loading = false;
     },
     async returnMenu() {
@@ -313,7 +322,8 @@ export default {
       }
     },
     getUniqueVerseTitles(verseItem) {
-      const filteredStories = this.stories.filter(item =>
+      if(this.isACFVersion) return;
+      const filteredStories = this.stories?.filter(item =>
         item.book_number === verseItem.book_number &&
         item.chapter === verseItem.chapter &&
         item.verse === verseItem.verse
@@ -401,12 +411,9 @@ export default {
       return [...new Set(verses.map(verseItem => verseItem.chapter))];
     },
     getDetailedInfo() {
-      const info = this.info;
-
-      const detailedInfo = info?.find(item => item.name === "detailed_info");
-
-      if (detailedInfo) {
-        return detailedInfo.value;
+      if (this.info && this.info[this.getVersion]) {
+        let details = this.info[this.getVersion];
+        return `${details} Todos os direitos reservados.`;
       } else {
         return "Informação não encontrada";
       }
@@ -419,6 +426,9 @@ export default {
     },
     isLastChapter() {
       return this.getChapter === this.uniqueChapters.length ? true : false
+    },
+    isACFVersion() {
+      return this.getVersion === 'ACF' ? true : false
     }
   }
 };
