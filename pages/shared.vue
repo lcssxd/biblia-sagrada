@@ -7,7 +7,7 @@
       </button>
     </Header>
     <div class="flex flex-col overflow-y-auto h-full">
-      <div v-if="loading" class="h-full bg-gray-300 dark:bg-gray-700 animate-pulse"></div>
+      <LoadingPage v-if="loading" />
       <div v-if="!loading && filteredVerses && filteredVerses.length > 0" class="flex flex-col">
         <span class="text-center font-bold select-none text-color-title mt-5">
           {{ getBookAndChapterName }}
@@ -33,8 +33,9 @@ import { mapGetters, mapMutations } from 'vuex'
 import arrowlongleftIcon from '@/static/heroicons/mini/arrow-long-left.svg?inline'
 import copyIcon from '@/static/svgrepo/copy.svg?inline';
 import noSymbolIcon from '@/static/heroicons/mini/no-symbol.svg?inline';
+import LoadingPage from '~/components/Loading.vue'
 export default {
-  components: { arrowlongleftIcon, copyIcon, noSymbolIcon },
+  components: { arrowlongleftIcon, copyIcon, noSymbolIcon, LoadingPage },
   data() {
     return {
       title: 'Compartilhado',

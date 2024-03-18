@@ -34,7 +34,7 @@
       </Transition>
     </Header>
     <div class="relative overflow-y-auto h-full">
-      <div v-if="loading" class="h-full bg-gray-300 dark:bg-gray-700 animate-pulse"></div>
+      <LoadingPage v-if="loading" />
       <Transition name="fade" mode="out-in">
         <div class="h-full" :key="currentChapterKey">
           <div v-if="!getBook && !loading" class="h-full">
@@ -120,6 +120,7 @@ import chevronRightIcon from '@/static/heroicons/mini/chevron-right.svg?inline';
 import bookmarkIcon from '@/static/heroicons/mini/bookmark.svg?inline';
 import bookmarkSlashIcon from '@/static/heroicons/mini/bookmark-slash.svg?inline';
 import shareIcon from '@/static/heroicons/mini/share.svg?inline';
+import LoadingPage from '~/components/Loading.vue'
 export default {
   components: { 
     arrowlongleftIcon,
@@ -130,7 +131,8 @@ export default {
     chevronRightIcon,
     bookmarkIcon,
     bookmarkSlashIcon,
-    shareIcon
+    shareIcon,
+    LoadingPage
   },
   data() {
     return {

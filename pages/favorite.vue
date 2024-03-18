@@ -4,8 +4,8 @@
       <h1 class="text-lg">{{ title }}</h1>
     </Header>
     <div class="flex flex-col overflow-y-auto h-full">
-      <div v-if="loading" class="h-full bg-gray-300 dark:bg-gray-700 animate-pulse"></div>
-      <div v-if="!loading && filteredVerses && filteredVerses.length > 0" class="divide-y divide-gray-200 dark:divide-gray-600">
+      <LoadingPage v-if="loading" />
+      <div v-if="!loading && filteredVerses && filteredVerses.length > 0" class="divider-y">
         <div v-for="(item, index) in filteredVerses" :key="index" class="p-2">
           <div class="flex items-center justify-between">
             <span class="font-semibold select-none">{{ getBookAndChapterName(item.book_number, item.chapter, item.verse) }}</span>
@@ -37,8 +37,9 @@ import arrowlongleftIcon from '@/static/heroicons/mini/arrow-long-left.svg?inlin
 import copyIcon from '@/static/svgrepo/copy.svg?inline';
 import bookmarkIcon from '@/static/heroicons/mini/bookmark.svg?inline';
 import bookmarkSlashIcon from '@/static/heroicons/mini/bookmark-slash.svg?inline';
+import LoadingPage from '~/components/Loading.vue'
 export default {
-  components: { arrowlongleftIcon, copyIcon, bookmarkIcon, bookmarkSlashIcon },
+  components: { arrowlongleftIcon, copyIcon, bookmarkIcon, bookmarkSlashIcon, LoadingPage },
   data() {
     return {
       title: 'Favoritos',
