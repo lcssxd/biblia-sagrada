@@ -12,7 +12,7 @@ O aplicativo da Bíblia Sagrada oferece várias funcionalidades úteis, incluind
 - Navegação rápida para o próximo e o versículo anterior.
 - Opções de escolha de fontes.
 - Disponibilidade das versões ARA (Almeida Revista e Atualizada), NAA (Nova Almeida Atualizada) e NTLH (Nova Tradução na Linguagem de Hoje).
-- Temas claros, escuros e clássico para personalização.
+- Tema claro, escuro e clássico para personalização.
 - Exporar e importar preferências
 
 ## Frameworks Utilizados
