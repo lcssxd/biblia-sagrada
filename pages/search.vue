@@ -23,19 +23,17 @@
       </div>
     </fieldset>
     <div class="overflow-y-auto h-full">
-      <div v-if="!loading && searchResults === null" class="flex items-center justify-center h-full text-gray-800 dark:text-gray-50">
-        <div class="flex flex-col items-center space-y-4">
+      <div v-if="!loading && searchResults === null && searchTextSelected === ''" class="flex items-center justify-center h-full text-color">
+        <div v-if="emptyName" class="flex flex-col items-center space-y-4">
           <magnifyingGlassIcon class="w-16 h-16" />
           <p class="text-lg select-none">Busque por um texto</p>
         </div>
+        <div v-if="foundName" class="flex items-center justify-center space-x-2">
+          <div v-for="index in 3" :key="index" class="w-4 h-4 rounded-full animate-pulse bg-gray-100 dark:bg-gray-700 old:bg-brown-700"></div>
+        </div>
       </div>
-      <div v-if="loading && searchResults && searchResults.length === 0" class="flex items-center justify-center space-x-2">
-        <div class="w-4 h-4 rounded-full animate-pulse bg-gray-100 dark:bg-gray-700"></div>
-        <div class="w-4 h-4 rounded-full animate-pulse bg-gray-100 dark:bg-gray-700"></div>
-        <div class="w-4 h-4 rounded-full animate-pulse bg-gray-100 dark:bg-gray-700"></div>
-      </div>
-      <div v-if="!loading && searchResults && searchResults.length > 0" class="flex flex-col divide-y divide-gray-200 dark:divide-gray-600">
-        <div class="flex text-center text-gray-400 dark:text-gray-500 p-2">{{ searchResults.length }} resultados foram encontrados</div>
+      <div v-if="!loading && searchResults && searchResults.length > 0" class="divider-y">
+        <div class="flex-result">{{ searchResults.length }} resultados foram encontrados</div>
         <div v-for="(item, index) in searchResults" :key="index" class="flex items-center p-2">
           <button class="text-left select-none outline-none" @click.prevent="goToText(item)">
             <p>"<span v-html="changeTags(item.text)"></span>" {{ getBookAndChapterName(item.book_number, item.chapter, item.verse) }}</p>
@@ -89,6 +87,12 @@ export default {
   },
   computed: {
     ...mapGetters(['getVersion', 'getSearchVerse']),
+    emptyName() {
+      return this.name === '' ? true : false
+    },
+    foundName() {
+      return this.name !== '' ? true : false
+    }
   },
   methods: {
     ...mapMutations(['UPDATE_VERSION', 'SET_BOOK', 'SET_CHAPTER', 'SEARCH_VERSE']),
