@@ -3,7 +3,7 @@
     <Header>
       <h1 class="text-lg">{{ title }}</h1>
     </Header>
-    <fieldset class="text-gray-800 dark:text-gray-50 px-2">
+    <fieldset class="text-color">
       <label for="Search" class="hidden">Procurar</label>
       <div class="relative">
         <span class="absolute inset-y-0 left-0 flex items-center pl-3">
@@ -14,7 +14,7 @@
           name="Search"
           placeholder="Procurar..."
           v-model="name"
-          class="w-full py-2 pl-10 pr-2 text-sm border rounded-md dark:bg-transparent border-gray-200 dark:border-gray-700 outline-none"
+          class="w-full py-2 pl-10 pr-2 text-sm border-b bg-transparent border-gray-200 dark:border-gray-700 old:border-brown-200 placeholder-color outline-none"
           required
           autofocus
           autocomplete="off"
@@ -43,7 +43,7 @@
         </div>
       </div>
       <div v-if="!loading && searchResults && searchResults.length === 0">
-        <div class="flex text-center text-gray-400 dark:text-gray-500 p-2">Nenhum texto foi encontrado</div>
+        <div class="flex-result">Nenhum texto foi encontrado</div>
       </div>
     </div>
   </div>
@@ -134,7 +134,7 @@ export default {
     },
     changeTags(text) {
       const regex = new RegExp(`(${this.searchTextSelected})`, 'gi');
-      const highlightedText = text.replace(regex, `<span class="bg-gray-300 dark:bg-gray-600">$1</span>`);
+      const highlightedText = text.replace(regex, `<span class="selected-verse">$1</span>`);
       const styledText = highlightedText.replace(/<J>(.*?)<\/J>/g, '<span class="j-tag">$1</span>');
       const cleanedText = styledText.replace(/<pb\/>|<f>.*?<\/f>|<t>|<\/t>|<br\/>|<x>.*?<\/x>/g, '').replace(/\s{2,}/g, ' ');
 
@@ -147,6 +147,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.flex-result {
+  @apply flex text-center text-gray-400 dark:text-gray-500 old:text-brown-500 p-2;
+}
 </style>

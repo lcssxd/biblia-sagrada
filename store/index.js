@@ -57,7 +57,7 @@ export const mutations = {
   },
   UPDATE_THEMA(state) {
     const thema = localStorage.getItem('thema');
-    const validThemas = ['light', 'dark'];
+    const validThemas = ['light', 'dark', 'old'];
 
     if (validThemas.includes(thema)) {
       state.thema = thema;
@@ -101,13 +101,15 @@ export const mutations = {
     }
   },
   SET_THEMA(state, payload) {
-    const validThemas = ['light', 'dark'];
+    const validThemas = ['light', 'dark', 'old'];
+    const currentThema = document.documentElement.classList[0];
 
     if (validThemas.includes(payload)) {
       if(payload === 'light') {
-        document.documentElement.classList.remove('dark')
-      } else if (payload === 'dark') {
-        document.documentElement.classList.add('dark')
+        document.documentElement.classList.remove(currentThema)
+      } else {
+        document.documentElement.classList.remove(currentThema)
+        document.documentElement.classList.add(`${payload}`)
       }
       state.thema = payload;
       localStorage.setItem('thema', payload);

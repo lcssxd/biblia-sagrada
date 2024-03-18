@@ -9,7 +9,7 @@
     <div class="flex flex-col overflow-y-auto h-full">
       <div v-if="loading" class="h-full bg-gray-300 dark:bg-gray-700 animate-pulse"></div>
       <div v-if="!loading && filteredVerses && filteredVerses.length > 0" class="flex flex-col">
-        <span class="text-center font-bold select-none text-black dark:text-white mt-5">
+        <span class="text-center font-bold select-none text-color-title mt-5">
           {{ getBookAndChapterName }}
         </span>
         <div v-for="(item, index) in filteredVerses" :key="index">
@@ -18,7 +18,7 @@
           </button>
         </div>
       </div>
-      <div v-if="!loading && filteredVerses && filteredVerses.length === 0" class="flex items-center justify-center h-full text-gray-800 dark:text-gray-50">
+      <div v-if="!loading && filteredVerses && filteredVerses.length === 0" class="flex items-center justify-center h-full text-color">
         <div class="flex flex-col items-center space-y-4">
           <noSymbolIcon class="w-16 h-16" />
           <p class="text-lg select-none">Nenhum versículo foi encontrado</p>

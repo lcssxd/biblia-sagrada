@@ -39,8 +39,8 @@
         <div class="h-full" :key="currentChapterKey">
           <div v-if="!getBook && !loading" class="h-full">
             <div class="flex flex-col h-full">
-              <div class="flex flex-col divide-y divide-gray-200 dark:divide-gray-600">
-                <h2 class="sticky top-0 p-2 text-center font-medium text-base select-none bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-100">Antigo Testamento</h2>
+              <div class="divider-y">
+                <h2 class="sticky top-0 title">Antigo Testamento</h2>
                 <button 
                   v-for="(item, index) in filteredOldTestament" :key="index"
                   class="text-left font-normal p-2 outline-none select-none"
@@ -48,8 +48,8 @@
                 >{{ item.name }}
                 </button>
               </div>
-              <div class="flex flex-col divide-y divide-gray-200 dark:divide-gray-600">
-                <h2 class="sticky top-0 p-2 text-center font-medium text-base select-none bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-100">Novo Testamento</h2>
+              <div class="divider-y">
+                <h2 class="sticky top-0 title">Novo Testamento</h2>
                 <button 
                   v-for="(item, index) in filteredNewTestament" :key="index"
                   class="text-left font-normal p-2 outline-none select-none"
@@ -63,7 +63,7 @@
             <div v-if="getBook && !getChapter" class="grid grid-cols-6 gap-1 p-1">
               <button
                 v-for="chapter in uniqueChapters" :key="chapter.id"
-                class="p-1 bg-gray-200 dark:bg-gray-700 border border-gray-300 rounded-md dark:border-gray-600 outline-none select-none"
+                class="btn-chapter"
                 @click.prevent="SET_CHAPTER(chapter)"
                 >{{ chapter }}
               </button>
@@ -74,28 +74,28 @@
                   <div v-for="verseItem in filteredChapter" :key="verseItem.id" class="flex flex-col">
                     <span 
                       v-if="getUniqueVerseTitles(verseItem) && getUniqueVerseTitles(verseItem).length > 0"
-                      class="text-center font-bold select-none text-black dark:text-white mt-5"
+                      class="text-center font-bold select-none text-color-title mt-5"
                     >{{ removeTagsTitle(getUniqueVerseTitles(verseItem).join('')) }}</span>
                     <button
                       v-show="verseItem.text !== ''"
                       class="px-2 text-left select-none outline-none mb-auto transition duration-200"
-                      :class="[{ 'bg-gray-300 dark:bg-gray-600' : selectedVerse.some(verse => verse.book_number === verseItem.book_number && verse.chapter === verseItem.chapter && verse.verse === verseItem.verse) }, { 'bg-gray-300/50 dark:bg-gray-600/50' : !selectedVerse.some(verse => verse.book_number === verseItem.book_number && verse.chapter === verseItem.chapter && verse.verse === verseItem.verse) && getFavoriteVerse.some(favorite => favorite?.book_number === verseItem?.book_number && favorite?.chapter === verseItem?.chapter && favorite?.verse === verseItem?.verse) }]"
+                      :class="[{ 'selected-verse' : selectedVerse.some(verse => verse.book_number === verseItem.book_number && verse.chapter === verseItem.chapter && verse.verse === verseItem.verse) }, { 'favorited-verse' : !selectedVerse.some(verse => verse.book_number === verseItem.book_number && verse.chapter === verseItem.chapter && verse.verse === verseItem.verse) && getFavoriteVerse.some(favorite => favorite?.book_number === verseItem?.book_number && favorite?.chapter === verseItem?.chapter && favorite?.verse === verseItem?.verse) }]"
                       :ref="'verse-' + verseItem.chapter + '-' + verseItem.verse"
                       @click.prevent="selectVerse(verseItem)"
                     >
                       <span class="superscript">{{ verseItem.verse }}</span> <span v-html="changeTags(verseItem.text)"></span>
                     </button>
                   </div>
-                  <p class="mt-5 px-2 text-base text-gray-400 dark:text-gray-500 select-none">{{ changeTags(getDetailedInfo) }}</p>
+                  <p class="mt-5 px-2 text-base text-gray-400 dark:text-gray-500 old:text-brown-400 select-none">{{ changeTags(getDetailedInfo) }}</p>
                 </div>
                 <div class="flex items-center justify-between sticky bottom-2 w-full px-5">
                   <button
-                    class="p-2 select-none outline-none transition duration-100 rounded-full text-gray-800 hover:bg-gray-800/30 dark:text-gray-50 hover:dark:bg-gray-100/30"
+                    class="btn-prev-next"
                     :class="{ 'invisible' : isFistChapter }"
                     @click.prevent="prevChapter()"
                   ><chevronLeftIcon class="w-6 h-6" /></button>
                   <button
-                    class="p-2 select-none outline-none transition duration-100 rounded-full text-gray-800 hover:bg-gray-800/30 dark:text-gray-50 hover:dark:bg-gray-100/30"
+                    class="btn-prev-next"
                     :class="{ 'invisible' : isLastChapter }"
                     @click.prevent="nextChapter()"
                   ><chevronRightIcon class="w-6 h-6" /></button>
@@ -422,6 +422,11 @@ export default {
 };
 </script>
 
-<style>
-
+<style scoped>
+.btn-chapter {
+  @apply p-1 rounded-md bg-gray-200 dark:bg-gray-700 old:bg-brown-200 border border-gray-300 dark:border-gray-600 old:border-brown-300 outline-none select-none
+}
+.btn-prev-next {
+  @apply p-2 select-none outline-none transition duration-100 rounded-full text-gray-800 hover:bg-gray-800/30 dark:text-gray-50 hover:dark:bg-gray-100/30 old:text-brown-800 hover:old:bg-brown-800/30
+}
 </style>

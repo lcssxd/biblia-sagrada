@@ -21,7 +21,7 @@
           <button class="select-none text-left" @click.prevent="goToText(item)"><span v-html="changeTags(item.text)"></span></button>
         </div>
       </div>
-      <div v-if="!loading && filteredVerses && filteredVerses.length === 0" class="flex items-center justify-center h-full text-gray-800 dark:text-gray-50">
+      <div v-if="!loading && filteredVerses && filteredVerses.length === 0" class="flex items-center justify-center h-full text-color">
         <div class="flex flex-col items-center space-y-4">
           <bookmarkIcon class="w-16 h-16" />
           <p class="text-lg select-none">Nenhum versículo salvo</p>

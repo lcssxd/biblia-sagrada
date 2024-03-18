@@ -1,7 +1,7 @@
 <template>
   <div class="grid py-3" :style="`grid-template-columns: repeat(${menu.length}, minmax(0, 1fr));`">
     <NuxtLink v-for="(item, index) in menu" :key="index" :to="item.link"
-      class="flex flex-col items-center justify-center space-y-1 outline-none text-gray-600 dark:text-gray-400 transition select-none"
+      class="flex flex-col items-center justify-center space-y-1 outline-none text-gray-600 dark:text-gray-400 old:text-brown-600 transition select-none"
       :exact-active-class="`active-link`"
     >
       <component :is="item.icon" class="w-6 h-6"></component>
@@ -53,6 +53,6 @@ export default {
 
 <style>
 .active-link {
-  @apply text-gray-800 dark:text-white
+  @apply text-gray-800 dark:text-white old:text-brown-950
 }
 </style>

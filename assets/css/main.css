@@ -1,9 +1,37 @@
 .superscript {
   vertical-align: super;
   font-size: smaller;
-  @apply text-gray-600 dark:text-gray-400;
+  @apply text-gray-600 dark:text-gray-400 old:text-brown-600;
 }
 
 .j-tag {
   @apply text-red-500;
+}
+
+.title {
+  @apply p-2 text-center font-medium text-base select-none bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-100 old:bg-brown-200 old:text-brown-700
+}
+
+.text-color {
+  @apply text-gray-800 dark:text-gray-50 old:text-brown-800
+}
+
+.text-color-title {
+  @apply text-black dark:text-white old:text-brown-950
+}
+
+.placeholder-color {
+  @apply placeholder:text-gray-500 placeholder:dark:text-gray-400 placeholder:old:text-brown-500
+}
+
+.divider-y {
+  @apply flex flex-col divide-y divide-gray-200 dark:divide-gray-600 old:divide-brown-200
+}
+
+.selected-verse {
+  @apply bg-gray-300 dark:bg-gray-600 old:bg-brown-300
+}
+
+.favorited-verse {
+  @apply bg-gray-300/50 dark:bg-gray-600/50 old:bg-brown-300/50
 }

@@ -5,16 +5,16 @@
     </Header>
     <div class="overflow-y-auto h-full">
       <div class="flex flex-col">
-        <span class="p-2 text-center font-medium text-base select-none bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-100">Opções de Fonte</span>
-        <div class="flex flex-col divide-y divide-gray-200 dark:divide-gray-600 text-sm">
+        <div class="title">Opções de Fonte</div>
+        <div class="divider-y text-sm">
           <div class="flex items-center justify-between p-2 outline-none select-none text-left">
             <div>
               <span>Tamanho da Fonte</span>
             </div>
             <div class="flex items-center">
-              <button class="flex outline-none transition duration-100" :class="{ 'text-gray-500' : isFontSize===20 }" @click.prevent="changeFontSize('+')" :disabled="isFontSize===20">A<arrowUpIcon class="w-3 h-3" /></button>
+              <button class="flex outline-none transition duration-100" :class="{ 'disabled-btn-font' : isFontSize===20 }" @click.prevent="changeFontSize('+')" :disabled="isFontSize===20">A<arrowUpIcon class="w-3 h-3" /></button>
               <span class="px-4">{{ isFontSize }}</span>
-              <button class="flex outline-none transition duration-100" :class="{ 'text-gray-500' : isFontSize===10 }"  @click.prevent="changeFontSize('-')" :disabled="isFontSize===10">A<arrowDownIcon class="w-3 h-3" /></button>
+              <button class="flex outline-none transition duration-100" :class="{ 'disabled-btn-font' : isFontSize===10 }"  @click.prevent="changeFontSize('-')" :disabled="isFontSize===10">A<arrowDownIcon class="w-3 h-3" /></button>
             </div>
           </div>
           <button 
@@ -30,8 +30,8 @@
         </div>
       </div>
       <div class="flex flex-col">
-        <span class="p-2 text-center font-medium text-base select-none bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-100">Versões</span>
-        <div class="flex flex-col divide-y divide-gray-200 dark:divide-gray-600 text-sm">
+        <div class="title">Versões</div>
+        <div class="divider-y text-sm">
           <button 
             v-for="(item, index) in versions" :key="index"
             class="relative p-2 outline-none select-none text-left"
@@ -45,8 +45,8 @@
         </div>
       </div>
       <div class="flex flex-col">
-        <span class="p-2 text-center font-medium text-base select-none bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-100">Temas</span>
-        <div class="flex flex-col divide-y divide-gray-200 dark:divide-gray-600 text-sm">
+        <div class="title">Temas</div>
+        <div class="divider-y text-sm">
           <button 
             v-for="(item, index) in themas" :key="index"
             class="relative p-2 outline-none select-none text-left"
@@ -60,8 +60,8 @@
         </div>
       </div>
       <div class="flex flex-col">
-        <span class="p-2 text-center font-medium text-base select-none bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-100">Exportar/Importar Preferências</span>
-        <div class="flex flex-col divide-y divide-gray-200 dark:divide-gray-600 text-sm">
+        <div class="title">Exportar/Importar Preferências</div>
+        <div class="divider-y text-sm">
           <button class="relative p-2 outline-none select-none text-left" @click.prevent="exportSettings()">
             <span class="text-sm">Exportar</span>
           </button>
@@ -72,8 +72,8 @@
         </div>
       </div>
       <div class="flex flex-col">
-        <span class="p-2 text-center font-medium text-base select-none bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-100">Informações</span>
-        <div class="flex flex-col divide-y divide-gray-200 dark:divide-gray-600 text-sm">
+        <div class="title">Informações</div>
+        <div class="divider-y text-sm">
           <NuxtLink 
             to="/about"
             class="p-2 outline-none select-none text-left text-sm"
@@ -121,6 +121,10 @@ export default {
         {
           id: 'dark',
           name: 'Escuro',
+        },
+        {
+          id: 'old',
+          name: 'Clássico',
         }
       ],
       fonts_family: [
@@ -270,6 +274,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.disabled-btn-font {
+  @apply text-gray-400 dark:text-gray-500 old:text-brown-400
+}
 </style>

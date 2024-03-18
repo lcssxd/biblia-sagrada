@@ -9,9 +9,9 @@
     <div class="overflow-y-auto h-full">
       <div class="flex flex-col">
         <div v-for="(item, index) in abouts" :key="index" class="flex flex-col">
-          <span class="p-2 text-center font-medium text-base select-none bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-100">{{ item.title }}</span>
+          <div class="title">{{ item.title }}</div>
           <span v-if="item.type === 'text'" class="p-2 outline-none select-none text-left text-sm">{{ item.value }}</span>
-          <div v-if="item.type === 'array'" class="flex flex-col divide-y divide-gray-200 dark:divide-gray-600 text-sm">
+          <div v-if="item.type === 'array'" class="divider-y text-sm">
             <span v-for="array in item.value" :key="array" class="p-2 outline-none select-none text-left text-sm">{{ array }}</span>
           </div>
           <a v-if="item.type === 'link'" :href="item.value" class="flex items-center space-x-1 p-2 outline-none select-none text-left text-sm w-fit" target="_blank" rel="noopener noreferrer">
