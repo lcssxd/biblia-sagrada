@@ -49,7 +49,7 @@ export default {
 }
 
 .app {
-  @apply flex flex-col h-full-screen w-full justify-between min-w-[320px] bg-gray-50 text-gray-800 dark:bg-gray-800 dark:text-gray-50 old:bg-brown-100 old:text-brown-800;
+  @apply flex flex-col h-full-screen w-full justify-between min-w-[320px] bg-gray-50 text-gray-800 dark:bg-gray-800 dark:text-gray-50 old:bg-brown-400 old:text-brown-800;
 }
 
 .fade-enter-active,

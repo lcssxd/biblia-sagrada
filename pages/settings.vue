@@ -12,9 +12,19 @@
               <span>Tamanho da Fonte</span>
             </div>
             <div class="flex items-center">
-              <button class="flex outline-none transition duration-100" :class="{ 'disabled-btn-font' : isFontSize===20 }" @click.prevent="changeFontSize('+')" :disabled="isFontSize===20">A<arrowUpIcon class="w-3 h-3" /></button>
+              <button
+                class="btn-font"
+                :class="{ 'disabled-btn-font' : isFontSize===20 }"
+                @click.prevent="changeFontSize('+')"
+                :disabled="isFontSize===20"
+              >A<arrowUpIcon class="w-3 h-3" /></button>
               <span class="px-4">{{ isFontSize }}</span>
-              <button class="flex outline-none transition duration-100" :class="{ 'disabled-btn-font' : isFontSize===10 }"  @click.prevent="changeFontSize('-')" :disabled="isFontSize===10">A<arrowDownIcon class="w-3 h-3" /></button>
+              <button
+                class="btn-font"
+                :class="{ 'disabled-btn-font' : isFontSize===10 }"
+                @click.prevent="changeFontSize('-')"
+                :disabled="isFontSize===10"
+              >A<arrowDownIcon class="w-3 h-3" /></button>
             </div>
           </div>
           <button 
@@ -275,7 +285,10 @@ export default {
 </script>
 
 <style scoped>
+.btn-font {
+  @apply flex outline-none transition duration-200
+}
 .disabled-btn-font {
-  @apply text-gray-400 dark:text-gray-500 old:text-brown-400
+  @apply text-gray-400 dark:text-gray-500 old:text-brown-600
 }
 </style>
