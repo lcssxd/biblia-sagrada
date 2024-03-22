@@ -1,26 +1,28 @@
+import db from '~/assets/json/db.json'
+
 export const state = () => ({
   version: 'ARA',
-  thema: 'dark',
-  font_size: '',
-  font_family: '',
+  theme: 'dark',
+  fontSize: 12,
+  fontFamily: 'auto',
   book: null,
   chapter: null,
-  favorite_verse: [],
-  search_verse: [],
+  favoriteVerse: [],
+  searchVerse: [],
 })
 
 export const getters = {
   getVersion(state) {
     return state.version;
   },
-  getThema(state) {
-    return state.thema;
+  getTheme(state) {
+    return state.theme;
   },
   getFontSize(state) {
-    return state.font_size;
+    return state.fontSize;
   },
   getFontFamily(state) {
-    return state.font_family;
+    return state.fontFamily;
   },
   getBook(state) {
     return state.book;
@@ -29,10 +31,10 @@ export const getters = {
     return state.chapter;
   },
   getFavoriteVerse(state) {
-    return state.favorite_verse;
+    return state.favoriteVerse;
   },
   getSearchVerse(state) {
-    return state.search_verse;
+    return state.searchVerse;
   }
 }
 
@@ -46,7 +48,7 @@ export const mutations = {
   },
   UPDATE_VERSION(state) {
     const version = localStorage.getItem('version');
-    const validVersions = ['ACF', 'ARA', 'NAA', 'NTLH', 'NVI'];
+    const validVersions = db.versions.map(version => version.abbrev);
 
     if (validVersions.includes(version)) {
       state.version = version;
@@ -55,80 +57,91 @@ export const mutations = {
     }
     localStorage.setItem('version', state.version);
   },
-  UPDATE_THEMA(state) {
-    const thema = localStorage.getItem('thema');
-    const validThemas = ['light', 'dark', 'old'];
+  UPDATE_THEME(state) {
+    const theme = localStorage.getItem('theme');
+    const validThemes = db.themes.map(theme => theme.id);
 
-    if (validThemas.includes(thema)) {
-      state.thema = thema;
+    if (validThemes.includes(theme)) {
+      state.theme = theme;
     } else {
-      state.thema = validThemas[0];
+      state.theme = validThemes[0];
     }
-    localStorage.setItem('thema', state.thema);
+    localStorage.setItem('theme', state.theme);
   },
   UPDATE_FONT_SIZE(state) {
-    const fontSize = localStorage.getItem('font_size');
-    const validFontsSize = ['text-xs', 'text-sm', 'text-base', 'text-lg', 'text-xl', 'text-2xl'];
-
-    if (validFontsSize.includes(fontSize)) {
-      state.font_size = fontSize;
-    } else {
-      state.font_size = validFontsSize[0];
+    const fontMin = 12, fontMax = 24;
+    let fontSize = parseInt(localStorage.getItem('fontSize'), 10);
+  
+    if (isNaN(fontSize)) {
+      fontSize = fontMin;
+    } else if (fontSize < fontMin) {
+      fontSize = fontMin;
+    } else if (fontSize > fontMax) {
+      fontSize = fontMax;
     }
-    localStorage.setItem('font_size', state.font_size);
+  
+    state.fontSize = fontSize;
+    localStorage.setItem('fontSize', String(state.fontSize));
   },
   UPDATE_FONT_FAMILY(state) {
-    const fontFamily = localStorage.getItem('font_family');
-    const validFontsFamily = ['font-sans', 'font-serif', 'font-mono'];
+    const fontFamily = localStorage.getItem('fontFamily');
+    const validFontsFamily = db.fontsFamily.map(fontFamily => fontFamily.id);
 
     if (validFontsFamily.includes(fontFamily)) {
-      state.font_family = fontFamily;
+      state.fontFamily = fontFamily;
     } else {
-      state.font_family = validFontsFamily[0];
+      state.fontFamily = validFontsFamily[0];
     }
-    localStorage.setItem('font_family', state.font_family);
+    localStorage.setItem('fontFamily', state.fontFamily);
   },
   UPDATE_FAVORITE_VERSE(state) {
-    const favorite_verse = JSON.parse(localStorage.getItem('favorite_verse') || '[]');
-    state.favorite_verse = favorite_verse;
+    const favoriteVerse = JSON.parse(localStorage.getItem('favoriteVerse') || '[]');
+    state.favoriteVerse = favoriteVerse;
   },
   SET_VERSION(state, payload) {
-    const validVersions = ['ACF', 'ARA', 'NAA', 'NTLH', 'NVI'];
+    const validVersions = db.versions.map(version => version.abbrev);
 
     if (validVersions.includes(payload)) {
       state.version = payload;
       localStorage.setItem('version', payload);
     }
   },
-  SET_THEMA(state, payload) {
-    const validThemas = ['light', 'dark', 'old'];
-    const currentThema = document.documentElement.classList[0];
+  SET_THEME(state, payload) {
+    const validThemes = db.themes.map(theme => theme.id);
 
-    if (validThemas.includes(payload)) {
-      if(payload === 'light') {
-        document.documentElement.classList.remove(currentThema)
-      } else {
-        document.documentElement.classList.remove(currentThema)
-        document.documentElement.classList.add(`${payload}`)
+    if (!validThemes.includes(payload)) return;
+
+    const currentThemeClass = document.documentElement.classList[0];
+
+    if (currentThemeClass !== payload) {
+
+      if (currentThemeClass && currentThemeClass !== 'light') {
+        document.documentElement.classList.remove(currentThemeClass);
       }
-      state.thema = payload;
-      localStorage.setItem('thema', payload);
+
+      if (payload !== 'light') {
+        document.documentElement.classList.add(payload);
+      }
+
+      state.theme = payload;
+      localStorage.setItem('theme', payload);
     }
   },
   SET_FONT_SIZE(state, payload) {
-    const validFontsSize = ['text-xs', 'text-sm', 'text-base', 'text-lg', 'text-xl', 'text-2xl'];
+    const fontMin = 12, fontMax = 24;
+    const fontSize = Number(payload);
 
-    if (validFontsSize.includes(payload)) {
-      state.font_size = payload;
-      localStorage.setItem('font_size', payload);
+    if (fontSize >= fontMin && fontSize <= fontMax) {
+      state.fontSize = fontSize;
+      localStorage.setItem('fontSize', String(fontSize));
     }
   },
   SET_FONT_FAMILY(state, payload) {
-    const validFontsFamily = ['font-sans', 'font-serif', 'font-mono'];
+    const validFontsFamily = db.fontsFamily.map(fontFamily => fontFamily.id);
 
     if (validFontsFamily.includes(payload)) {
-      state.font_family = payload;
-      localStorage.setItem('font_family', payload);
+      state.fontFamily = payload;
+      localStorage.setItem('fontFamily', payload);
     }
   },
   SET_BOOK(state, payload) {
@@ -140,22 +153,22 @@ export const mutations = {
     localStorage.setItem('chapter', payload);
   },
   FAVORITE_VERSE(state, payload) {
-    state.favorite_verse = payload;
-    localStorage.setItem('favorite_verse', JSON.stringify(payload));
+    state.favoriteVerse = payload;
+    localStorage.setItem('favoriteVerse', JSON.stringify(payload));
   },
   SEARCH_VERSE(state, payload) {
     if (Array.isArray(payload) && payload.length === 0) {
-      state.search_verse = [];
+      state.searchVerse = [];
     } else {
-      state.search_verse.push(payload);
+      state.searchVerse.push(payload);
     }
-    localStorage.setItem('search_verse', JSON.stringify(state.search_verse));
+    localStorage.setItem('searchVerse', JSON.stringify(state.searchVerse));
   }
 }
 
 export const actions = {
   toggleFavoriteVerse({ commit, state }, verseItem) {
-    let updatedFavoriteVerse = [...state.favorite_verse];
+    let updatedFavoriteVerse = [...state.favoriteVerse];
   
     const toggleItem = (item) => {
       const index = updatedFavoriteVerse.findIndex(favorite => 

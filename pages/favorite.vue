@@ -75,8 +75,8 @@ export default {
     async loadVersionFiles() {
       const version = this.getVersion;
       const [books, verses] = await Promise.all([
-        import(`@/assets/versions/books.json`),
-        import(`@/assets/versions/${version}/verses.json`)
+        import(`@/assets/json/books.json`),
+        import(`@/assets/json/versions/${version}/verses.json`)
       ]);
       this.books = books.default;
       this.verses = verses.default;

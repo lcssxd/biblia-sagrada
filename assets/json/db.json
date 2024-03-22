@@ -1,0 +1,73 @@
+{
+  "versions": [
+    {
+      "abbrev": "ACF",
+      "description": "Almeida Corrigida Fiel, 2011",
+      "copyright": "ACF © 2011. Sociedade Bíblica Trinitária do Brasil."
+    },
+    {
+      "abbrev": "ARA",
+      "description": "Almeida Revista e Atualizada, 1993",
+      "copyright": "ARA © 1993. Sociedade Biblica do Brasil."
+    },
+    {
+      "abbrev": "NAA",
+      "description": "Nova Almeida Atualizada, 2017",
+      "copyright": "NAA © 2017. Sociedade Biblica do Brasil."
+    },
+    {
+      "abbrev": "NTLH",
+      "description": "Nova Tradução na Linguagem de Hoje, 2000",
+      "copyright": "NTLH © 2000. Sociedade Biblica do Brasil."
+    },
+    {
+      "abbrev": "NVI",
+      "description": "Nova Versão Internacional, 2011",
+      "copyright": "NVI © 1993, 2000, 2011 by Biblica, Inc."
+    }
+  ],
+  "themes": [
+    {
+      "id": "light",
+      "name": "Claro"
+    },
+    {
+      "id": "dark",
+      "name": "Escuro"
+    },
+    {
+      "id": "old",
+      "name": "Clássico"
+    }
+  ],
+  "fontsFamily": [
+    {
+      "id": "auto",
+      "name": "Automática"
+    },
+    {
+      "id": "cursive",
+      "name": "Cursiva"
+    },
+    {
+      "id": "fantasy",
+      "name": "Fantasia"
+    },
+    {
+      "id": "monospace",
+      "name": "Monoespaçada"
+    },
+    {
+      "id": "none",
+      "name": "Nenhuma"
+    },
+    {
+      "id": "sans-serif",
+      "name": "Sem Serifa"
+    },
+    {
+      "id": "system-ui",
+      "name": "Sistema"
+    }
+  ]
+}

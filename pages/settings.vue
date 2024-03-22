@@ -14,54 +14,41 @@
             <div class="flex items-center">
               <button
                 class="btn-font"
-                :class="{ 'disabled-btn-font' : isFontSize===20 }"
+                :class="{ 'disabled-btn-font' : isFontMax }"
                 @click.prevent="changeFontSize('+')"
-                :disabled="isFontSize===20"
+                :disabled="isFontMax"
               >A<arrowUpIcon class="w-3 h-3" /></button>
-              <span class="px-4">{{ isFontSize }}</span>
+              <span class="px-4">{{ getFontSize }}</span>
               <button
                 class="btn-font"
-                :class="{ 'disabled-btn-font' : isFontSize===10 }"
+                :class="{ 'disabled-btn-font' : isFontMin }"
                 @click.prevent="changeFontSize('-')"
-                :disabled="isFontSize===10"
+                :disabled="isFontMin"
               >A<arrowDownIcon class="w-3 h-3" /></button>
             </div>
           </div>
-          <button 
-            v-for="(item, index) in fonts_family" :key="index"
-            class="relative p-2 outline-none select-none text-left"
-            @click.prevent="changeFontFamily(item.id)"
-          >
-            <span>{{ item.name }}</span>
-            <Selected v-if="font_family === item.id" />
-          </button>
+          <select v-model="fontFamily" @change="changeFontFamily(fontFamily)">
+            <option v-for="(item, index) in fontsFamily" :key="index" :value="item.id">
+              {{ item.name }}
+            </option>
+          </select>
         </div>
       </div>
       <div class="flex flex-col">
         <div class="title">Versões</div>
-        <div class="divider-y text-sm">
-          <button 
-            v-for="(item, index) in versions" :key="index"
-            class="relative p-2 outline-none select-none text-left"
-            @click.prevent="changeVersion(item.id)"
-          >
-            <span class="text-sm">{{ item.id }} - {{ item.title }}</span>
-            <Selected v-if="version === item.id" />
-          </button>
-        </div>
+        <select v-model="version" @change="changeVersion(version)">
+          <option v-for="(item, index) in versions" :key="index" :value="item.abbrev">
+            {{ item.abbrev }} - {{ item.description }}
+          </option>
+        </select>
       </div>
       <div class="flex flex-col">
         <div class="title">Temas</div>
-        <div class="divider-y text-sm">
-          <button 
-            v-for="(item, index) in themas" :key="index"
-            class="relative p-2 outline-none select-none text-left"
-            @click.prevent="changeThema(item.id)"
-          >
-            <span class="text-sm">{{ item.name }}</span>
-            <Selected v-if="thema === item.id" />
-          </button>
-        </div>
+        <select v-model="theme" @change="changeTheme(theme)">
+          <option v-for="(item, index) in themes" :key="index" :value="item.id">
+            {{ item.name }}
+          </option>
+        </select>
       </div>
       <div class="flex flex-col">
         <div class="title">Exportar/Importar Preferências</div>
@@ -93,83 +80,30 @@ import { mapGetters, mapMutations } from 'vuex'
 import arrowlongleftIcon from '@/static/heroicons/mini/arrow-long-left.svg?inline'
 import arrowUpIcon from '@/static/heroicons/mini/arrow-up.svg?inline'
 import arrowDownIcon from '@/static/heroicons/mini/arrow-down.svg?inline'
-import Selected from '~/components/Selected.vue'
+import db from '~/assets/json/db.json'
 export default {
-  components: { arrowlongleftIcon, arrowUpIcon, arrowDownIcon, Selected },
+  components: { arrowlongleftIcon, arrowUpIcon, arrowDownIcon },
   data() {
     return {
       title: 'Configurações',
       version: null,
-      thema: null,
-      font_size: null,
-      font_family: null,
-      versions: [
-        {
-          id: 'ACF',
-          title: 'Almeida Corrigida Fiel - 2011',
-        },
-        {
-          id: 'ARA',
-          title: 'Almeida Revista e Atualizada - 1993',
-        },
-        {
-          id: 'NAA',
-          title: 'Nova Almeida Atualizada - 2017',
-        },
-        {
-          id: 'NTLH',
-          title: 'Nova Tradução na Linguagem de Hoje - 2000',
-        },
-        {
-          id: 'NVI',
-          title: 'Nova Versão Internacional - 1993',
-        }
-      ],
-      themas: [
-        {
-          id: 'light',
-          name: 'Claro',
-        },
-        {
-          id: 'dark',
-          name: 'Escuro',
-        },
-        {
-          id: 'old',
-          name: 'Clássico',
-        }
-      ],
-      fonts_family: [
-        {
-          id: 'font-sans',
-          name: 'Padrão',
-        },
-        {
-          id: 'font-serif',
-          name: 'Serifa',
-        },
-        {
-          id: 'font-mono',
-          name: 'Mono',
-        },
-      ],
-      fonts_size: [
-        'text-xs',
-        'text-sm',
-        'text-base',
-        'text-lg',
-        'text-xl',
-        'text-2xl'
-      ]
+      theme: null,
+      fontSize: null,
+      fontFamily: null,
+      versions: [],
+      themes: [],
+      fontsFamily: [],
+      fontsSize: null
     }
   },
   mounted() {
+    this.getDBSets()
     this.updates()
   },
   methods: {
     ...mapMutations([
       'SET_VERSION',
-      'SET_THEMA',
+      'SET_THEME',
       'SET_FONT_SIZE',
       'SET_FONT_FAMILY',
       'FAVORITE_VERSE',
@@ -179,29 +113,15 @@ export default {
       this.SET_VERSION(version)
       this.updateVersion()
     },
-    changeThema(thema) {
-      this.SET_THEMA(thema)
-      this.updateThema()
+    changeTheme(theme) {
+      this.SET_THEME(theme)
+      this.updateTheme()
     },
     changeFontSize(type) {
-        const fonts = this.fonts_size;
-        const fontIndex = fonts.indexOf(this.getFontSize);
-        let nextIndex;
-
-        if (type === '+') {
-            nextIndex = (fontIndex + 1) % fonts.length;
-            if (nextIndex < fontIndex) {
-                nextIndex = fontIndex;
-            }
-        } else {
-            nextIndex = (fontIndex - 1 + fonts.length) % fonts.length;
-            if (nextIndex > fontIndex) {
-                nextIndex = fontIndex;
-            }
-        }
-
-        this.SET_FONT_SIZE(fonts[nextIndex]);
-        this.updateFontSize();
+      let fontSize = this.fontSize;
+      let fontResult = type === '+' ? fontSize + 1 : fontSize - 1;
+      this.SET_FONT_SIZE(fontResult);
+      this.updateFontSize();
     },
     changeFontFamily(font) {
       this.SET_FONT_FAMILY(font)
@@ -210,21 +130,21 @@ export default {
     updateVersion() {
       this.version = this.getVersion
     },
-    updateThema() {
-      this.thema = this.getThema
+    updateTheme() {
+      this.theme = this.getTheme
     },
     updateFontSize() {
-      this.font_size = this.getFontSize
+      this.fontSize = this.getFontSize
     },
     updateFontFamily() {
-      this.font_family = this.getFontFamily
+      this.fontFamily = this.getFontFamily
     },
     exportSettings() {
       const data = {
         version: this.getStoreState.version,
-        thema: this.getStoreState.thema,
-        font_size: this.getStoreState.font_size,
-        font_family: this.getStoreState.font_family,
+        theme: this.getStoreState.theme,
+        fontSize: this.getStoreState.fontSize,
+        fontFamily: this.getStoreState.fontFamily,
         favorite_verse: this.getStoreState.favorite_verse
       }
       const jsonString = JSON.stringify(data);
@@ -248,9 +168,9 @@ export default {
         try {
           const importedSettings = JSON.parse(e.target.result);
           this.SET_VERSION(importedSettings.version);
-          this.SET_THEMA(importedSettings.thema);
-          this.SET_FONT_SIZE(importedSettings.font_size);
-          this.SET_FONT_FAMILY(importedSettings.font_family);
+          this.SET_THEME(importedSettings.theme);
+          this.SET_FONT_SIZE(importedSettings.fontSize);
+          this.SET_FONT_FAMILY(importedSettings.fontFamily);
           this.FAVORITE_VERSE(importedSettings.favorite_verse);
           this.updates()
           this.$toast.success("Preferências atualizadas");
@@ -262,26 +182,32 @@ export default {
     },
     updates() {
       this.updateVersion()
-      this.updateThema()
+      this.updateTheme()
       this.updateFontSize()
       this.updateFontFamily()
       this.UPDATE_FAVORITE_VERSE()
+    },
+    getDBSets() {
+      this.versions = db.versions.map(version => ({ abbrev: version.abbrev, description: version.description }))
+      this.themes = db.themes
+      this.fontsFamily = db.fontsFamily
     }
   },
   computed: {
     ...mapGetters([
       'getVersion',
-      'getThema',
+      'getTheme',
       'getFontSize',
       'getFontFamily'
     ]),
-    isFontSize() {
-      const fonts = this.fonts_size;
-      const fontIndex = fonts.indexOf(this.getFontSize);
-      return (fontIndex * 2) + 10
-    },
     getStoreState() {
       return this.$store.state
+    },
+    isFontMin() {
+      return this.getFontSize === 12 ? true : false
+    },
+    isFontMax() {
+      return this.getFontSize === 24 ? true : false
     }
   }
 }
@@ -293,5 +219,8 @@ export default {
 }
 .disabled-btn-font {
   @apply text-gray-400 dark:text-gray-500 old:text-brown-600
+}
+select {
+  @apply px-1 py-2 text-sm outline-none select-none bg-gray-50 text-gray-800 dark:bg-gray-800 dark:text-gray-50 old:bg-brown-400 old:text-brown-900 transition-all
 }
 </style>

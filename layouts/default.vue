@@ -1,5 +1,5 @@
 <template>
-  <div class="app" :class="`${getFontFamily} ${getFontSize}`">
+  <div class="app" :style="{ fontFamily: getFontFamily, fontSize: getFontSize + 'px' }">
     <Transition name="fade" mode="out-in">
       <Nuxt class="mb-auto" :key="routePath" />
     </Transition>
@@ -12,7 +12,7 @@ import { mapGetters, mapMutations } from 'vuex'
 export default {
   created() {
     this.UPDATE_VERSION()
-    this.UPDATE_THEMA()
+    this.UPDATE_THEME()
     this.UPDATE_FONT_SIZE()
     this.UPDATE_FONT_FAMILY()
   },
@@ -22,18 +22,18 @@ export default {
       this.getWindowHeight()
     })
     this.SET_VERSION(this.getVersion)
-    this.SET_THEMA(this.getThema)
+    this.SET_THEME(this.getTheme)
     this.SET_FONT_SIZE(this.getFontSize)
     this.SET_FONT_FAMILY(this.getFontFamily)
   },
   computed: {
-    ...mapGetters(['getVersion', 'getThema', 'getFontSize', 'getFontFamily']),
+    ...mapGetters(['getVersion', 'getTheme', 'getFontSize', 'getFontFamily']),
     routePath() {
       return this.$route.path
     }
   },
   methods: {
-    ...mapMutations(['UPDATE_VERSION', 'UPDATE_THEMA', 'UPDATE_FONT_SIZE', 'UPDATE_FONT_FAMILY', 'SET_VERSION', 'SET_THEMA', 'SET_FONT_SIZE', 'SET_FONT_FAMILY']),
+    ...mapMutations(['UPDATE_VERSION', 'UPDATE_THEME', 'UPDATE_FONT_SIZE', 'UPDATE_FONT_FAMILY', 'SET_VERSION', 'SET_THEME', 'SET_FONT_SIZE', 'SET_FONT_FAMILY']),
     getWindowHeight() {
       let vh = window.innerHeight * 0.01;
       document.documentElement.style.setProperty('--vh', `${vh}px`);

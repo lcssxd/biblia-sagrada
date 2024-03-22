@@ -35,7 +35,7 @@
     </Header>
     <div class="relative overflow-y-auto h-full">
       <LoadingPage v-if="loading" />
-      <Transition name="fade" mode="out-in">
+      <Transition v-else name="fade" mode="out-in">
         <div class="h-full" :key="currentChapterKey">
           <div v-if="!getBook && !loading" class="h-full">
             <div class="flex flex-col h-full">
@@ -86,7 +86,7 @@
                       <span class="superscript">{{ verseItem.verse }}</span> <span v-html="changeTags(verseItem.text)"></span>
                     </button>
                   </div>
-                  <p class="mt-5 px-2 text-base text-gray-400 dark:text-gray-500 old:text-brown-700 select-none">{{ getDetailedInfo }}</p>
+                  <p class="mt-5 px-2 text-base text-gray-400 dark:text-gray-500 old:text-brown-700 select-none">{{ getCopyright }}</p>
                 </div>
                 <div class="flex items-center justify-between sticky bottom-2 w-full px-5">
                   <button
@@ -164,20 +164,21 @@ export default {
     ...mapActions(['toggleFavoriteVerse']),
     async loadVersionFiles() {
       const version = this.getVersion;
-      const [books, info] = await Promise.all([
-        import(`@/assets/versions/books.json`),
-        import(`@/assets/versions/infos.json`)
+      const [books, db] = await Promise.all([
+        import(`@/assets/json/books.json`),
+        import(`@/assets/json/db.json`)
       ]);
       this.books = books.default;
-      this.info = info.default;
+      let copyright = db.default.versions.find(item => item.abbrev == version).copyright
+      this.copyright = copyright
 
       if (this.isACFVersion) {
-        const verses = await import(`@/assets/versions/${version}/verses.json`);
+        const verses = await import(`@/assets/json/versions/${version}/verses.json`);
         this.verses = verses.default;
       } else {
         const [stories, verses] = await Promise.all([
-          import(`@/assets/versions/${version}/stories.json`),
-          import(`@/assets/versions/${version}/verses.json`)
+          import(`@/assets/json/versions/${version}/stories.json`),
+          import(`@/assets/json/versions/${version}/verses.json`)
         ]);
         this.stories = stories.default;
         this.verses = verses.default;
@@ -410,9 +411,9 @@ export default {
       const verses = this.filteredVerses;
       return [...new Set(verses.map(verseItem => verseItem.chapter))];
     },
-    getDetailedInfo() {
-      if (this.info && this.info[this.getVersion]) {
-        let details = this.info[this.getVersion];
+    getCopyright() {
+      if (this.copyright) {
+        let details = this.copyright;
         return `${details} Todos os direitos reservados.`;
       } else {
         return "Informação não encontrada";

@@ -27,6 +27,7 @@
 <script>
 import arrowlongleftIcon from '@/static/heroicons/mini/arrow-long-left.svg?inline'
 import newWindowIcon from '@/static/svgrepo/new-window.svg?inline'
+import db from '~/assets/json/db.json'
 export default {
   components: { 
     arrowlongleftIcon,
@@ -44,13 +45,7 @@ export default {
         { 
           type: 'array',
           title: 'Traduções',
-          value: [
-            'Almeida Corrigida Fiel, 2011',
-            'Almeida Revista e Atualizada, 1993',
-            'Nova Almeida Atualizadam, 2017',
-            'Nova Tradução na Linguagem de Hoje, 2000',
-            'Nova Versão Internacional, 1993'
-          ] 
+          value: [] 
         },
         { 
           type: 'link',
@@ -66,6 +61,9 @@ export default {
         }
       ]
     }
+  },
+  mounted() {
+    this.abouts.find(item => item.type === 'array').value = db.versions.map(version => version.description)
   }
 }
 </script>
