@@ -15,7 +15,7 @@
           <button class="outline-none" @click.prevent="copyCurrentVerse">
             <copyIcon class="w-5 h-5" />
           </button>
-          <button class="outline-none" @click.prevent="favoriteVerse(selectedVerse)">
+          <button class="outline-none" @click.prevent="favoriteVerses(selectedVerse)">
             <bookmarkSlashIcon 
               v-if="getFavoriteVerse.some(favorite => 
                   favorite?.book_number === selectedVerse[0]?.book_number && 
@@ -148,7 +148,7 @@ export default {
   async mounted() {
     await this.loadVersionFiles()
     this.UPDATE_VERSION()
-    this.UPDATE_FAVORITE_VERSE()
+    this.UPDATE_FAVORITE_VERSES()
     this.selectedSearch()
   },
   watch: {
@@ -160,7 +160,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['UPDATE_VERSION', 'UPDATE_FAVORITE_VERSE', 'SET_BOOK', 'SET_CHAPTER', 'SEARCH_VERSE']),
+    ...mapMutations(['UPDATE_VERSION', 'UPDATE_FAVORITE_VERSES', 'SET_BOOK', 'SET_CHAPTER', 'SEARCH_VERSE']),
     ...mapActions(['toggleFavoriteVerse']),
     async loadVersionFiles() {
       const version = this.getVersion;
@@ -333,7 +333,7 @@ export default {
       const uniqueTitles = [...new Set(filteredStories.map(item => item.title))];
       return uniqueTitles;
     },
-    favoriteVerse(verseItem) {
+    favoriteVerses(verseItem) {
       this.toggleFavoriteVerse(verseItem)
       this.cancelSelected()
     },

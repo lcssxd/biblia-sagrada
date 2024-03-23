@@ -51,7 +51,7 @@ export default {
   async mounted() {
     await this.loadVersionFiles();
     this.UPDATE_VERSION();
-    this.UPDATE_FAVORITE_VERSE();
+    this.UPDATE_FAVORITE_VERSES();
   },
   computed: {
     ...mapGetters(['getVersion', 'getFavoriteVerse']),
@@ -70,7 +70,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['UPDATE_VERSION', 'UPDATE_FAVORITE_VERSE', 'SET_BOOK', 'SET_CHAPTER', 'SEARCH_VERSE']),
+    ...mapMutations(['UPDATE_VERSION', 'UPDATE_FAVORITE_VERSES', 'SET_BOOK', 'SET_CHAPTER', 'SEARCH_VERSE']),
     ...mapActions(['toggleFavoriteVerse']),
     async loadVersionFiles() {
       const version = this.getVersion;

@@ -106,8 +106,8 @@ export default {
       'SET_THEME',
       'SET_FONT_SIZE',
       'SET_FONT_FAMILY',
-      'FAVORITE_VERSE',
-      'UPDATE_FAVORITE_VERSE'
+      'FAVORITE_VERSES',
+      'UPDATE_FAVORITE_VERSES'
     ]),
     changeVersion(version) {
       this.SET_VERSION(version)
@@ -145,7 +145,7 @@ export default {
         theme: this.getStoreState.theme,
         fontSize: this.getStoreState.fontSize,
         fontFamily: this.getStoreState.fontFamily,
-        favorite_verse: this.getStoreState.favorite_verse
+        favoriteVerses: this.getStoreState.favoriteVerses
       }
       const jsonString = JSON.stringify(data);
       const blob = new Blob([jsonString], { type: "application/json" });
@@ -171,7 +171,7 @@ export default {
           this.SET_THEME(importedSettings.theme);
           this.SET_FONT_SIZE(importedSettings.fontSize);
           this.SET_FONT_FAMILY(importedSettings.fontFamily);
-          this.FAVORITE_VERSE(importedSettings.favorite_verse);
+          this.FAVORITE_VERSES(importedSettings.favoriteVerses);
           this.updates()
           this.$toast.success("Preferências atualizadas");
         } catch (error) {
@@ -185,7 +185,7 @@ export default {
       this.updateTheme()
       this.updateFontSize()
       this.updateFontFamily()
-      this.UPDATE_FAVORITE_VERSE()
+      this.UPDATE_FAVORITE_VERSES()
     },
     getDBSets() {
       this.versions = db.versions.map(version => ({ abbrev: version.abbrev, description: version.description }))

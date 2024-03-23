@@ -7,7 +7,7 @@ export const state = () => ({
   fontFamily: 'auto',
   book: null,
   chapter: null,
-  favoriteVerse: [],
+  favoriteVerses: [],
   searchVerse: [],
 })
 
@@ -31,7 +31,7 @@ export const getters = {
     return state.chapter;
   },
   getFavoriteVerse(state) {
-    return state.favoriteVerse;
+    return state.favoriteVerses;
   },
   getSearchVerse(state) {
     return state.searchVerse;
@@ -94,9 +94,9 @@ export const mutations = {
     }
     localStorage.setItem('fontFamily', state.fontFamily);
   },
-  UPDATE_FAVORITE_VERSE(state) {
-    const favoriteVerse = JSON.parse(localStorage.getItem('favoriteVerse') || '[]');
-    state.favoriteVerse = favoriteVerse;
+  UPDATE_FAVORITE_VERSES(state) {
+    const favoriteVerses = JSON.parse(localStorage.getItem('favoriteVerses') || '[]');
+    state.favoriteVerses = favoriteVerses;
   },
   SET_VERSION(state, payload) {
     const validVersions = db.versions.map(version => version.abbrev);
@@ -152,9 +152,9 @@ export const mutations = {
     state.chapter = payload;
     localStorage.setItem('chapter', payload);
   },
-  FAVORITE_VERSE(state, payload) {
-    state.favoriteVerse = payload;
-    localStorage.setItem('favoriteVerse', JSON.stringify(payload));
+  FAVORITE_VERSES(state, payload) {
+    state.favoriteVerses = payload;
+    localStorage.setItem('favoriteVerses', JSON.stringify(payload));
   },
   SEARCH_VERSE(state, payload) {
     if (Array.isArray(payload) && payload.length === 0) {
@@ -168,7 +168,7 @@ export const mutations = {
 
 export const actions = {
   toggleFavoriteVerse({ commit, state }, verseItem) {
-    let updatedFavoriteVerse = [...state.favoriteVerse];
+    let updatedFavoriteVerse = [...state.favoriteVerses];
   
     const toggleItem = (item) => {
       const index = updatedFavoriteVerse.findIndex(favorite => 
@@ -193,7 +193,7 @@ export const actions = {
       toggleItem(verseItem);
     }
   
-    commit('FAVORITE_VERSE', updatedFavoriteVerse);
+    commit('FAVORITE_VERSES', updatedFavoriteVerse);
   }  
 }
 
