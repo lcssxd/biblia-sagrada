@@ -1,12 +1,12 @@
 <template>
   <div class="flex flex-col h-full justify-between overflow-hidden">
     <Header>
-      <h1 class="text-lg">{{ title }}</h1>
+      <h1>{{ title }}</h1>
     </Header>
     <div class="overflow-y-auto h-full">
       <div class="flex flex-col">
         <div class="title">Opções de Fonte</div>
-        <div class="divider-y text-sm">
+        <div class="divider-y">
           <div class="flex items-center justify-between p-2 outline-none select-none text-left">
             <div>
               <span>Tamanho da Fonte</span>
@@ -52,22 +52,22 @@
       </div>
       <div class="flex flex-col">
         <div class="title">Exportar/Importar Preferências</div>
-        <div class="divider-y text-sm">
+        <div class="divider-y">
           <button class="relative p-2 outline-none select-none text-left" @click.prevent="exportSettings()">
-            <span class="text-sm">Exportar</span>
+            <span>Exportar</span>
           </button>
           <input ref="importSets" type="file" class="hidden" @change="handleFileUpload($event)">
           <button class="relative p-2 outline-none select-none text-left" @click.prevent="importSettings()">
-            <span class="text-sm">Importar</span>
+            <span>Importar</span>
           </button>
         </div>
       </div>
       <div class="flex flex-col">
         <div class="title">Informações</div>
-        <div class="divider-y text-sm">
+        <div class="divider-y">
           <NuxtLink 
             to="/about"
-            class="p-2 outline-none select-none text-left text-sm"
+            class="p-2 outline-none select-none text-left"
           >Sobre</NuxtLink>
         </div>
       </div>
@@ -215,12 +215,12 @@ export default {
 
 <style scoped>
 .btn-font {
-  @apply flex outline-none transition duration-200
+  @apply flex outline-none transition duration-100
 }
 .disabled-btn-font {
-  @apply text-gray-400 dark:text-gray-500 old:text-brown-600
+  @apply text-gray-400 dark:text-gray-500 old:text-brown-400
 }
 select {
-  @apply px-1 py-2 text-sm outline-none select-none bg-gray-50 text-gray-800 dark:bg-gray-800 dark:text-gray-50 old:bg-brown-400 old:text-brown-900 transition-all
+  @apply px-1 py-2 outline-none select-none bg-gray-50 text-gray-800 dark:bg-gray-800 dark:text-gray-50 old:bg-brown-50 old:text-brown-800 transition-all duration-100
 }
 </style>

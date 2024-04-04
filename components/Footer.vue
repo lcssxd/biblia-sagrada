@@ -76,9 +76,9 @@ export default {
 
 <style scoped>
 .btn {
-  @apply flex flex-col items-center justify-center space-y-1 outline-none text-gray-600 dark:text-gray-400 old:text-brown-700 transition duration-200 select-none
+  @apply flex flex-col items-center justify-center space-y-1 outline-none text-gray-600 dark:text-gray-400 old:text-brown-600 transition-all duration-100 select-none
 }
 .btn-active {
-  @apply text-gray-800 dark:text-white old:text-brown-900
+  @apply text-gray-800 dark:text-white old:text-brown-800
 }
 </style>

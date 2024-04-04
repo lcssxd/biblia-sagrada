@@ -4,18 +4,18 @@
       <NuxtLink to="/settings" class="flex items-center cursor-pointer outline-none">
         <arrowlongleftIcon class="w-5 h-5" />
       </NuxtLink>
-      <h1 class="text-lg">{{ title }}</h1>
+      <h1>{{ title }}</h1>
     </Header>
     <div class="overflow-y-auto h-full">
       <div class="flex flex-col">
         <div v-for="(item, index) in abouts" :key="index" class="flex flex-col">
           <div class="title">{{ item.title }}</div>
-          <span v-if="item.type === 'text'" class="p-2 outline-none select-none text-left text-sm">{{ item.value }}</span>
-          <div v-if="item.type === 'array'" class="divider-y text-sm">
-            <span v-for="array in item.value" :key="array" class="p-2 outline-none select-none text-left text-sm">{{ array }}</span>
+          <span v-if="item.type === 'text'" class="p-2 outline-none select-none text-left">{{ item.value }}</span>
+          <div v-if="item.type === 'array'" class="divider-y">
+            <span v-for="array in item.value" :key="array" class="p-2 outline-none select-none text-left">{{ array }}</span>
           </div>
           <a v-if="item.type === 'link'" :href="item.value" class="flex items-center space-x-1 p-2 outline-none select-none text-left w-fit" target="_blank" rel="noopener noreferrer">
-            <span class="text-sm">{{ item.name }}</span>
+            <span>{{ item.name }}</span>
             <newWindowIcon class="w-3 h-3" />
           </a>
         </div>

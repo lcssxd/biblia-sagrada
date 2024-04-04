@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col h-full overflow-hidden">
     <Header class="flex items-center justify-between">
-      <h1 class="text-lg">{{ title }}</h1>
+      <h1>{{ title }}</h1>
       <button v-if="!loading && filteredVerses && filteredVerses.length > 0" class="cursor-pointer outline-none" @click.prevent="copyVerse()">
         <copyIcon class="w-5 h-5" />
       </button>
@@ -21,7 +21,7 @@
       <div v-if="!loading && filteredVerses && filteredVerses.length === 0" class="flex items-center justify-center h-full text-color">
         <div class="flex flex-col items-center space-y-4">
           <noSymbolIcon class="w-16 h-16" />
-          <p class="text-lg select-none">Nenhum versículo foi encontrado</p>
+          <p class="select-none">Nenhum versículo foi encontrado</p>
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col h-full overflow-hidden">
     <Header>
-      <h1 class="text-lg">{{ title }}</h1>
+      <h1>{{ title }}</h1>
     </Header>
     <div class="flex flex-col overflow-y-auto h-full">
       <LoadingPage v-if="loading" />
@@ -24,7 +24,7 @@
       <div v-if="!loading && filteredVerses && filteredVerses.length === 0" class="flex items-center justify-center h-full text-color">
         <div class="flex flex-col items-center space-y-4">
           <bookmarkIcon class="w-16 h-16" />
-          <p class="text-lg select-none">Nenhum versículo salvo</p>
+          <p class="select-none">Nenhum versículo salvo</p>
         </div>
       </div>
     </div>

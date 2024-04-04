@@ -5,7 +5,7 @@
         <button v-if="getBook && (getChapter || !getChapter )" class="cursor-pointer outline-none" @click.prevent="returnMenu">
           <arrowlongleftIcon class="w-5 h-5" />
         </button>
-        <h1 class="text-lg">{{ currentName }}</h1>
+        <h1>{{ currentName }}</h1>
       </div>
       <Transition name="fade" mode="out-in">
         <div v-if="getBook && getChapter && selectedVerse && selectedVerse.length > 0" class="flex items-center space-x-3">
@@ -78,7 +78,7 @@
                     >{{ removeTagsTitle(getUniqueVerseTitles(verseItem).join('')) }}</span>
                     <button
                       v-show="verseItem.text !== ''"
-                      class="px-2 text-left select-none outline-none mb-auto transition duration-200"
+                      class="px-2 text-left select-none outline-none mb-auto transition duration-100"
                       :class="[{ 'selected-verse' : selectedVerse.some(verse => verse.book_number === verseItem.book_number && verse.chapter === verseItem.chapter && verse.verse === verseItem.verse) }, { 'favorited-verse' : !selectedVerse.some(verse => verse.book_number === verseItem.book_number && verse.chapter === verseItem.chapter && verse.verse === verseItem.verse) && getFavoriteVerse.some(favorite => favorite?.book_number === verseItem?.book_number && favorite?.chapter === verseItem?.chapter && favorite?.verse === verseItem?.verse) }]"
                       :ref="'verse-' + verseItem.chapter + '-' + verseItem.verse"
                       @click.prevent="selectVerse(verseItem)"
@@ -86,7 +86,7 @@
                       <span class="superscript">{{ verseItem.verse }}</span> <span v-html="changeTags(verseItem.text)"></span>
                     </button>
                   </div>
-                  <p class="mt-5 px-2 text-base text-gray-400 dark:text-gray-500 old:text-brown-700 select-none">{{ getCopyright }}</p>
+                  <p class="mt-5 px-2 text-gray-400 dark:text-gray-500 old:text-brown-400 select-none">{{ getCopyright }}</p>
                 </div>
                 <div class="flex items-center justify-between sticky bottom-2 w-full px-5">
                   <button
@@ -437,9 +437,9 @@ export default {
 
 <style scoped>
 .btn-chapter {
-  @apply p-1 rounded-md bg-gray-200 dark:bg-gray-700 old:bg-brown-300 border border-gray-300 dark:border-gray-600 old:border-brown-500 outline-none select-none
+  @apply p-1 rounded-md bg-gray-200 dark:bg-gray-700 old:bg-brown-200 border border-gray-300 dark:border-gray-600 old:border-brown-300 outline-none select-none
 }
 .btn-prev-next {
-  @apply p-2 select-none outline-none transition duration-200 rounded-full text-gray-800 hover:bg-gray-800/30 dark:text-gray-50 hover:dark:bg-gray-100/30 old:text-brown-800 hover:old:bg-brown-800/30
+  @apply p-2 select-none outline-none transition duration-100 rounded-full text-gray-800 hover:bg-gray-800/30 dark:text-gray-50 hover:dark:bg-gray-100/30 old:text-brown-800 hover:old:bg-brown-800/30
 }
 </style>
