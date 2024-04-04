@@ -1,12 +1,19 @@
 <template>
   <div class="grid py-3" :style="`grid-template-columns: repeat(${menu.length}, minmax(0, 1fr));`">
-    <NuxtLink v-for="(item, index) in menu" :key="index" :to="item.link" class="btn" :exact-active-class="`btn-active`">
+    <button
+      v-for="(item, index) in menu"
+      :key="index"
+      class="btn"
+      :class="{ 'btn-active' : item.link === getRoutePath }"
+      @click.prevent="toRouterPush(item.link)"
+    >
       <component :is="item.icon" class="w-6 h-6" />
-    </NuxtLink>
+    </button>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapMutations } from 'vuex'
 import homeIcon from '@/static/heroicons/mini/home.svg?inline'
 import bookOpenIcon from '@/static/heroicons/mini/book-open.svg?inline'
 import cog8ToothIcon from '@/static/heroicons/mini/cog-8-tooth.svg?inline'
@@ -43,6 +50,25 @@ export default {
           icon: 'cog8ToothIcon'
         }
       ]
+    }
+  },
+  computed: {
+    ...mapGetters(['getBook', 'getChapter']),
+    getRoutePath() {
+      return this.$route.path
+    }
+  },
+  methods: {
+    ...mapMutations(['SET_BOOK', 'SET_CHAPTER']),
+    async toRouterPush(link) {
+      const isBiblePath = (this.getRoutePath === '/bible' && link === '/bible')
+      if (isBiblePath && this.getBook && !this.getChapter) {
+        this.SET_BOOK(null);
+      } else if (isBiblePath && this.getBook && this.getChapter) {
+        this.SET_CHAPTER(null);
+      } else {
+        this.$router.push(link);
+      }
     }
   }
 }
