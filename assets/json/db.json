@@ -50,24 +50,12 @@
       "name": "Cursiva"
     },
     {
-      "id": "fantasy",
-      "name": "Fantasia"
-    },
-    {
       "id": "monospace",
       "name": "Monoespaçada"
     },
     {
-      "id": "none",
-      "name": "Nenhuma"
-    },
-    {
       "id": "sans-serif",
       "name": "Sem Serifa"
-    },
-    {
-      "id": "system-ui",
-      "name": "Sistema"
     }
   ]
 }

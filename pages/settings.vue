@@ -11,20 +11,19 @@
             <div>
               <span>Tamanho da Fonte</span>
             </div>
-            <div class="flex items-center">
+            <div class="flex items-center space-x-2">
               <button
-                class="btn-font"
-                :class="{ 'disabled-btn-font' : isFontMax }"
-                @click.prevent="changeFontSize('+')"
-                :disabled="isFontMax"
-              >A<arrowUpIcon class="w-3 h-3" /></button>
-              <span class="px-4">{{ getFontSize }}</span>
-              <button
-                class="btn-font"
+                class="btn-font text-xs"
                 :class="{ 'disabled-btn-font' : isFontMin }"
                 @click.prevent="changeFontSize('-')"
                 :disabled="isFontMin"
-              >A<arrowDownIcon class="w-3 h-3" /></button>
+              >A</button>
+              <button
+                class="btn-font text-lg"
+                :class="{ 'disabled-btn-font' : isFontMax }"
+                @click.prevent="changeFontSize('+')"
+                :disabled="isFontMax"
+              >A</button>
             </div>
           </div>
           <select v-model="fontFamily" @change="changeFontFamily(fontFamily)">
@@ -215,7 +214,7 @@ export default {
 
 <style scoped>
 .btn-font {
-  @apply flex outline-none transition duration-100
+  @apply text-center outline-none transition duration-100 w-16 h-8 rounded-md bg-gray-200 dark:bg-gray-700 old:bg-brown-200 border border-gray-300 dark:border-gray-600 old:border-brown-300 select-none
 }
 .disabled-btn-font {
   @apply text-gray-400 dark:text-gray-500 old:text-brown-400
