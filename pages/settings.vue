@@ -214,6 +214,6 @@ export default {
   @apply text-gray-400 dark:text-gray-500 old:text-brown-400
 }
 select {
-  @apply p-2 outline-none select-none bg-gray-50 text-gray-800 dark:bg-gray-800 dark:text-gray-50 old:bg-brown-50 old:text-brown-800 transition-all duration-100
+  @apply px-1 py-3 outline-none select-none bg-gray-50 text-gray-800 dark:bg-gray-800 dark:text-gray-50 old:bg-brown-50 old:text-brown-800 transition-all duration-100
 }
 </style>
