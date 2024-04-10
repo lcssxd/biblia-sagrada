@@ -11,9 +11,19 @@ O aplicativo da Bíblia Sagrada oferece várias funcionalidades úteis, incluind
 - Seleção fácil de versículos.
 - Navegação rápida para o próximo e o versículo anterior.
 - Opções de escolha de fontes.
-- Disponibilidade das versões ACF (Almeida Corrigida Fiel), ARA (Almeida Revista e Atualizada), NAA (Nova Almeida Atualizada), NTLH (Nova Tradução na Linguagem de Hoje) e NVI (Nova Versão Internacional).
 - Tema claro, escuro e clássico para personalização.
 - Exporar e importar preferências
+- Retorno automático para o último livro e/ou capítulo visto
+
+## Versões
+
+O aplicativo possui as versões:
+
+- ACF (Almeida Corrigida Fiel)
+- ARA (Almeida Revista e Atualizada)
+- NAA (Nova Almeida Atualizada)
+- NTLH (Nova Tradução na Linguagem de Hoje)
+- NVI (Nova Versão Internacional)
 
 ## Frameworks Utilizados
 
