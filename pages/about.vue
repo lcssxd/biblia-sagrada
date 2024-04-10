@@ -46,7 +46,7 @@ export default {
         { 
           type: 'text',
           title: 'Versão',
-          value: '1.0.0'
+          value: '2.0.0'
         },
         { 
           type: 'array',
@@ -56,7 +56,7 @@ export default {
         { 
           type: 'link',
           title: 'Repositório',
-          name: 'GithHub',
+          name: 'GitHub',
           value: 'https://github.com/lcssxd/biblia-sagrada'
         },
         { 
