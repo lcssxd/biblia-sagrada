@@ -91,7 +91,7 @@ export default {
       return !this.loading && this.searchResults && this.searchResults.length > 0
     },
     notFoundResults() {
-      return !this.loading && this.searchResults && this.searchResults.length === 0
+      return !this.loading && this.searchResults && this.searchResults.length === 0 && this.searchTextSelected !== ''
     }
   },
   methods: {
