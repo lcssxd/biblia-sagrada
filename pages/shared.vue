@@ -14,7 +14,7 @@
         </span>
         <div v-for="(item, index) in filteredVerses" :key="index">
           <button class="px-2 text-left select-none outline-none" @click.prevent="goToText(item)">
-            <span class="superscript">{{ item.verse }}</span> <span v-html="changeTags(item.text)"></span>
+            <span class="superscript">{{ item.verse }}</span> <span v-html="$changeTags(item.text)"></span>
           </button>
         </div>
       </div>
@@ -149,7 +149,7 @@ export default {
     },
     copyVerse() {
       const sortedSelectedVerses = [...this.filteredVerses].sort((a, b) => a.verse - b.verse);
-      const versesText = this.removeTags(sortedSelectedVerses.map(verseItem => `${verseItem.verse} ${verseItem.text}`).join(' '));
+      const versesText = this.$removeTags(sortedSelectedVerses.map(verseItem => `${verseItem.verse} ${verseItem.text}`).join(' '));
       const verseToCopy = `"${versesText}" (${this.getBookAndChapterName})`;
 
       if (navigator.clipboard) {
@@ -171,15 +171,6 @@ export default {
       this.SET_CHAPTER(verseItem.chapter)
       this.SEARCH_VERSE(verseItem)
       this.$router.push('/bible');
-    },
-    changeTags(text) {
-      const styledText = text.replace(/<J>(.*?)<\/J>/g, '<span class="j-tag">$1</span>');
-      const cleanedText = styledText.replace(/<pb\/>|<f>.*?<\/f>|<t>|<\/t>|<br\/>|<x>.*?<\/x>/g, '').replace(/\s{2,}/g, ' ');
-      return cleanedText;
-    },
-    removeTags(text) {
-      const cleanedText = text.replace(/<pb\/>|<f>.*?<\/f>|<t>|<\/t>|<br\/>|<x>.*?<\/x>|<J>|<\/J>/g, '').replace(/\s{2,}/g, ' ');
-      return cleanedText;
     },
     cancelSelected() {
       this.SEARCH_VERSE([]);

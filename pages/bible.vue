@@ -75,7 +75,7 @@
                     <span 
                       v-if="getUniqueVerseTitles(verseItem) && getUniqueVerseTitles(verseItem).length > 0"
                       class="text-center font-bold select-none text-color-title mt-5"
-                    >{{ removeTagsTitle(getUniqueVerseTitles(verseItem).join('')) }}</span>
+                    >{{ $removeTagsTitle(getUniqueVerseTitles(verseItem).join('')) }}</span>
                     <button
                       v-show="verseItem.text !== ''"
                       class="px-2 text-left select-none outline-none mb-auto transition duration-100"
@@ -83,7 +83,7 @@
                       :ref="'verse-' + verseItem.chapter + '-' + verseItem.verse"
                       @click.prevent="selectVerse(verseItem)"
                     >
-                      <span class="superscript">{{ verseItem.verse }}</span> <span v-html="changeTags(verseItem.text)"></span>
+                      <span class="superscript">{{ verseItem.verse }}</span> <span v-html="$changeTags(verseItem.text)"></span>
                     </button>
                   </div>
                   <p class="mt-5 px-2 text-gray-400 dark:text-gray-500 old:text-brown-400 select-none">{{ getCopyright }}</p>
@@ -212,7 +212,7 @@ export default {
     },
     copyCurrentVerse() {
       const sortedSelectedVerses = [...this.selectedVerse].sort((a, b) => a.verse - b.verse);
-      const versesText = this.removeTags(sortedSelectedVerses.map(verseItem => `${verseItem.verse} ${verseItem.text}`).join(' '));
+      const versesText = this.$removeTags(sortedSelectedVerses.map(verseItem => `${verseItem.verse} ${verseItem.text}`).join(' '));
 
       let referenceGroups = [];
       let currentGroup = [];
@@ -256,7 +256,7 @@ export default {
       const bookNumber = this.getBook?.book_number;
       const chapterNumber = this.getChapter;
       const sortedSelectedVerses = [...this.selectedVerse].sort((a, b) => a.verse - b.verse);
-      const versesText = this.removeTags(sortedSelectedVerses.map(verseItem => `${verseItem.verse} ${verseItem.text}`).join(' '));
+      const versesText = this.$removeTags(sortedSelectedVerses.map(verseItem => `${verseItem.verse} ${verseItem.text}`).join(' '));
 
       let referenceGroups = [];
       let currentGroup = [];
@@ -342,19 +342,6 @@ export default {
         this.selectedVerse = [...this.getSearchVerse]
         this.scrollToSelectedVerse();
       }
-    },
-    changeTags(text) {
-      const styledText = text.replace(/<J>(.*?)<\/J>/g, '<span class="j-tag">$1</span>');
-      const cleanedText = styledText.replace(/<pb\/>|<f>.*?<\/f>|<t>|<\/t>|<br\/>|<x>.*?<\/x>/g, '').replace(/\s{2,}/g, ' ');
-      return cleanedText;
-    },
-    removeTags(text) {
-      const cleanedText = text.replace(/<pb\/>|<f>.*?<\/f>|<t>|<\/t>|<br\/>|<x>.*?<\/x>|<J>|<\/J>/g, '').replace(/\s{2,}/g, ' ');
-      return cleanedText;
-    },
-    removeTagsTitle(text) {
-      const cleanedText = text.replace(/<pb\/>|<f>.*?<\/f>|<t>|<\/t>|<br\/>|<x>.*?<\/x>|<J>|<\/J>|—|;|,/g, '').replace(/\s{2,}/g, ' ');
-      return cleanedText;
     },
     scrollToSelectedVerse() {
       this.$nextTick(() => {

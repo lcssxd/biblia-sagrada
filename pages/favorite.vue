@@ -18,7 +18,7 @@
               </button>
             </div>
           </div>
-          <button class="select-none text-left" @click.prevent="goToText(item)"><span v-html="changeTags(item.text)"></span></button>
+          <button class="select-none text-left" @click.prevent="goToText(item)"><span v-html="$changeTags(item.text)"></span></button>
         </div>
       </div>
       <div v-if="!loading && filteredVerses && filteredVerses.length === 0" class="flex items-center justify-center h-full text-color">
@@ -96,7 +96,7 @@ export default {
       return `${foundBook.name} ${chapter}:${verse}`;
     },
     copyVerse(verseItem) {
-      let verseToCopy = `"${this.removeTags(verseItem.text)}" (${this.getBookAndChapterName(verseItem.book_number, verseItem.chapter, verseItem.verse)})`;
+      let verseToCopy = `"${this.$removeTags(verseItem.text)}" (${this.getBookAndChapterName(verseItem.book_number, verseItem.chapter, verseItem.verse)})`;
 
       if (navigator.clipboard) {
         navigator.clipboard.writeText(verseToCopy)
@@ -117,15 +117,6 @@ export default {
       this.SET_CHAPTER(verseItem.chapter)
       this.SEARCH_VERSE(verseItem)
       this.$router.push('/bible');
-    },
-    changeTags(text) {
-      const styledText = text.replace(/<J>(.*?)<\/J>/g, '<span class="j-tag">$1</span>');
-      const cleanedText = styledText.replace(/<pb\/>|<f>.*?<\/f>|<t>|<\/t>|<br\/>|<x>.*?<\/x>/g, '').replace(/\s{2,}/g, ' ');
-      return cleanedText;
-    },
-    removeTags(text) {
-      const cleanedText = text.replace(/<pb\/>|<f>.*?<\/f>|<t>|<\/t>|<br\/>|<x>.*?<\/x>|<J>|<\/J>/g, '').replace(/\s{2,}/g, ' ');
-      return cleanedText;
     },
     cancelSelected() {
       this.SEARCH_VERSE([]);     

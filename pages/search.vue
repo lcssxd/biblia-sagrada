@@ -139,7 +139,7 @@ export default {
       const regex = new RegExp(`(${this.searchTextSelected})`, 'gi');
       const highlightedText = text.replace(regex, `<span class="selected-verse">$1</span>`);
       const styledText = highlightedText.replace(/<J>(.*?)<\/J>/g, '<span class="j-tag">$1</span>');
-      const cleanedText = styledText.replace(/<pb\/>|<f>.*?<\/f>|<t>|<\/t>|<br\/>|<x>.*?<\/x>/g, '').replace(/\s{2,}/g, ' ');
+      const cleanedText = styledText.replace(/<pb\/>|<f>.*?<\/f>|<t>|<\/t>|<br\/>|<x>.*?<\/x>|<font size=-1>|<\/font>|<i>.*?<\/i>/g, '').replace(/\s{2,}/g, ' ');
 
       return cleanedText;
     },
