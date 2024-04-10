@@ -12,13 +12,11 @@
         <input
           type="search"
           name="Search"
-          placeholder="Procurar..."
           v-model="name"
-          class="w-full py-2 pl-10 pr-2 border-b bg-transparent border-gray-200 dark:border-gray-600 old:border-brown-200 placeholder-color outline-none"
+          class="w-full py-2 pl-10 pr-2 border-b bg-transparent border-gray-200 dark:border-gray-600 old:border-brown-200 outline-none"
           required
           autofocus
           autocomplete="off"
-          @keyup.enter="searchText"
         >
       </div>
     </fieldset>

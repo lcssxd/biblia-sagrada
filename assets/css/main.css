@@ -20,10 +20,6 @@
   @apply text-black dark:text-white old:text-brown-950
 }
 
-.placeholder-color {
-  @apply placeholder:text-gray-500 placeholder:dark:text-gray-400 placeholder:old:text-brown-500
-}
-
 .divider-y {
   @apply flex flex-col divide-y divide-gray-200 dark:divide-gray-600 old:divide-brown-200
 }
