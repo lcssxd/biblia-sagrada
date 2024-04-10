@@ -1,5 +1,5 @@
 <template>
-  <div class="app" :style="{ fontFamily: getFontFamily, fontSize: getFontSize + 'px' }">
+  <div class="app" :style="{ fontFamily: getFontFamily, fontSize: `${getFontSize}px`, lineHeight: `${getLineHeight}px` }">
     <Transition name="fade" mode="out-in">
       <Nuxt class="mb-auto" :key="routePath" />
     </Transition>
@@ -30,6 +30,19 @@ export default {
     ...mapGetters(['getVersion', 'getTheme', 'getFontSize', 'getFontFamily']),
     routePath() {
       return this.$route.path
+    },
+    getLineHeight() {
+      const fontSize = this.getFontSize
+      const height = {
+        12: 16,
+        14: 20,
+        16: 24,
+        18: 28,
+        20: 30,
+        22: 33,
+        24: 36
+      }
+      return height[fontSize];
     }
   },
   methods: {

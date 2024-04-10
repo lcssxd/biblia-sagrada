@@ -15,13 +15,13 @@
               <button
                 class="btn-font text-xs"
                 :class="{ 'disabled-btn-font' : isFontMin }"
-                @click.prevent="changeFontSize('-')"
+                @click.prevent="changeFontSize('decrease')"
                 :disabled="isFontMin"
               >A</button>
               <button
                 class="btn-font text-lg"
                 :class="{ 'disabled-btn-font' : isFontMax }"
-                @click.prevent="changeFontSize('+')"
+                @click.prevent="changeFontSize('increase')"
                 :disabled="isFontMax"
               >A</button>
             </div>
@@ -112,10 +112,8 @@ export default {
       this.SET_THEME(theme)
       this.updateTheme()
     },
-    changeFontSize(type) {
-      let fontSize = this.fontSize;
-      let fontResult = type === '+' ? fontSize + 1 : fontSize - 1;
-      this.SET_FONT_SIZE(fontResult);
+    changeFontSize(action) {
+      this.SET_FONT_SIZE(this.fontSize + (action === 'increase' ? 2 : -2));
       this.updateFontSize();
     },
     changeFontFamily(font) {

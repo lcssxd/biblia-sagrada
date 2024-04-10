@@ -3,7 +3,7 @@ import db from '~/assets/json/db.json'
 export const state = () => ({
   version: 'ARA',
   theme: 'dark',
-  fontSize: 12,
+  fontSize: 18,
   fontFamily: 'auto',
   book: null,
   chapter: null,
@@ -134,12 +134,18 @@ export const mutations = {
   },
   SET_FONT_SIZE(state, payload) {
     const fontMin = 12, fontMax = 24;
-    const fontSize = Number(payload);
-
-    if (fontSize >= fontMin && fontSize <= fontMax) {
-      state.fontSize = fontSize;
-      localStorage.setItem('fontSize', String(fontSize));
+    let fontSize = Number(payload);
+  
+    if (isNaN(fontSize)) {
+      fontSize = fontMin;
+    } else if (fontSize < fontMin) {
+      fontSize = fontMin;
+    } else if (fontSize > fontMax) {
+      fontSize = fontMax;
     }
+  
+    state.fontSize = fontSize;
+    localStorage.setItem('fontSize', String(fontSize));
   },
   SET_FONT_FAMILY(state, payload) {
     const validFontsFamily = db.fontsFamily.map(fontFamily => fontFamily.id);
