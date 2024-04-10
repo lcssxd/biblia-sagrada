@@ -145,6 +145,10 @@ export default {
       selectedVerse: [],
     };
   },
+  created() {
+    this.UPDATE_BOOK()
+    this.UPDATE_CHAPTER()
+  },
   async mounted() {
     await this.loadVersionFiles()
     this.UPDATE_VERSION()
@@ -160,7 +164,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['UPDATE_VERSION', 'UPDATE_FAVORITE_VERSES', 'SET_BOOK', 'SET_CHAPTER', 'SEARCH_VERSE']),
+    ...mapMutations(['UPDATE_VERSION', 'UPDATE_BOOK', 'UPDATE_CHAPTER', 'UPDATE_FAVORITE_VERSES', 'SET_BOOK', 'SET_CHAPTER', 'SEARCH_VERSE']),
     ...mapActions(['toggleFavoriteVerse']),
     async loadVersionFiles() {
       const version = this.getVersion;

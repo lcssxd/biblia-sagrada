@@ -39,13 +39,6 @@ export const getters = {
 }
 
 export const mutations = {
-  UPDATE(state) {
-    const book = localStorage.getItem('book');
-    const chapter = localStorage.getItem('chapter');
-
-    state.book = book;
-    state.chapter = chapter;
-  },
   UPDATE_VERSION(state) {
     const version = localStorage.getItem('version');
     const validVersions = db.versions.map(version => version.abbrev);
@@ -93,6 +86,18 @@ export const mutations = {
       state.fontFamily = validFontsFamily[0];
     }
     localStorage.setItem('fontFamily', state.fontFamily);
+  },
+  UPDATE_BOOK(state) {
+    const book = JSON.parse(localStorage.getItem('book'));
+    if (book) {
+      state.book = book;
+    }
+  },
+  UPDATE_CHAPTER(state) {
+    const chapter = localStorage.getItem('chapter');
+    if (chapter) {
+      state.chapter = Number(chapter);
+    }
   },
   UPDATE_FAVORITE_VERSES(state) {
     const favoriteVerses = JSON.parse(localStorage.getItem('favoriteVerses') || '[]');
@@ -146,11 +151,11 @@ export const mutations = {
   },
   SET_BOOK(state, payload) {
     state.book = payload;
-    localStorage.setItem('book', payload);
+    localStorage.setItem('book', JSON.stringify(payload));
   },
   SET_CHAPTER(state, payload) {
     state.chapter = payload;
-    localStorage.setItem('chapter', payload);
+    localStorage.setItem('chapter', String(payload));
   },
   FAVORITE_VERSES(state, payload) {
     state.favoriteVerses = payload;
