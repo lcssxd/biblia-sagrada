@@ -76,12 +76,8 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
-import arrowlongleftIcon from '@/static/heroicons/mini/arrow-long-left.svg?inline'
-import arrowUpIcon from '@/static/heroicons/mini/arrow-up.svg?inline'
-import arrowDownIcon from '@/static/heroicons/mini/arrow-down.svg?inline'
 import db from '~/assets/json/db.json'
 export default {
-  components: { arrowlongleftIcon, arrowUpIcon, arrowDownIcon },
   data() {
     return {
       title: 'Configurações',
@@ -220,6 +216,6 @@ export default {
   @apply text-gray-400 dark:text-gray-500 old:text-brown-400
 }
 select {
-  @apply px-1 py-2 outline-none select-none bg-gray-50 text-gray-800 dark:bg-gray-800 dark:text-gray-50 old:bg-brown-50 old:text-brown-800 transition-all duration-100
+  @apply p-2 outline-none select-none bg-gray-50 text-gray-800 dark:bg-gray-800 dark:text-gray-50 old:bg-brown-50 old:text-brown-800 transition-all duration-100
 }
 </style>
