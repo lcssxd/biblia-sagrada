@@ -10,10 +10,10 @@ O aplicativo da Bíblia Sagrada oferece várias funcionalidades úteis, incluind
 - Capacidade de salvar versículos.
 - Seleção fácil de versículos.
 - Navegação rápida para o próximo e o versículo anterior.
-- Opções de escolha de fontes.
+- Opções de escolha de fontes e seu tamanho.
 - Tema claro, escuro e clássico para personalização.
-- Exporar e importar preferências
-- Retorno automático para o último livro e/ou capítulo visto
+- Exportar e importar preferências.
+- Retorno automático para o último livro e/ou capítulo visto.
 
 ## Versões
 
