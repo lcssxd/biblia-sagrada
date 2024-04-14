@@ -1,12 +1,13 @@
 <template>
   <div class="flex flex-col h-full justify-between overflow-hidden">
     <Header class="flex items-center justify-between">
-      <div class="flex items-center space-x-2">
-        <button v-if="getBook && (getChapter || !getChapter )" class="cursor-pointer outline-none" @click.prevent="returnMenu">
-          <arrowlongleftIcon class="w-5 h-5" />
-        </button>
+      <button class="flex items-center space-x-2 outline-none"
+        :class="getBook && (getChapter || !getChapter ) ? 'cursor-pointer' : 'cursor-default'"
+        @click.prevent="returnMenu"
+      >
+        <arrowlongleftIcon v-if="getBook && (getChapter || !getChapter )" class="w-5 h-5" />
         <h1>{{ currentName }}</h1>
-      </div>
+      </button>
       <Transition name="fade" mode="out-in">
         <div v-if="getBook && getChapter && selectedVerse && selectedVerse.length > 0" class="flex items-center space-x-3">
           <button class="outline-none" @click.prevent="selectAllVerses">
