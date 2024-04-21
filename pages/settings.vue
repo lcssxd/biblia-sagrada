@@ -17,13 +17,13 @@
                 :class="{ 'disabled-btn-font' : isFontMin }"
                 @click.prevent="changeFontSize('decrease')"
                 :disabled="isFontMin"
-              >A</button>
+              ><span class="absolute bottom-1 inset-x-0">A</span></button>
               <button
                 class="btn-font text-lg"
                 :class="{ 'disabled-btn-font' : isFontMax }"
                 @click.prevent="changeFontSize('increase')"
                 :disabled="isFontMax"
-              >A</button>
+              ><span class="absolute bottom-0 inset-x-0">A</span></button>
             </div>
           </div>
           <select v-model="fontFamily" @change="changeFontFamily(fontFamily)">
@@ -208,7 +208,7 @@ export default {
 
 <style scoped>
 .btn-font {
-  @apply text-center outline-none transition duration-100 w-16 h-8 rounded-md bg-gray-200 dark:bg-gray-700 old:bg-brown-200 border border-gray-300 dark:border-gray-600 old:border-brown-300 select-none
+  @apply relative outline-none transition duration-100 w-10 h-8 rounded-md bg-gray-200 dark:bg-gray-700 old:bg-brown-200 border border-gray-300 dark:border-gray-600 old:border-brown-300 select-none
 }
 .disabled-btn-font {
   @apply text-gray-400 dark:text-gray-500 old:text-brown-400

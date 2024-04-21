@@ -80,7 +80,7 @@
                     <button
                       v-show="verseItem.text !== ''"
                       class="px-2 text-left select-none outline-none mb-auto transition duration-100"
-                      :class="[{ 'selected-verse' : selectedVerse.some(verse => verse.book_number === verseItem.book_number && verse.chapter === verseItem.chapter && verse.verse === verseItem.verse) }, { 'favorited-verse' : !selectedVerse.some(verse => verse.book_number === verseItem.book_number && verse.chapter === verseItem.chapter && verse.verse === verseItem.verse) && getFavoriteVerse.some(favorite => favorite?.book_number === verseItem?.book_number && favorite?.chapter === verseItem?.chapter && favorite?.verse === verseItem?.verse) }]"
+                      :class="[{'selected-verse' : selectedVerse.some(verse => verse.book_number === verseItem.book_number && verse.chapter === verseItem.chapter && verse.verse === verseItem.verse)}, {'favorited-verse' : !selectedVerse.some(verse => verse.book_number === verseItem.book_number && verse.chapter === verseItem.chapter && verse.verse === verseItem.verse) && getFavoriteVerse.some(favorite => favorite?.book_number === verseItem?.book_number && favorite?.chapter === verseItem?.chapter && favorite?.verse === verseItem?.verse)}]"
                       :ref="'verse-' + verseItem.chapter + '-' + verseItem.verse"
                       @click.prevent="selectVerse(verseItem)"
                     >
