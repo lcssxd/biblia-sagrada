@@ -2,11 +2,11 @@ export default (context, inject) => {
   const cleanText = (text, extraPatterns = []) => {
     const basePattern = /<pb\/>|<f>.*?<\/f>|<t>|<\/t>|<br\/>|<x>.*?<\/x>|<font size=-1>|<\/font>|<i>.*?<\/i>/g;
     let finalPattern = basePattern;
-    
+
     if (extraPatterns.length) {
-      finalPattern = new RegExp(`${basePattern.source}|${extraPatterns.join('|')}`, 'g');
+      finalPattern = new RegExp(`${basePattern.source}|${extraPatterns.map(pattern => pattern.source).join('|')}`, 'g');
     }
-    
+
     return text.replace(finalPattern, '').replace(/\s{2,}/g, ' ');
   };
 
@@ -16,11 +16,11 @@ export default (context, inject) => {
   };
 
   const removeTags = (text) => {
-    return cleanText(text, [/|<J>|<\/J>/g]);
+    return cleanText(text, [/<J>/g, /<\/J>/g]);
   };
 
   const removeTagsTitle = (text) => {
-    return cleanText(text, [/|<J>|<\/J>|—|;|,/g]);
+    return cleanText(text, [/<J>/g, /<\/J>/g, /—/g, /;/g, /,/g, /\(.*?\)/g]);
   };
 
   inject('changeTags', changeTags);
