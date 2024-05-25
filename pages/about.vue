@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col h-full overflow-hidden">
     <Header>
-      <NuxtLink to="/settings" class="flex items-center space-x-2 cursor-pointer outline-none">
+      <NuxtLink to="/settings" class="flex items-center space-x-2 cursor-pointer outline-none w-fit">
         <arrowlongleftIcon class="w-5 h-5" />
         <h1>{{ title }}</h1>
       </NuxtLink>
