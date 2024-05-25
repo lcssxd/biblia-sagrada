@@ -1,10 +1,10 @@
 <template>
   <div class="flex flex-col h-full overflow-hidden">
-    <Header class="flex items-center space-x-2">
-      <NuxtLink to="/settings" class="flex items-center cursor-pointer outline-none">
+    <Header>
+      <NuxtLink to="/settings" class="flex items-center space-x-2 cursor-pointer outline-none">
         <arrowlongleftIcon class="w-5 h-5" />
+        <h1>{{ title }}</h1>
       </NuxtLink>
-      <h1>{{ title }}</h1>
     </Header>
     <div class="overflow-y-auto h-full">
       <div class="flex flex-col">
