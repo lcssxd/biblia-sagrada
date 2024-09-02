@@ -64,7 +64,7 @@
       <div class="flex flex-col">
         <div class="title">Informações</div>
         <div class="divider-y">
-          <NuxtLink 
+          <NuxtLink
             to="/about"
             class="p-2 outline-none select-none text-left"
           >Sobre</NuxtLink>
@@ -208,7 +208,7 @@ export default {
 
 <style scoped>
 .btn-font {
-  @apply relative outline-none transition duration-100 w-10 h-8 rounded-md bg-gray-200 dark:bg-gray-700 old:bg-brown-200 border border-gray-300 dark:border-gray-600 old:border-brown-300 select-none
+  @apply relative outline-none transition duration-100 w-10 h-8 bg-gray-200 dark:bg-gray-700 old:bg-brown-200 border border-gray-300 dark:border-gray-600 old:border-brown-300 select-none
 }
 .disabled-btn-font {
   @apply text-gray-400 dark:text-gray-500 old:text-brown-400

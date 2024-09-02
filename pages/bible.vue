@@ -17,11 +17,11 @@
             <copyIcon class="w-5 h-5" />
           </button>
           <button class="outline-none" @click.prevent="favoriteVerses(selectedVerse)">
-            <bookmarkSlashIcon 
-              v-if="getFavoriteVerse.some(favorite => 
-                  favorite?.book_number === selectedVerse[0]?.book_number && 
-                  favorite?.chapter === selectedVerse[0]?.chapter && 
-                  favorite?.verse === selectedVerse[0]?.verse)" 
+            <bookmarkSlashIcon
+              v-if="getFavoriteVerse.some(favorite =>
+                  favorite?.book_number === selectedVerse[0]?.book_number &&
+                  favorite?.chapter === selectedVerse[0]?.chapter &&
+                  favorite?.verse === selectedVerse[0]?.verse)"
               class="w-5 h-5" />
             <bookmarkIcon v-else class="w-5 h-5" />
           </button>
@@ -42,7 +42,7 @@
             <div class="flex flex-col h-full">
               <div class="divider-y">
                 <h2 class="sticky top-0 title">Antigo Testamento</h2>
-                <button 
+                <button
                   v-for="(item, index) in filteredOldTestament" :key="index"
                   class="text-left font-normal p-2 outline-none select-none"
                   @click.prevent="SET_BOOK(item)"
@@ -51,7 +51,7 @@
               </div>
               <div class="divider-y">
                 <h2 class="sticky top-0 title">Novo Testamento</h2>
-                <button 
+                <button
                   v-for="(item, index) in filteredNewTestament" :key="index"
                   class="text-left font-normal p-2 outline-none select-none"
                   @click.prevent="SET_BOOK(item)"
@@ -73,7 +73,7 @@
               <div class="flex flex-col space-y-2 overflow-y-auto h-full relative" ref="scrollContainer">
                 <div class="flex flex-col mb-auto">
                   <div v-for="verseItem in filteredChapter" :key="verseItem.id" class="flex flex-col">
-                    <span 
+                    <span
                       v-if="getUniqueVerseTitles(verseItem) && getUniqueVerseTitles(verseItem).length > 0"
                       class="text-center font-bold select-none text-color-title mt-5"
                     >{{ $removeTagsTitle(getUniqueVerseTitles(verseItem).join('')) }}</span>
@@ -123,7 +123,7 @@ import bookmarkSlashIcon from '@/static/heroicons/mini/bookmark-slash.svg?inline
 import shareIcon from '@/static/heroicons/mini/share.svg?inline';
 import LoadingPage from '~/components/Loading.vue'
 export default {
-  components: { 
+  components: {
     arrowlongleftIcon,
     selectAllIcon,
     copyIcon,
@@ -243,7 +243,7 @@ export default {
       }).join(', ');
 
       const verseToCopy = `"${versesText}" (${this.currentName}:${reference})`;
-      
+
       if (navigator.clipboard) {
         navigator.clipboard.writeText(verseToCopy)
           .then(() => {
@@ -394,8 +394,8 @@ export default {
         return [];
       }
 
-      return this.verses.filter(verseItem => 
-        verseItem.book_number === this.getBook.book_number && 
+      return this.verses.filter(verseItem =>
+        verseItem.book_number === this.getBook.book_number &&
         verseItem.chapter === this.getChapter
       ).map(o => ({ ...o, select: false }));
     },
@@ -429,7 +429,7 @@ export default {
 
 <style scoped>
 .btn-chapter {
-  @apply p-1 rounded-md bg-gray-200 dark:bg-gray-700 old:bg-brown-200 border border-gray-300 dark:border-gray-600 old:border-brown-300 outline-none select-none
+  @apply p-1 bg-gray-200 dark:bg-gray-700 old:bg-brown-200 border border-gray-300 dark:border-gray-600 old:border-brown-300 outline-none select-none
 }
 .btn-prev-next {
   @apply p-2 select-none outline-none transition duration-100 rounded-full text-gray-800 hover:bg-gray-800/30 dark:text-gray-50 hover:dark:bg-gray-100/30 old:text-brown-800 hover:old:bg-brown-800/30
