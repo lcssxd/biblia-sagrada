@@ -1,9 +1,11 @@
 <template>
   <div class="app" :style="{ fontFamily: getFontFamily, fontSize: `${getFontSize}px`, lineHeight: `${getLineHeight}px` }">
-    <Transition name="fade" mode="out-in">
-      <Nuxt class="mb-auto" :key="routePath" />
-    </Transition>
-    <Footer />
+    <div class="body">
+      <Transition name="fade" mode="out-in">
+        <Nuxt class="mb-auto" :key="routePath" />
+      </Transition>
+      <Footer />
+    </div>
   </div>
 </template>
 
@@ -62,7 +64,11 @@ export default {
 }
 
 .app {
-  @apply flex flex-col h-full-screen w-full justify-between min-w-[320px] bg-gray-50 text-gray-800 dark:bg-gray-800 dark:text-gray-50 old:bg-brown-50 old:text-brown-800 transition-all duration-100;
+  @apply flex justify-center h-full-screen min-w-80 bg-gray-50/75 dark:bg-gray-800/75 old:bg-brown-50/75
+}
+
+.body {
+  @apply flex flex-col h-full w-full max-w-2xl bg-gray-50 text-gray-800 dark:bg-gray-800 dark:text-gray-50 old:bg-brown-50 old:text-brown-800 transition-all duration-100;
 }
 
 .fade-enter-active,
