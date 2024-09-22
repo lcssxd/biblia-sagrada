@@ -2,7 +2,7 @@
   <div class="flex flex-col h-full overflow-hidden">
     <Header>
       <NuxtLink to="/settings" class="flex items-center space-x-2 cursor-pointer outline-none w-fit">
-        <arrowlongleftIcon class="w-5 h-5" />
+        <arrowlongleftIcon class="size-5" />
         <h1>{{ title }}</h1>
       </NuxtLink>
     </Header>
@@ -22,7 +22,7 @@
             rel="noopener noreferrer"
           >
             <span>{{ item.name }}</span>
-            <newWindowIcon class="w-3 h-3" />
+            <newWindowIcon class="size-3" />
           </a>
         </div>
       </div>
@@ -35,7 +35,7 @@ import arrowlongleftIcon from '@/static/heroicons/mini/arrow-long-left.svg?inlin
 import newWindowIcon from '@/static/svgrepo/new-window.svg?inline'
 import db from '~/assets/json/db.json'
 export default {
-  components: { 
+  components: {
     arrowlongleftIcon,
     newWindowIcon
   },
@@ -43,23 +43,23 @@ export default {
     return {
       title: 'Sobre',
       abouts: [
-        { 
+        {
           type: 'text',
           title: 'Versão',
           value: '2.0.0'
         },
-        { 
+        {
           type: 'array',
           title: 'Traduções',
-          value: [] 
+          value: []
         },
-        { 
+        {
           type: 'link',
           title: 'Repositório',
           name: 'GitHub',
           value: 'https://github.com/lcssxd/biblia-sagrada'
         },
-        { 
+        {
           type: 'link',
           title: 'Contato',
           name: 'WhatsApp',

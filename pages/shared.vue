@@ -3,7 +3,7 @@
     <Header class="flex items-center justify-between">
       <h1>{{ title }}</h1>
       <button v-if="!loading && filteredVerses && filteredVerses.length > 0" class="cursor-pointer outline-none" @click.prevent="copyVerse()">
-        <copyIcon class="w-5 h-5" />
+        <copyIcon class="size-5" />
       </button>
     </Header>
     <div class="flex flex-col overflow-y-auto h-full">
@@ -20,7 +20,7 @@
       </div>
       <div v-if="!loading && filteredVerses && filteredVerses.length === 0" class="flex items-center justify-center h-full text-color">
         <div class="flex flex-col items-center space-y-4">
-          <noSymbolIcon class="w-16 h-16" />
+          <noSymbolIcon class="size-16" />
           <p class="select-none">Nenhum versículo foi encontrado</p>
         </div>
       </div>
@@ -91,10 +91,10 @@ export default {
         return [];
       }
 
-      return this.verses.filter(verseItem => 
-        this.getSharedVerse.some(shared => 
-          shared.book_number === verseItem.book_number && 
-          shared.chapter === verseItem.chapter && 
+      return this.verses.filter(verseItem =>
+        this.getSharedVerse.some(shared =>
+          shared.book_number === verseItem.book_number &&
+          shared.chapter === verseItem.chapter &&
           shared.verse === verseItem.verse
         )
       );

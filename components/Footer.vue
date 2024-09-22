@@ -7,7 +7,7 @@
       :class="{ 'btn-active' : item.link === getRoutePath }"
       @click.prevent="toRouterPush(item.link)"
     >
-      <component :is="item.icon" class="w-6 h-6" />
+      <component :is="item.icon" class="size-6" />
     </button>
   </div>
 </template>

@@ -5,16 +5,16 @@
         :class="getBook && (getChapter || !getChapter ) ? 'cursor-pointer' : 'cursor-default'"
         @click.prevent="returnMenu"
       >
-        <arrowlongleftIcon v-if="getBook && (getChapter || !getChapter )" class="w-5 h-5" />
+        <arrowlongleftIcon v-if="getBook && (getChapter || !getChapter )" class="size-5" />
         <h1>{{ currentName }}</h1>
       </button>
       <Transition name="fade" mode="out-in">
         <div v-if="getBook && getChapter && selectedVerse && selectedVerse.length > 0" class="flex items-center space-x-3">
           <button class="outline-none" @click.prevent="selectAllVerses">
-            <selectAllIcon class="w-5 h-5" />
+            <selectAllIcon class="size-5" />
           </button>
           <button class="outline-none" @click.prevent="copyCurrentVerse">
-            <copyIcon class="w-5 h-5" />
+            <copyIcon class="size-5" />
           </button>
           <button class="outline-none" @click.prevent="favoriteVerses(selectedVerse)">
             <bookmarkSlashIcon
@@ -22,14 +22,14 @@
                   favorite?.book_number === selectedVerse[0]?.book_number &&
                   favorite?.chapter === selectedVerse[0]?.chapter &&
                   favorite?.verse === selectedVerse[0]?.verse)"
-              class="w-5 h-5" />
-            <bookmarkIcon v-else class="w-5 h-5" />
+              class="size-5" />
+            <bookmarkIcon v-else class="size-5" />
           </button>
           <button class="outline-none" @click.prevent="shareVerse">
-            <shareIcon class="w-5 h-5" />
+            <shareIcon class="size-5" />
           </button>
           <button class="outline-none" @click.prevent="cancelSelected">
-            <xMarkIcon class="w-5 h-5" />
+            <xMarkIcon class="size-5" />
           </button>
         </div>
       </Transition>
@@ -94,12 +94,12 @@
                     class="btn-prev-next"
                     :class="{ 'invisible' : isFistChapter }"
                     @click.prevent="prevChapter()"
-                  ><chevronLeftIcon class="w-6 h-6" /></button>
+                  ><chevronLeftIcon class="size-6" /></button>
                   <button
                     class="btn-prev-next"
                     :class="{ 'invisible' : isLastChapter }"
                     @click.prevent="nextChapter()"
-                  ><chevronRightIcon class="w-6 h-6" /></button>
+                  ><chevronRightIcon class="size-6" /></button>
                 </div>
               </div>
             </div>

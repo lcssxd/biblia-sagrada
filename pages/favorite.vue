@@ -11,10 +11,10 @@
             <span class="font-semibold select-none">{{ getBookAndChapterName(item.book_number, item.chapter, item.verse) }}</span>
             <div class="flex items-center space-x-2">
               <button class="cursor-pointer outline-none" @click.prevent="copyVerse(item)">
-                <copyIcon class="w-5 h-5" />
+                <copyIcon class="size-5" />
               </button>
               <button class="cursor-pointer outline-none" @click.prevent="toggleFavoriteVerse(item)">
-                <bookmarkSlashIcon class="w-5 h-5" />
+                <bookmarkSlashIcon class="size-5" />
               </button>
             </div>
           </div>
@@ -23,7 +23,7 @@
       </div>
       <div v-if="!loading && filteredVerses && filteredVerses.length === 0" class="flex items-center justify-center h-full text-color">
         <div class="flex flex-col items-center space-y-4">
-          <bookmarkIcon class="w-16 h-16" />
+          <bookmarkIcon class="size-16" />
           <p class="select-none">Nenhum versículo salvo</p>
         </div>
       </div>
@@ -60,10 +60,10 @@ export default {
         return [];
       }
 
-      return this.verses.filter(verseItem => 
-        this.getFavoriteVerse.some(favorite => 
-          favorite.book_number === verseItem.book_number && 
-          favorite.chapter === verseItem.chapter && 
+      return this.verses.filter(verseItem =>
+        this.getFavoriteVerse.some(favorite =>
+          favorite.book_number === verseItem.book_number &&
+          favorite.chapter === verseItem.chapter &&
           favorite.verse === verseItem.verse
         )
       )
@@ -119,7 +119,7 @@ export default {
       this.$router.push('/bible');
     },
     cancelSelected() {
-      this.SEARCH_VERSE([]);     
+      this.SEARCH_VERSE([]);
     }
   }
 }

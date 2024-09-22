@@ -7,7 +7,7 @@
       <label for="Search" class="hidden">Procurar</label>
       <div class="relative">
         <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-          <magnifyingGlassIcon class="w-4 h-4" />
+          <magnifyingGlassIcon class="size-5" />
         </span>
         <input
           type="search"
@@ -23,11 +23,11 @@
     <div class="overflow-y-auto h-full">
       <div v-if="nothingSearch || loading" class="flex items-center justify-center h-full text-color">
         <div v-if="nothingSearch" class="flex flex-col items-center space-y-4">
-          <magnifyingGlassIcon class="w-16 h-16" />
+          <magnifyingGlassIcon class="size-16" />
           <p class="select-none">Busque por um texto</p>
         </div>
         <div v-if="loading" class="flex items-center justify-center space-x-2">
-          <div v-for="index in 3" :key="index" class="w-4 h-4 rounded-full animate-pulse bg-gray-300 dark:bg-gray-700 old:bg-brown-300"></div>
+          <div v-for="index in 3" :key="index" class="size-4 rounded-full animate-pulse bg-gray-300 dark:bg-gray-700 old:bg-brown-300"></div>
         </div>
       </div>
       <div v-if="foundResults" class="divider-y">
@@ -107,7 +107,7 @@ export default {
     },
     searchText() {
       if(this.foundName) {
-        this.searchResults = this.verses.filter(v => 
+        this.searchResults = this.verses.filter(v =>
           v.text.toLowerCase().includes(this.name.toLowerCase())
         )
         this.loading = false
@@ -144,7 +144,7 @@ export default {
       return cleanedText;
     },
     cancelSelected() {
-      this.SEARCH_VERSE([]);   
+      this.SEARCH_VERSE([]);
     },
     resetSearchState() {
       this.searchResults = [];
