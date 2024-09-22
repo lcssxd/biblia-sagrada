@@ -14,6 +14,7 @@ O aplicativo da Bíblia Sagrada oferece várias funcionalidades úteis, incluind
 - Tema claro, escuro e clássico para personalização.
 - Exportar e importar preferências.
 - Retorno automático para o último livro e/ou capítulo visto.
+- Versículo do dia.
 
 ## Versões
 
