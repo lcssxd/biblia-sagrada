@@ -50,7 +50,7 @@
         </select>
       </div>
       <div class="flex flex-col">
-        <div class="title">Exportar/Importar Preferências</div>
+        <div class="title">Preferências</div>
         <div class="divider-y">
           <button class="relative p-2 outline-none select-none text-left" @click.prevent="exportSettings()">
             <span>Exportar</span>
@@ -77,6 +77,7 @@
 <script>
 import { mapGetters, mapMutations } from 'vuex'
 import db from '~/assets/json/db.json'
+
 export default {
   data() {
     return {
@@ -208,7 +209,7 @@ export default {
 
 <style scoped>
 .btn-font {
-  @apply relative outline-none transition duration-100 w-10 h-8 bg-gray-200 dark:bg-gray-700 old:bg-brown-200 border border-gray-300 dark:border-gray-600 old:border-brown-300 select-none
+  @apply relative rounded-lg outline-none transition duration-100 w-10 h-8 bg-gray-200 dark:bg-gray-700 old:bg-brown-200 border border-gray-300 dark:border-gray-600 old:border-brown-300 select-none
 }
 .disabled-btn-font {
   @apply text-gray-400 dark:text-gray-500 old:text-brown-400

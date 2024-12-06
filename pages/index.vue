@@ -5,16 +5,18 @@
     </Header>
     <div class="h-full">
       <LoadingPage v-if="loading" />
-      <div v-if="!loading && verseOfTheDay" class="p-1">
-        <div class="px-4 py-2 rounded bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-100 old:bg-brown-200 old:text-brown-700">
-          <span class="font-semibold select-none">{{ getBookAndChapterName(verseOfTheDay.book_number, verseOfTheDay.chapter, verseOfTheDay.verse) }}</span>
-          <button class="select-none text-left" @click.prevent="goToText(verseOfTheDay)">
-            <span v-html="$changeTags(verseOfTheDay.text)"></span>
-          </button>
-        </div>
-      </div>
-      <div v-if="!loading && !verseOfTheDay" class="flex items-center justify-center h-full text-color">
-        <p class="select-none">Nenhum versículo encontrado</p>
+      <div v-else class="flex items-center justify-center h-full px-2">
+        <template v-if="verseOfTheDay">
+          <div class="p-6 rounded-lg bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-100 old:bg-brown-200 old:text-brown-700">
+            <span class="font-semibold select-none text-lg">{{ getBookAndChapterName(verseOfTheDay.book_number, verseOfTheDay.chapter, verseOfTheDay.verse) }}</span>
+            <button class="select-none text-left text-2xl" @click.prevent="goToText(verseOfTheDay)">
+              <span class="leading-8 tracking-wide" v-html="$changeTags(verseOfTheDay.text)" />
+            </button>
+          </div>
+        </template>
+        <template v-if="!verseOfTheDay">
+          <p class="select-none text-color">Nenhum versículo encontrado</p>
+        </template>
       </div>
     </div>
   </div>
@@ -57,23 +59,25 @@ export default {
       }
       this.loading = false;
     },
-    getIndexSeed() {
+    getDayOfYear() {
       const today = new Date();
-      const day = today.getDate();
-      const month = today.getMonth() + 1;
-      const year = today.getFullYear();
-      return day + month + year;
+      const startOfYear = new Date(today.getFullYear(), 0, 0);
+      const diff = today - startOfYear;
+      const oneDay = 1000 * 60 * 60 * 24;
+      const dayOfYear = Math.floor(diff / oneDay);
+      return dayOfYear;
     },
-
     getVerseOfTheDay() {
       const totalVerses = this.verses.length;
+      const totalDaysInYear = 365;
+      const dayOfYear = this.getDayOfYear();
+
       if (totalVerses === 0) {
         this.verseOfTheDay = null;
         return;
       }
 
-      const indexSeed = this.getIndexSeed();
-      const verseIndex = indexSeed % totalVerses;
+      const verseIndex = Math.floor((dayOfYear / totalDaysInYear) * totalVerses);
 
       this.verseOfTheDay = this.verses[verseIndex] ? {
         book_number: this.verses[verseIndex].book_number,

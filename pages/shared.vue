@@ -34,6 +34,7 @@ import arrowlongleftIcon from '@/static/heroicons/mini/arrow-long-left.svg?inlin
 import copyIcon from '@/static/svgrepo/copy.svg?inline';
 import noSymbolIcon from '@/static/heroicons/mini/no-symbol.svg?inline';
 import LoadingPage from '~/components/Loading.vue'
+
 export default {
   components: { arrowlongleftIcon, copyIcon, noSymbolIcon, LoadingPage },
   data() {

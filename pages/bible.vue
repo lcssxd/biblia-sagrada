@@ -41,7 +41,7 @@
           <div v-if="!getBook && !loading" class="h-full">
             <div class="flex flex-col h-full">
               <div class="divider-y">
-                <h2 class="sticky top-0 title">Antigo Testamento</h2>
+                <h2 class="sticky top-0 title z-10 mb-0.5">Antigo Testamento</h2>
                 <button
                   v-for="(item, index) in filteredOldTestament" :key="index"
                   class="text-left font-normal p-2 outline-none select-none"
@@ -50,7 +50,7 @@
                 </button>
               </div>
               <div class="divider-y">
-                <h2 class="sticky top-0 title">Novo Testamento</h2>
+                <h2 class="sticky top-0 title z-10 mb-0.5">Novo Testamento</h2>
                 <button
                   v-for="(item, index) in filteredNewTestament" :key="index"
                   class="text-left font-normal p-2 outline-none select-none"
@@ -61,7 +61,7 @@
             </div>
           </div>
           <div v-else class="h-full relative">
-            <div v-if="getBook && !getChapter" class="grid grid-cols-6 gap-1 p-1">
+            <div v-if="getBook && !getChapter" class="grid grid-cols-6 gap-1 pt-0.5 px-1">
               <button
                 v-for="chapter in uniqueChapters" :key="chapter.id"
                 class="btn-chapter"
@@ -70,7 +70,7 @@
               </button>
             </div>
             <div v-if="getBook && getChapter" class="h-full">
-              <div class="flex flex-col space-y-2 overflow-y-auto h-full relative" ref="scrollContainer">
+              <div class="flex flex-col overflow-y-auto h-full relative" ref="scrollContainer">
                 <div class="flex flex-col mb-auto">
                   <div v-for="verseItem in filteredChapter" :key="verseItem.id" class="flex flex-col">
                     <span
@@ -429,7 +429,7 @@ export default {
 
 <style scoped>
 .btn-chapter {
-  @apply p-1 bg-gray-200 dark:bg-gray-700 old:bg-brown-200 border border-gray-300 dark:border-gray-600 old:border-brown-300 outline-none select-none
+  @apply p-1 rounded-lg bg-gray-200 dark:bg-gray-700 old:bg-brown-200 border border-gray-300 dark:border-gray-600 old:border-brown-300 outline-none select-none
 }
 .btn-prev-next {
   @apply p-2 select-none outline-none transition duration-100 rounded-full text-gray-800 hover:bg-gray-800/30 dark:text-gray-50 hover:dark:bg-gray-100/30 old:text-brown-800 hover:old:bg-brown-800/30

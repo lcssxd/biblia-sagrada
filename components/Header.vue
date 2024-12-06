@@ -1,5 +1,5 @@
 <template>
-  <div class="font-semibold py-3 px-2 w-full select-none shadow z-10">
+  <div class="header">
     <slot></slot>
   </div>
 </template>
@@ -11,5 +11,7 @@ export default {
 </script>
 
 <style>
-
+.header {
+  @apply font-semibold p-3 mb-0.5 w-full select-none shadow z-10 rounded-b-lg bg-gray-300 dark:bg-gray-700 old:bg-brown-300
+}
 </style>

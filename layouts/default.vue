@@ -11,6 +11,7 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
+
 export default {
   created() {
     this.UPDATE_VERSION()

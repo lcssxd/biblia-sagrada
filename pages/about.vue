@@ -34,6 +34,7 @@
 import arrowlongleftIcon from '@/static/heroicons/mini/arrow-long-left.svg?inline'
 import newWindowIcon from '@/static/svgrepo/new-window.svg?inline'
 import db from '~/assets/json/db.json'
+
 export default {
   components: {
     arrowlongleftIcon,
@@ -46,7 +47,7 @@ export default {
         {
           type: 'text',
           title: 'Versão',
-          value: '2.0.0'
+          value: '3.0.0'
         },
         {
           type: 'array',

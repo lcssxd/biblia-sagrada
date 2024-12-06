@@ -13,7 +13,7 @@
           type="search"
           name="Search"
           v-model="name"
-          class="w-full py-2 pl-10 pr-2 border-b bg-transparent border-gray-200 dark:border-gray-600 old:border-brown-200 outline-none"
+          class="w-full py-2 pl-10 pr-2 border-b border-x bg-transparent rounded-lg border-gray-200 dark:border-gray-600 old:border-brown-200 outline-none"
           required
           autofocus
           autocomplete="off"
@@ -27,7 +27,10 @@
           <p class="select-none">Busque por um texto</p>
         </div>
         <div v-if="loading" class="flex items-center justify-center space-x-2">
-          <div v-for="index in 3" :key="index" class="size-4 rounded-full animate-pulse bg-gray-300 dark:bg-gray-700 old:bg-brown-300"></div>
+          <p v-if="this.name.length <= 3" class="j-tag">A pesquisa requer pelo menos 3 caracteres</p>
+          <template v-else>
+            <div v-for="index in 3" :key="index" class="size-4 rounded-full animate-pulse bg-gray-300 dark:bg-gray-700 old:bg-brown-300"></div>
+          </template>
         </div>
       </div>
       <div v-if="foundResults" class="divider-y">
@@ -49,6 +52,7 @@
 import { mapGetters, mapMutations } from 'vuex'
 import arrowlongleftIcon from '@/static/heroicons/mini/arrow-long-left.svg?inline'
 import magnifyingGlassIcon from '@/static/heroicons/mini/magnifying-glass.svg?inline'
+
 export default {
   components: { arrowlongleftIcon, magnifyingGlassIcon },
   data() {
@@ -79,10 +83,10 @@ export default {
   computed: {
     ...mapGetters(['getVersion', 'getSearchVerse']),
     emptyName() {
-      return this.name === '' ? true : false
+      return this.name === ''
     },
     foundName() {
-      return this.name !== '' ? true : false
+      return this.name !== '' && this.name.length > 3
     },
     nothingSearch() {
       return !this.loading && this.emptyName && this.searchResults && this.searchResults.length === 0 && this.searchTextSelected === ''

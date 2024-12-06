@@ -38,6 +38,7 @@ import copyIcon from '@/static/svgrepo/copy.svg?inline';
 import bookmarkIcon from '@/static/heroicons/mini/bookmark.svg?inline';
 import bookmarkSlashIcon from '@/static/heroicons/mini/bookmark-slash.svg?inline';
 import LoadingPage from '~/components/Loading.vue'
+
 export default {
   components: { arrowlongleftIcon, copyIcon, bookmarkIcon, bookmarkSlashIcon, LoadingPage },
   data() {
