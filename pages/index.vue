@@ -5,11 +5,11 @@
     </Header>
     <div class="h-full">
       <LoadingPage v-if="loading" />
-      <div v-else class="flex items-center justify-center h-full px-2">
+      <div v-else class="flex items-center justify-center h-full">
         <template v-if="verseOfTheDay">
-          <div class="p-6 rounded-lg bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-100 old:bg-brown-200 old:text-brown-700">
-            <span class="font-semibold select-none text-lg">{{ getBookAndChapterName(verseOfTheDay.book_number, verseOfTheDay.chapter, verseOfTheDay.verse) }}</span>
-            <button class="select-none text-left text-2xl" @click.prevent="goToText(verseOfTheDay)">
+          <div class="flex flex-col justify-center px-6 space-y-4 size-full text-gray-700dark:text-gray-100 old:text-brown-700">
+            <span class="font-semibold select-none text-3xl">{{ getBookAndChapterName(verseOfTheDay.book_number, verseOfTheDay.chapter, verseOfTheDay.verse) }} {{ getVersion }}</span>
+            <button class="select-none text-left text-6xl" @click.prevent="goToText(verseOfTheDay)">
               <span class="leading-8 tracking-wide" v-html="$changeTags(verseOfTheDay.text)" />
             </button>
           </div>

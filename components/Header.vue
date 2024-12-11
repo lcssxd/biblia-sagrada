@@ -12,6 +12,6 @@ export default {
 
 <style>
 .header {
-  @apply font-semibold p-3 mb-0.5 w-full select-none shadow z-10 rounded-b-lg bg-gray-300 dark:bg-gray-700 old:bg-brown-300
+  @apply font-semibold p-3 w-full select-none shadow z-10 rounded-b-lg bg-gray-300 dark:bg-gray-700 old:bg-brown-300
 }
 </style>

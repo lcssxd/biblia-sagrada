@@ -77,7 +77,7 @@ export default {
 
 <style scoped>
 .footer {
-  @apply grid p-3 mt-0.5 rounded-t-xl bg-gray-300 dark:bg-gray-700 old:bg-brown-300
+  @apply grid p-3 rounded-t-xl bg-gray-300 dark:bg-gray-700 old:bg-brown-300
 }
 .btn {
   @apply flex flex-col items-center justify-center space-y-1 outline-none text-gray-500 dark:text-gray-500 old:text-brown-500 select-none

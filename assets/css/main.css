@@ -25,7 +25,7 @@
 }
 
 .selected-verse {
-  @apply bg-gray-300 dark:bg-gray-600 old:bg-brown-300
+  @apply underline
 }
 
 .favorited-verse {

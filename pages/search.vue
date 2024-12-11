@@ -7,13 +7,13 @@
       <label for="Search" class="hidden">Procurar</label>
       <div class="relative">
         <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-          <magnifyingGlassIcon class="size-5" />
+          <magnifyingGlassIcon class="size-6" />
         </span>
         <input
           type="search"
           name="Search"
           v-model="name"
-          class="w-full py-2 pl-10 pr-2 border-b border-x bg-transparent rounded-lg border-gray-200 dark:border-gray-600 old:border-brown-200 outline-none"
+          class="w-full py-1.5 pl-10 pr-2 border-b bg-transparent border-gray-200 dark:border-gray-600 old:border-brown-200 outline-none"
           required
           autofocus
           autocomplete="off"
