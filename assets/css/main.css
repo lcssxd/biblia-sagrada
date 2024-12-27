@@ -33,5 +33,5 @@
 }
 
 button {
-  @apply hover:brightness-95 dark:hover:brightness-110 old:hover:brightness-95 active:translate-y-[1px]
+  @apply hover:brightness-95 dark:hover:brightness-110 old:hover:brightness-95 active:translate-y-px
 }
