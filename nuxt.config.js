@@ -15,7 +15,8 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
+      { name: 'format-detection', content: 'telephone=no' },
+      { name: 'theme-color', content: '#f9fafb' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -32,7 +33,8 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~/plugins/toast.js',
-    '~/plugins/text-manipulation.js'
+    '~/plugins/text-manipulation.js',
+    '~/plugins/theme-color.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -40,7 +42,8 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    '@nuxtjs/svg'
+    '@nuxtjs/svg',
+    '@nuxtjs/pwa'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -55,4 +58,31 @@ export default {
       },
     },
   },
+
+  serverMiddleware: {
+    '/manifest.json': '~/serverMiddleware/manifest.js',
+  },
+
+  pwa: {
+    manifest: {
+      name: 'Sagrada Escritura',
+      short_name: 'Sagrada Escritura',
+      description: 'Aplicativo da Sagrada Escritura',
+      lang: 'pt-BR',
+      theme_color: '#f9fafb',
+      background_color: '#f9fafb',
+      display: 'standalone',
+      start_url: '/',
+      icons: [
+        {
+          src: '/favicon.ico',
+          sizes: 'any',
+          type: 'image/x-icon'
+        }
+      ]
+    },
+    workbox: {
+      offline: false
+    }
+  }
 }
