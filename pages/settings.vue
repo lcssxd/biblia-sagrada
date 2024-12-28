@@ -7,7 +7,7 @@
       <div class="flex flex-col">
         <div class="title">Opções de Fonte</div>
         <div class="divider-y">
-          <div class="flex items-center justify-between p-2 outline-none select-none text-left">
+          <div class="flex items-center justify-between p-2 outline-none text-left">
             <div>
               <span>Tamanho da Fonte</span>
             </div>
@@ -52,11 +52,11 @@
       <div class="flex flex-col">
         <div class="title">Preferências</div>
         <div class="divider-y">
-          <button class="relative p-2 outline-none select-none text-left" @click.prevent="exportSettings()">
+          <button class="relative p-2 outline-none text-left" @click.prevent="exportSettings()">
             <span>Exportar</span>
           </button>
           <input ref="importSets" type="file" class="hidden" @change="handleFileUpload($event)">
-          <button class="relative p-2 outline-none select-none text-left" @click.prevent="importSettings()">
+          <button class="relative p-2 outline-none text-left" @click.prevent="importSettings()">
             <span>Importar</span>
           </button>
         </div>
@@ -66,7 +66,7 @@
         <div class="divider-y">
           <NuxtLink
             to="/about"
-            class="p-2 outline-none select-none text-left"
+            class="p-2 outline-none text-left"
           >Sobre</NuxtLink>
         </div>
       </div>
