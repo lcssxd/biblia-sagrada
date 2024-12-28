@@ -29,7 +29,7 @@
 }
 
 .favorited-verse {
-  @apply bg-gray-300/50 dark:bg-gray-600/50 old:bg-brown-300/50
+  @apply bg-gray-300/30 dark:bg-gray-600/30 old:bg-brown-300/30
 }
 
 button {
