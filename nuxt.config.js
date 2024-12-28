@@ -59,10 +59,6 @@ export default {
     },
   },
 
-  serverMiddleware: {
-    '/manifest.json': '~/serverMiddleware/manifest.js',
-  },
-
   pwa: {
     manifest: {
       name: 'Sagrada Escritura',
