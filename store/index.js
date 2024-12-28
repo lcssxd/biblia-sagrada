@@ -4,6 +4,8 @@ export const state = () => ({
   version: 'ARA',
   theme: 'dark',
   fontSize: 18,
+  fontSizeMin: 12,
+  fontSizeMax: 30,
   fontFamily: 'auto',
   book: null,
   chapter: null,
@@ -62,17 +64,16 @@ export const mutations = {
     localStorage.setItem('theme', state.theme);
   },
   UPDATE_FONT_SIZE(state) {
-    const fontMin = 12, fontMax = 24;
     let fontSize = parseInt(localStorage.getItem('fontSize'), 10);
-  
+
     if (isNaN(fontSize)) {
-      fontSize = fontMin;
-    } else if (fontSize < fontMin) {
-      fontSize = fontMin;
-    } else if (fontSize > fontMax) {
-      fontSize = fontMax;
+      fontSize = state.fontSizeMin;
+    } else if (fontSize < state.fontSizeMin) {
+      fontSize = state.fontSizeMin;
+    } else if (fontSize > state.fontSizeMax) {
+      fontSize = state.fontSizeMax;
     }
-  
+
     state.fontSize = fontSize;
     localStorage.setItem('fontSize', String(state.fontSize));
   },
@@ -133,17 +134,16 @@ export const mutations = {
     }
   },
   SET_FONT_SIZE(state, payload) {
-    const fontMin = 12, fontMax = 24;
     let fontSize = Number(payload);
-  
+
     if (isNaN(fontSize)) {
-      fontSize = fontMin;
-    } else if (fontSize < fontMin) {
-      fontSize = fontMin;
-    } else if (fontSize > fontMax) {
-      fontSize = fontMax;
+      fontSize = state.fontSizeMin;
+    } else if (fontSize < state.fontSizeMin) {
+      fontSize = state.fontSizeMin;
+    } else if (fontSize > state.fontSizeMax) {
+      fontSize = state.fontSizeMax;
     }
-  
+
     state.fontSize = fontSize;
     localStorage.setItem('fontSize', String(fontSize));
   },
@@ -180,31 +180,31 @@ export const mutations = {
 export const actions = {
   toggleFavoriteVerse({ commit, state }, verseItem) {
     let updatedFavoriteVerse = [...state.favoriteVerses];
-  
+
     const toggleItem = (item) => {
-      const index = updatedFavoriteVerse.findIndex(favorite => 
-        favorite?.book_number === item?.book_number && 
-        favorite?.chapter === item?.chapter && 
+      const index = updatedFavoriteVerse.findIndex(favorite =>
+        favorite?.book_number === item?.book_number &&
+        favorite?.chapter === item?.chapter &&
         favorite?.verse === item?.verse
       );
       if (index === -1) {
-        updatedFavoriteVerse.push({ 
-          book_number: item.book_number, 
-          chapter: item.chapter, 
-          verse: item.verse 
+        updatedFavoriteVerse.push({
+          book_number: item.book_number,
+          chapter: item.chapter,
+          verse: item.verse
         });
       } else {
         updatedFavoriteVerse.splice(index, 1);
       }
     };
-  
+
     if (Array.isArray(verseItem)) {
       verseItem.forEach(toggleItem);
     } else {
       toggleItem(verseItem);
     }
-  
+
     commit('FAVORITE_VERSES', updatedFavoriteVerse);
-  }  
+  }
 }
 

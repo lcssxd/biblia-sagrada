@@ -14,15 +14,15 @@
             <div class="flex items-center space-x-2">
               <button
                 class="btn-font text-xs"
-                :class="{ 'disabled-btn-font' : isFontMin }"
+                :class="{ 'disabled-btn-font' : isFontSizeMin }"
                 @click.prevent="changeFontSize('decrease')"
-                :disabled="isFontMin"
+                :disabled="isFontSizeMin"
               ><span class="absolute bottom-1 inset-x-0">A</span></button>
               <button
                 class="btn-font text-lg"
-                :class="{ 'disabled-btn-font' : isFontMax }"
+                :class="{ 'disabled-btn-font' : isFontSizeMax }"
                 @click.prevent="changeFontSize('increase')"
-                :disabled="isFontMax"
+                :disabled="isFontSizeMax"
               ><span class="absolute bottom-0 inset-x-0">A</span></button>
             </div>
           </div>
@@ -197,11 +197,11 @@ export default {
     getStoreState() {
       return this.$store.state
     },
-    isFontMin() {
-      return this.getFontSize === 12 ? true : false
+    isFontSizeMin() {
+      return this.getFontSize === this.$store.state.fontSizeMin
     },
-    isFontMax() {
-      return this.getFontSize === 24 ? true : false
+    isFontSizeMax() {
+      return this.getFontSize === this.$store.state.fontSizeMax
     }
   }
 }
