@@ -28,6 +28,7 @@ export default {
     this.SET_THEME(this.getTheme)
     this.SET_FONT_SIZE(this.getFontSize)
     this.SET_FONT_FAMILY(this.getFontFamily)
+    setTimeout(() => { this.$updateThemeColor(this.getTheme) }, 1)
   },
   computed: {
     ...mapGetters(['getVersion', 'getTheme', 'getFontSize', 'getFontFamily']),

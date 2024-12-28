@@ -1,4 +1,4 @@
-export default ({ store }) => {
+export default ({ store }, inject) => {
   const updateThemeColor = (theme) => {
     const colors = {
       light: '#f9fafb',
@@ -24,6 +24,9 @@ export default ({ store }) => {
       }
     }
   };
+
+  // Torna a função disponível globalmente
+  inject('updateThemeColor', updateThemeColor);
 
   // Inicializa com o tema atual do store
   updateThemeColor(store.state.theme);
