@@ -9,7 +9,7 @@
 }
 
 .title {
-  @apply p-2 rounded-lg text-center font-semibold bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-100 old:bg-brown-200 old:text-brown-700
+  @apply p-2 rounded-lg text-center font-semibold select-none bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-100 old:bg-brown-200 old:text-brown-700
 }
 
 .text-color {

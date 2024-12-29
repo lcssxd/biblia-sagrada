@@ -75,11 +75,11 @@
                   <div v-for="verseItem in filteredChapter" :key="verseItem.id" class="flex flex-col">
                     <span
                       v-if="getUniqueVerseTitles(verseItem) && getUniqueVerseTitles(verseItem).length > 0"
-                      class="text-center font-bold text-color-title mt-5"
+                      class="text-center font-bold select-none text-color-title mt-5"
                     >{{ $removeTagsTitle(getUniqueVerseTitles(verseItem).join('')) }}</span>
                     <button
                       v-show="verseItem.text !== ''"
-                      class="px-2 text-left outline-none mb-auto transition duration-100"
+                      class="px-2 text-left select-none outline-none mb-auto transition duration-100"
                       :class="[
                         {'selected-verse' : selectedVerse.some(verse => verse.book_number === verseItem.book_number && verse.chapter === verseItem.chapter && verse.verse === verseItem.verse)},
                         {'favorited-verse' : getFavoriteVerse.some(favorite => favorite?.book_number === verseItem?.book_number && favorite?.chapter === verseItem?.chapter && favorite?.verse === verseItem?.verse)}
