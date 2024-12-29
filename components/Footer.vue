@@ -4,10 +4,10 @@
       v-for="(item, index) in menu"
       :key="index"
       class="btn"
-      :class="{ 'btn-active' : item.link === getRoutePath }"
+      :class="{ 'btn-active' : item.link === $route.path }"
       @click.prevent="toRouterPush(item.link)"
     >
-      <component :is="item.icon" class="size-6" />
+      <component :is="item.icon" class="size-7" />
     </button>
   </div>
 </template>
@@ -25,44 +25,21 @@ export default {
   data() {
     return {
       menu: [
-        {
-          name: 'Início',
-          link: '/',
-          icon: 'homeIcon'
-        },
-        {
-          name: 'Procurar',
-          link: '/search',
-          icon: 'magnifyingGlassIcon'
-        },
-        {
-          name: 'Bíblia',
-          link: '/bible',
-          icon: 'bookOpenIcon'
-        },
-        {
-          name: 'Favorito',
-          link: '/favorite',
-          icon: 'bookmarkIcon'
-        },
-        {
-          name: 'Configurações',
-          link: '/settings',
-          icon: 'cog8ToothIcon'
-        }
+        { name: 'Início', link: '/', icon: 'homeIcon' },
+        { name: 'Procurar', link: '/search', icon: 'magnifyingGlassIcon' },
+        { name: 'Bíblia', link: '/bible', icon: 'bookOpenIcon' },
+        { name: 'Favorito', link: '/favorite', icon: 'bookmarkIcon' },
+        { name: 'Configurações', link: '/settings', icon: 'cog8ToothIcon' }
       ]
     }
   },
   computed: {
-    ...mapGetters(['getBook', 'getChapter']),
-    getRoutePath() {
-      return this.$route.path
-    }
+    ...mapGetters(['getBook', 'getChapter'])
   },
   methods: {
     ...mapMutations(['SET_BOOK', 'SET_CHAPTER']),
     async toRouterPush(link) {
-      const isBiblePath = (this.getRoutePath === '/bible' && link === '/bible')
+      const isBiblePath = (this.$route.path === '/bible' && link === '/bible')
       if (isBiblePath && this.getBook && !this.getChapter) {
         this.SET_BOOK(null);
       } else if (isBiblePath && this.getBook && this.getChapter) {
@@ -77,12 +54,12 @@ export default {
 
 <style scoped>
 .footer {
-  @apply grid p-3 rounded-t-xl bg-gray-300 dark:bg-gray-700 old:bg-brown-300
+  @apply grid p-3 z-10 rounded-t-xl bg-gray-300 dark:bg-gray-700 old:bg-brown-700
 }
 .btn {
-  @apply flex flex-col items-center justify-center space-y-1 outline-none text-gray-500 dark:text-gray-500 old:text-brown-500 select-none
+  @apply flex flex-col items-center justify-center space-y-1 outline-none text-gray-500 dark:text-gray-400 old:text-brown-400 select-none
 }
 .btn-active {
-  @apply text-gray-800 dark:text-gray-200 old:text-brown-800
+  @apply text-gray-900 dark:text-gray-50 old:text-brown-50
 }
 </style>

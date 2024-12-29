@@ -92,7 +92,7 @@
                   </div>
                   <p class="mt-5 mb-2 px-2 text-center text-gray-400 dark:text-gray-500 old:text-brown-400 select-none">{{ getCopyright }}</p>
                 </div>
-                <div class="flex items-center justify-between sticky bottom-2 w-full px-5">
+                <div class="flex items-center justify-between sticky bottom-2 w-full px-3">
                   <button
                     class="btn-prev-next"
                     :disabled="isFistChapter"
@@ -435,7 +435,7 @@ export default {
   @apply p-1 rounded-lg bg-gray-200 dark:bg-gray-700 old:bg-brown-200 border border-gray-300 dark:border-gray-600 old:border-brown-300 outline-none select-none
 }
 .btn-prev-next {
-  @apply p-1 select-none outline-none transition duration-100 rounded-full text-gray-800 dark:text-gray-200 old:text-brown-800 bg-gray-300 dark:bg-gray-700 old:bg-brown-300;
+  @apply p-2.5 select-none outline-none transition duration-100 rounded-full text-gray-800 dark:text-gray-200 old:text-brown-800 bg-gray-300 dark:bg-gray-700 old:bg-brown-300;
 }
 .btn-prev-next:disabled {
   @apply opacity-50 cursor-not-allowed bg-gray-200 dark:bg-gray-600 old:bg-brown-200 text-gray-500 dark:text-gray-400 old:text-brown-500;

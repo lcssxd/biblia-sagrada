@@ -1,9 +1,9 @@
 export default ({ store }, inject) => {
   const updateThemeColor = (theme) => {
     const colors = {
-      light: '#f9fafb',
-      dark: '#1f2937',
-      old: '#f3e9e0',
+      light: '#d1d5db',
+      dark: '#374151',
+      old: '#916442',
     };
 
     const themeColor = colors[theme] || colors.light;

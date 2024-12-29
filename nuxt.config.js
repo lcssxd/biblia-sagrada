@@ -16,7 +16,7 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
-      { name: 'theme-color', content: '#f9fafb' }
+      { name: 'theme-color', content: '' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -65,8 +65,8 @@ export default {
       short_name: 'Sagrada Escritura',
       description: 'Aplicativo da Sagrada Escritura',
       lang: 'pt-BR',
-      theme_color: '#f9fafb',
-      background_color: '#f9fafb',
+      theme_color: '',
+      background_color: '',
       display: 'standalone',
       start_url: '/',
       icons: [
