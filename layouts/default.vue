@@ -4,6 +4,7 @@
       <Transition name="fade" mode="out-in">
         <Nuxt class="mb-auto" :key="routePath" />
       </Transition>
+      <InstallApp />
       <Footer />
     </div>
   </div>
@@ -11,8 +12,10 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
+import InstallApp from '~/components/InstallApp.vue';
 
 export default {
+  components: { InstallApp },
   created() {
     this.UPDATE_VERSION()
     this.UPDATE_THEME()
@@ -57,7 +60,7 @@ export default {
 }
 
 .body {
-  @apply flex flex-col h-full w-full max-w-2xl bg-gray-50 text-gray-800 dark:bg-gray-800 dark:text-gray-50 old:bg-brown-50 old:text-brown-800 transition-all duration-100;
+  @apply relative flex flex-col h-full w-full max-w-2xl bg-gray-50 text-gray-800 dark:bg-gray-800 dark:text-gray-50 old:bg-brown-50 old:text-brown-800 transition-all duration-100;
 }
 
 .fade-enter-active,

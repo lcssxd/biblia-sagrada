@@ -11,6 +11,7 @@ export const state = () => ({
   chapter: null,
   favoriteVerses: [],
   searchVerse: [],
+  installAppButton: true
 })
 
 export const getters = {
@@ -174,6 +175,9 @@ export const mutations = {
       state.searchVerse.push(payload);
     }
     localStorage.setItem('searchVerse', JSON.stringify(state.searchVerse));
+  },
+  SET_INSTALL_BUTTON(state, payload) {
+    state.installAppButton = payload;
   }
 }
 

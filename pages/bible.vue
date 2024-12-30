@@ -41,7 +41,7 @@
           <div v-if="!getBook && !loading" class="h-full">
             <div class="flex flex-col h-full">
               <div class="divider-y">
-                <h2 class="sticky top-0 title z-10 mb-0.5">Antigo Testamento</h2>
+                <h2 class="sticky top-0 title z-10">Antigo Testamento</h2>
                 <button
                   v-for="(item, index) in filteredOldTestament" :key="index"
                   class="text-left font-normal p-2 outline-none select-none"
@@ -50,7 +50,7 @@
                 </button>
               </div>
               <div class="divider-y">
-                <h2 class="sticky top-0 title z-10 mb-0.5">Novo Testamento</h2>
+                <h2 class="sticky top-0 title z-10">Novo Testamento</h2>
                 <button
                   v-for="(item, index) in filteredNewTestament" :key="index"
                   class="text-left font-normal p-2 outline-none select-none"

@@ -21,17 +21,15 @@
         </template>
       </div>
     </div>
-    <InstallApp />
   </div>
 </template>
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
 import LoadingPage from '~/components/Loading.vue';
-import InstallApp from '~/components/InstallApp.vue';
 
 export default {
-  components: { LoadingPage, InstallApp },
+  components: { LoadingPage },
   data() {
     return {
       title: 'Versículo do Dia',
