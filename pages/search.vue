@@ -20,6 +20,9 @@
         >
       </div>
     </fieldset>
+    <div v-if="foundResults" class="border-b border-gray-200 dark:border-gray-600 old:border-brown-200">
+      <div class="flex-result">{{ searchResults.length }} resultados foram encontrados</div>
+    </div>
     <div class="overflow-y-auto h-full">
       <div v-if="nothingSearch || loading" class="flex items-center justify-center h-full text-color">
         <div v-if="nothingSearch" class="flex flex-col items-center space-y-4">
@@ -34,7 +37,6 @@
         </div>
       </div>
       <div v-if="foundResults" class="divider-y">
-        <div class="flex-result">{{ searchResults.length }} resultados foram encontrados</div>
         <div v-for="(item, index) in searchResults" :key="index" class="flex items-center p-2">
           <button class="text-left select-none outline-none" @click.prevent="goToText(item)">
             <p>"<span v-html="changeTags(item.text)"></span>" {{ getBookAndChapterName(item.book_number, item.chapter, item.verse) }}</p>

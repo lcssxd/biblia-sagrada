@@ -6,23 +6,24 @@
         <copyIcon class="size-5" />
       </button>
     </Header>
-    <div class="flex flex-col overflow-y-auto h-full">
+    <div class="h-full">
       <LoadingPage v-if="loading" />
-      <div v-if="!loading && filteredVerses && filteredVerses.length > 0" class="flex flex-col">
-        <span class="text-center font-bold select-none text-color-title mt-5">
-          {{ getBookAndChapterName }}
-        </span>
-        <div v-for="(item, index) in filteredVerses" :key="index">
-          <button class="px-2 text-left select-none outline-none" @click.prevent="goToText(item)">
-            <span class="superscript">{{ item.verse }}</span> <span v-html="$changeTags(item.text)"></span>
-          </button>
-        </div>
-      </div>
-      <div v-if="!loading && filteredVerses && filteredVerses.length === 0" class="flex items-center justify-center h-full text-color">
-        <div class="flex flex-col items-center space-y-4">
-          <noSymbolIcon class="size-16" />
-          <p class="select-none">Nenhum versículo foi encontrado</p>
-        </div>
+      <div v-else class="flex items-center justify-center h-full">
+        <template v-if="filteredVerses && filteredVerses.length > 0">
+          <div class="flex flex-col pt-2 pb-14 px-6 space-y-2 size-full text-gray-700 dark:text-gray-100 old:text-brown-700">
+            <span class="font-semibold select-none">{{ getBookAndChapterName }} {{ getVersion }}</span>
+            <div class="overflow-y-auto">
+              <div v-for="(item, index) in filteredVerses" :key="index">
+                <button class="select-none text-left" @click.prevent="goToText(item)">
+                  <span class="superscript">{{ item.verse }}</span> <span v-html="$changeTags(item.text)"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </template>
+        <template v-if="filteredVerses && filteredVerses.length === 0">
+          <p class="select-none text-color">Nenhum versículo encontrado</p>
+        </template>
       </div>
     </div>
   </div>
@@ -32,11 +33,10 @@
 import { mapGetters, mapMutations } from 'vuex'
 import arrowlongleftIcon from '@/static/heroicons/mini/arrow-long-left.svg?inline'
 import copyIcon from '@/static/svgrepo/copy.svg?inline';
-import noSymbolIcon from '@/static/heroicons/mini/no-symbol.svg?inline';
 import LoadingPage from '~/components/Loading.vue'
 
 export default {
-  components: { arrowlongleftIcon, copyIcon, noSymbolIcon, LoadingPage },
+  components: { arrowlongleftIcon, copyIcon, LoadingPage },
   data() {
     return {
       title: 'Compartilhado',
@@ -151,7 +151,7 @@ export default {
     copyVerse() {
       const sortedSelectedVerses = [...this.filteredVerses].sort((a, b) => a.verse - b.verse);
       const versesText = this.$removeTags(sortedSelectedVerses.map(verseItem => `${verseItem.verse} ${verseItem.text}`).join(' '));
-      const verseToCopy = `"${versesText}" (${this.getBookAndChapterName})`;
+      const verseToCopy = `"${versesText}" (${this.getBookAndChapterName} ${this.getVersion})`;
 
       if (navigator.clipboard) {
         navigator.clipboard.writeText(verseToCopy)

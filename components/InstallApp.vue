@@ -4,7 +4,7 @@
     class="absolute bottom-14 left-1/2 transform -translate-x-1/2 w-[99%] z-50"
   >
     <div class="px-6 py-4 bg-gray-300 dark:bg-gray-700 old:bg-brown-300 shadow-lg rounded-lg">
-      <div class="flex items-center justify-between space-x-4">
+      <div class="flex items-center justify-between space-x-4 text-base">
         <div class="flex items-center space-x-3">
           <InstallIcon class="size-6 min-w-6 min-h-6 text-gray-800 dark:text-gray-50 old:text-brown-800" />
           <p class="text-color">
@@ -14,11 +14,11 @@
         <div class="flex space-x-3">
           <button
             @click.prevent="installApp"
-            class="px-4 py-2 font-medium bg-gray-100 dark:bg-gray-50 old:bg-brown-700 old:text-gray-50 dark:text-gray-700 rounded-lg"
+            class="px-2 py-1 font-medium bg-gray-100 dark:bg-gray-50 old:bg-brown-700 old:text-gray-50 dark:text-gray-700 rounded-lg"
           >Sim</button>
           <button
             @click.prevent="closeBanner"
-            class="px-4 py-2 font-medium border border-gray-700 dark:border-gray-50 old:border-brown-700 dark:hover:bg-gray-600 rounded-lg"
+            class="px-2 py-1 font-medium border border-gray-700 dark:border-gray-50 old:border-brown-700 dark:hover:bg-gray-600 rounded-lg"
           >Não</button>
         </div>
       </div>

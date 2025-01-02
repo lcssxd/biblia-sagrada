@@ -245,7 +245,7 @@ export default {
         return group.length > 1 ? `${group[0]}-${group[group.length - 1]}` : `${group[0]}`;
       }).join(', ');
 
-      const verseToCopy = `"${versesText}" (${this.currentName}:${reference})`;
+      const verseToCopy = `"${versesText}" (${this.currentName}:${reference} ${this.getVersion})`;
 
       if (navigator.clipboard) {
         navigator.clipboard.writeText(verseToCopy)
