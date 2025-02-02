@@ -15,6 +15,7 @@ O aplicativo da Bíblia Sagrada oferece várias funcionalidades úteis, incluind
 - Exportar e importar preferências.
 - Retorno automático para o último livro e/ou capítulo visto.
 - Versículo do dia.
+- Progressive Web Apps (PWA)
 
 ## Versões
 
